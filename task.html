@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kombinatorika - úlohy</title>
+  <link rel="icon" type="image/x-icon" href="images/dice-six-faces-five.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="theme/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="theme/usebootstrap.css">
+
+  <script src="bootstrap/html5shiv.js"></script>
+  <script src="bootstrap/respond.min.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    MathJax={
+      tex: {
+        inlineMath: [["$", "$"], ["\(", "\)"]]
+      }, svg: {fontCache: 'global'}
+    };
+  </script>
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <img style="width: 60px; height: 60px; float: left" src="images/dice-six-faces-five.png" alt="logo">
+  <ul class="nav navbar-nav">
+    <li id="name" class="introName"><a href="index.html">Kombinatorika</a></li>
+    <li><a href="theory.html"><i class="fa fa-book"></i> Teória</a></li>
+    <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
+  </ul>
+  <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Prihlásiť sa</button>
+  <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Odhlásiť sa</button>
+</div>
+
+<div id="myModal" class="mymodal">
+  <div class="modalContent" id="list">
+    <span class="close" onclick="closeModal()"><i class="fa fa-window-close"></i></span>
+    <h3 style="margin-bottom: 20px; font-weight: bold" id="modalName">
+      <i class="fa fa-paperclip"></i>
+    </h3>
+  </div>
+</div>
+
+<div class="container" id="options">
+  <div class="row">
+    <div class="col-sm-6" style="padding: 30px">
+      <div class=" introSet">
+        <h3 class="setName"><i class="fa fa-paperclip"></i> 1. sada úloh</h3>
+        <div class="row" style="padding: 20px; text-align: center">
+          <div class="col-sm-3"><img src="images/pascal.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+          <div class="col-sm-6">
+            <p class="setTheme">Kombinácie, variácie, permutácie, Pascalov trojuholník</p>
+            <button class="btn btn-warning" onclick="set(1)">Vyber</button>
+          </div>
+          <div class="col-sm-3"><img src="images/card.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6" style="padding: 30px">
+      <div class=" introSet">
+        <h3 class="setName"><i class="fa fa-paperclip"></i> 2. sada úloh</h3>
+        <div class="row" style="padding: 20px; text-align: center">
+          <div class="col-sm-3"><img src="images/locomotive.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+          <div class="col-sm-6">
+            <p class="setTheme">Kombinácie, variácie, a permutácie s opakovaním</p>
+            <button class="btn btn-warning" onclick="set(2)">Vyber</button>
+          </div>
+          <div class="col-sm-3"><img src="images/letter.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6" style="padding: 0 30px;">
+      <div class=" introSet">
+        <h3 class="setName"><i class="fa fa-paperclip"></i> 3. sada úloh</h3>
+        <div class="row" style="padding: 20px; text-align: center">
+          <div class="col-sm-3"><img src="images/diagram.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+          <div class="col-sm-6">
+            <p class="setTheme">Princíp inklúzie a exklúzie</p>
+            <button class="btn btn-warning" onclick="set(3)">Vyber</button>
+          </div>
+          <div class="col-sm-3"><img src="images/football.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6" style="padding: 0 30px;">
+      <div class=" introSet">
+        <h3 class="setName"><i class="fa fa-paperclip"></i> 4. sada úloh</h3>
+        <div class="row" style="padding: 20px; text-align: center">
+          <div class="col-sm-3"><img src="images/lock.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+          <div class="col-sm-6">
+            <p class="setTheme">Výber úloh na olympiádu</p>
+            <button class="btn btn-warning" onclick="set(4)">Vyber</button>
+          </div>
+          <div class="col-sm-3"><img src="images/brick.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="trashModal" class="mymodal">
+  <div class="modalContent">
+    <span class="close" onclick="closeTrashModal()"><i class="fa fa-window-close"></i></span>
+    <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
+      <i class="fa fa-question"></i> Naozaj chceš vymazať <u>všetko</u> z plochy <i class="fa fa-question"></i>
+    </h4>
+    <div style="text-align: center">
+      <button class="btn btn-default" style="font-weight: bold; background-color: #66a650; border: solid 1px #1a242f" onclick="closeTrashModal(), deleteAll()">Áno</button>
+      <button class="btn btn-default" style="font-weight: bold; background-color: #b6372a; border: solid 1px #1a242f" onclick="closeTrashModal()">Nie</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="helpModal" class="mymodal">
+  <div class="modalContent">
+    <span class="close" onclick="closeHelpModal()"><i class="fa fa-window-close"></i></span>
+    <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
+      <i class="fa fa-lightbulb-o"></i> <u>Nápoveda</u>
+    </h4>
+    <div id="helpContent" style="text-align: center"></div>
+  </div>
+</div>
+
+<div id="resultModal" class="mymodal">
+  <div class="modalContent">
+    <span class="close" onclick="closeResultModal()"><i class="fa fa-window-close"></i></span>
+    <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
+      <i class="fa fa-calculator"></i> <u>Výsledok</u>
+    </h4>
+    <div id="resultContent" style="text-align: center">
+      <p style="text-align: center">Zadaj svoj výsledok a stlač tlačidlo <u>Skontroluj</u></p>
+      <input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
+      <button type="button" class="btn btn-warning" onclick="checkResult()">Skontroluj</button>
+      <label class="messageLabel" id="correctLabel" style="font-size: 1.8em; background-color: #66a650; display: none">Správny výsledok</label>
+      <label class="messageLabel" id="incorrectLabel" style="font-size: 1.8em; background-color: #b6372a; display: none">Nesprávny výsledok</label>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12" id="taskPage" style="display: none">
+  <div class="col-lg-2">
+    <button class="btn btn-warning" id="listOfTasks" onclick="displayModal()">
+      <i class="fa fa-align-justify"></i> Zoznam úloh
+    </button>
+    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask()"> <i class="fa fa-arrow-left"></i> </button>
+  </div>
+  <div class="col-lg-8">
+    <div id="task">
+      <blockquote style="background-color: #f3e4bf; margin-bottom: 0">
+        <h4 id="taskNum" style="font-weight: bold">
+        </h4>
+        <p id="taskText">
+        </p>
+      </blockquote>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask()"> <i class="fa fa-arrow-right"></i> </button>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 tools">
+      <div class="bs-component" style="width: 200px; height: 700px; text-align: right">
+        <button type="button" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky" onclick="addInput()">
+          <i class="fa fa-pencil"></i> Text
+        </button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+      </div>
+    </div>
+    <div class="col-lg-8">
+
+      <div id="canvasArea">
+        <div style="width: inherit; text-align: center" class="bs-component">
+          <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" onclick="displayHelpModal()">
+            <i class="fa fa-lightbulb-o" style="color: #1a242f; font-size: 1.5em;"></i>
+          </button>
+          <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" onclick="undo()">
+            <i class="fa fa-undo" style="color: #1a242f; font-size: 1em;"></i>
+          </button>
+          <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" onclick="redo()">
+            <i class="fa fa-repeat" style="color: #1a242f; font-size: 1em;"></i>
+          </button>
+          <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" onclick="displayTrashModal()">
+            <i class="fa fa-trash" style="color: #1a242f; font-size: 1.5em;"></i>
+          </button>
+        </div>
+        <div id="inputArea"></div>
+        <canvas id="canvas" width="932px" height="630px"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-2 tools">
+      <div class="bs-component" style="width: 200px; height: 700px; text-align: left">
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool">Nástroj</button>
+        <button type="button" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" onclick="displayResultModal()">
+          <i class="fa fa-question-circle"></i> Výsledok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/login.js"></script>
+<script src="js/taskLoading.js"></script>
+<script src="js/taskSolving.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/usebootstrap.js"></script>
+</body>
+<footer>
+  <div class="footer navbar-fixed-bottom">
+    Vytvorila Lenka Čakurdová ako bakalársku prácu, FMFI UK 2023
+  </div>
+</footer>
+</html>

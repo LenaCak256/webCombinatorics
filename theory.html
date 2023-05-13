@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Kombinatorika - teória</title>
+    <link rel="icon" type="image/x-icon" href="images/dice-six-faces-five.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="theme/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="theme/usebootstrap.css">
+
+    <script src="bootstrap/html5shiv.js"></script>
+    <script src="bootstrap/respond.min.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax={
+            tex: {
+                inlineMath: [["$", "$"], ["\(", "\)"]]
+            }, svg: {fontCache: 'global'}
+        };
+    </script>
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+    <img style="width: 60px; height: 60px; float: left" src="images/dice-six-faces-five.png" alt="logo">
+    <ul class="nav navbar-nav">
+        <li id="name" class="introName"><a href="index.html">Kombinatorika</a></li>
+        <li><a href="theory.html"><i class="fa fa-book"></i> Teória</a></li>
+        <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
+    </ul>
+    <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Prihlásiť sa</button>
+    <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Odhlásiť sa</button>
+</div>
+
+<div id="page1" style="display:inline">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Úvod</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning disabled" style="float:left; margin-top: 250px; font-size: 1.5em">
+                    <i class="fa fa-circle"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p>Matematický obor <b>kombinatorika</b> skúma podmnožiny prvkov konečnej množiny s nejakými
+                    definovanými vlastnosťami. Základné kombinatorické úlohy spočívajú v hľadaní
+                    počtu prvkov, ktoré spĺňajú zadané vlastnosti. </p>
+                    <p> Hlbšie štúdium kombinatoriky sa začalo
+                    približne v 16. storočí, najmä v oblasti hazardných hier. Hráči skúmali pravdepodobnosť
+                    výhry či možné výskyty číselných hodnôt pri hode kockou. Neskôr tento obor
+                    začal skúmať aj iné matematické otázky a v súčasnosti sa úlohy s kombinatorickými
+                    problémami vyskytujú najmä v teórií pravdepodobnosti, tiež informatike, teórií čísel,
+                    geometrii a algebre.</p>
+                    <p> V kombinatorike poznáme niekoľko základných tried, do ktorých
+                    prvky vieme rozdeliť. V týchto triedach sú rozhodujúce dve hlavné charakteristiky -
+                        <u>dôležitosť poradia prvkov a možnosť opakovania prvkov.</u> </p>
+                    <p>Vzniknú teda skupiny:</p>
+                    <ul>
+                        <li><b>kombinácie</b> - nezáleží na poradí, bez opakovania prvkov</li>
+                        <li><b>kombinácie s opakovaním</b> - nezáleží na poradí, s opakovaním prvkov</li>
+                        <li><b>variácie</b> - záleží na poradí, bez opakovania prvkov</li>
+                        <li><b>variácie s opakovaním</b> - záleží na poradí, s opakovaním prvkov</li>
+                        <li><b>permutácie</b> - bijektívne zobrazenia množiny na samú seba</li>
+                        <li><b>permutácie s opakovaním</b> - možnosť opakovania prvkov</li>
+                    </ul>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(1);">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page2" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Kombinatorické pravidlo súčinu</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(2);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Počet všetkých <u>usporiadaných</u> $k$-tic, ktorých prvého člena môžeme vybrať $n_{1}$ spôsobmi, druhého člena po výbere prvého
+                        $n_{2}$ spôsobmi atď ... až $k$-tého člena $n_{k}$ spôsobmi, je rovný: \[n_{1}\times n_{2}\times ... \times n_{k}\]
+                    </p>
+                    <div style="background-color: #f3e4bf; padding: 10px;">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center;">
+                            V zmrzlinárni ponúkajú $4$ druhy zmrzliny a $3$ polevy. Koľko rôznych zmrzlín s polevou si vieme kúpiť,
+                            ak chceme len jeden druh zmrzliny s jednou polevou ?
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center;">
+                            V tomto prípade dvojice, ktorých počet hľadáme, predstavuje dvojica $(zmrzlina, poleva)$.
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-3 ice-cream">
+                                <img src="images/cokolada.png" style="width: 60px; height: 100px; display:inline-block;vertical-align:top;">
+                                <div style="display:inline-block;">
+                                    <p style="background-color: #49290b; width: max-content"><i class="fa fa-arrow-right"></i> čokoládová </p>
+                                    <p style="background-color: #a76811; width: max-content"><i class="fa fa-arrow-right"></i> karamelová </p>
+                                    <p style="background-color: #f30e48; width: max-content"><i class="fa fa-arrow-right"></i> ovocná </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ice-cream">
+                                <img src="images/vanilka.png" style="width: 60px; height: 100px; display:inline-block;vertical-align:top;">
+                                <div style="display:inline-block;">
+                                    <p style="background-color: #49290b; width: max-content"><i class="fa fa-arrow-right"></i> čokoládová </p>
+                                    <p style="background-color: #a76811; width: max-content"><i class="fa fa-arrow-right"></i> karamelová </p>
+                                    <p style="background-color: #f30e48; width: max-content"><i class="fa fa-arrow-right"></i> ovocná </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ice-cream">
+                                <img src="images/jahoda.png" style="width: 60px; height: 100px; display:inline-block;vertical-align:top;">
+                                <div style="display:inline-block;">
+                                    <p style="background-color: #49290b; width: max-content"><i class="fa fa-arrow-right"></i> čokoládová </p>
+                                    <p style="background-color: #a76811; width: max-content"><i class="fa fa-arrow-right"></i> karamelová </p>
+                                    <p style="background-color: #f30e48; width: max-content"><i class="fa fa-arrow-right"></i> ovocná </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 ice-cream">
+                                <img src="images/orech.png" style="width: 60px; height: 100px; display:inline-block;vertical-align:top;">
+                                <div style="display:inline-block;">
+                                    <p style="background-color: #49290b; width: max-content"><i class="fa fa-arrow-right"></i> čokoládová </p>
+                                    <p style="background-color: #a76811; width: max-content"><i class="fa fa-arrow-right"></i> karamelová </p>
+                                    <p style="background-color: #f30e48; width: max-content"><i class="fa fa-arrow-right"></i> ovocná </p>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="text-align: center">
+                            Ku každému zo $4$ druhov zmrzliny môžeme priradiť jednu z $3$ polev, celkovo je potom možné vytvoriť
+                            $4\times 3 = 12$ rôznych zmrzlín s polevou.
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(2);">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page3" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Kombinatorické pravidlo súčtu</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(3);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Nech $A_{1}, A_{2}, ... A_{n}$ sú konečné množiny, majú $p_{1}, p_{2}, ... p_{n}$ prvkov
+                        a každé dve sú disjunktné, potom počet prvkov množiny $A_{1}\cup A_{2} \cup ... \cup A_{n}$ sa rovná
+                        \[p_{1} + p_{2} + ... + p_{n}\]
+                    </p>
+                    <div style="background-color: #f3e4bf; padding: 10px;">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center;">
+                            Hádžeme dvoma hracími kockami. Koľko je možnosti aby padol súčet väčší ako $7$?
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center;">
+                            Súčet väčší ako $7$ je súčet $8, 9, 10, 11$ a $12$. Určíme počet možnosti pre každý súčet.
+                        </p>
+                        <ul style="margin-top: 30px; margin-bottom: 30px; padding-left: 200px">
+                            <li>Súčet $8$ .......... $(6+2), (5+3), (4+4)$ ............ $3$ možnosti</li>
+                            <li>Súčet $9$ .......... $(6+3), (5+4)$ ................. $2$ možnosti</li>
+                            <li>Súčet $10$ ........ $(6+4), (5+5)$ ................ $2$ možnosti</li>
+                            <li>Súčet $11$ ........ $(6+5)$ ..................... $1$ možnosť</li>
+                            <li>Súčet $12$ ........ $(6+6)$ ..................... $1$ možnosť</li>
+                        </ul>
+                        <p style="text-align: center">
+                            Spolu $3 + 2 + 2 + 1 + 1 = 9$<br>
+                            Súčet väčší ako $7$ môže padnúť deviatimi spôsobmi.
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(3);">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page4" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Kombinácie, kombinačné číslo</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(4);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center; font-weight: bold; font-size: 1.3em">Kombinácie</p>
+                    <p style="text-align: center">
+                        Predstavujú <u>neusporiadané výbery</u> k prvkov z n-prvkovej množiny. Počet takýchto
+                        kombinácií sa vyjadruje <b>kombinačným číslom</b>. Toto číslo sa označuje $C(n, k)$ alebo $\binom{n}{k}$.
+                        Nazývame ho tiež <b>binomický koeficient</b>.
+                    </p>
+                    <p>Pre ľubovoľné $n$ platí:</p>
+                    <p style="text-align: center">
+                        $ C(n, k) = \binom{n}{k}$<br>
+                        $ C(n,0)=C(n,n)=1$ ,$C(n,1)=n$, ak $0\leq r \leq n$ <br>
+                        $ C(n,r)=0 $, ak $ r>n $ <br>
+                        $ C(n,k)=C(n,n-k) $
+                    </p><br>
+                    <p style="text-align: center">
+                        Symbol $n!$ označuje pojem <b>faktoriál</b>. Faktoriál čísla $n$ predstavuje súčin prvých $n$
+                        prirodzených čísel. <br> Platí, že $0! = 1$.
+                    </p>
+                    <p>Kombinačné číslo vieme vyjadriť ako:
+                        \[ \binom{n}{k} = \frac{n!}{(n-k)!k!} \]
+                    </p>
+                    <p>Platí, že:
+                        \[\binom{n}{k} = \binom{n}{n-k}\]
+                    </p><br>
+                    <p>
+                        Pre všetky celé nezáporné čísla $n, k, k≤n$, platí:
+                        \[\binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}\]
+                    </p><br>
+                    <p style="text-align: center">
+                        Ďalšou významnou rovnosťou je <b>Pascalova formula</b> pre výpočet binomického koeficienta:
+                    </p>
+                    <p>
+                        \[\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}, k\geq 1\]
+                        \[\binom{n}{0} = 1\]
+                    </p>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(4);">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page5" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Kombinácie</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(5);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            V izbe v hosteli sa nachádza $10$ postelí. Koľko je možných skupín postelí, ktoré bude musieť upratovačka prezliecť,
+                            ak v izbe budú spať $6$ turisti?
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: right">
+                                <img src="images/night.png" style="height: 100px; width: 100px" alt="pillow">
+                            </div>
+                            <div class="col-sm-4" style="text-align: center">
+                                <img src="images/sleeping.png" style="height: 100px; width: 100px" alt="bed">
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">
+                                <img src="images/night.png" style="height: 100px; width: 100px" alt="pillow">
+                            </div>
+                        </div>
+                        <p style="text-align: center; padding-top: 15px">
+                            Aby sme mohli túto úlohu vyriešiť, musíme najprv určiť, ktoré spôsoby obsadenia postelí budeme považovať za rôzne.
+                            Z pohľadu upratovačky hostela je dôležité, na ktorých posteliach sa spalo a ktoré musí prezliecť, nezáleží jej na tom,
+                            ktorý konkrétny turista sa uložil na danú posteľ. Preto hľadáme počet neusporiadaných šestíc postelí, ktoré môžeme zostaviť
+                            zo všetkých desiatich postelí - inými slovami teda počet všetkých $6$-prvkových podmnožín $10$-prvkovej množiny postelí v izbe.
+                            Prvky sa v podmnožinách nebudú mocť opakovať, pretože v izbe nebudú spať dvaja turisti na jednej posteli.<br>
+                            Iná formulácia - vyberáme $6$ postelí z $10$, ktoré bude upratovačka musieť prezliecť, tvoríme teda <b>kombinácie</b>
+                            $6$-tej triedy z $10$-tich prvkov $C(10, 6)$.
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">Jedným možným riešením, ak je počet prvkov množiny malý, je vymenovanie všetkých možností.
+                            Určíme si teda menšiu $4$-prvkovú množinu postelí $M = \{p_{1}, p_{2}, p_{3}, p_{4}\}$ a počet turistov $3$.<br>
+                            Všetky možnosti kombinácií obsadení postelí $3$ turistami teda budú: \[(p_{1}, p_{2}, p_{3}), (p_{1}, p_{2}, p_{4}),
+                            (p_{1}, p_{3}, p_{4}), (p_{2}, p_{3}, p_{4})\]
+                            Zistili sme, že počet kombinácií $3$ prvkov z $4$-prvkovej množiny je \[C(4, 3) = 4\]
+                        </p>
+                        <p style="text-align: center">
+                            Pre väčšie hodnoty, aké sú uvedené v zadaní príkladu, je vhodné využiť vzorec pre výpočet počtu kombinácií:
+                            \[ C(n, k) = \binom{n}{k} = \frac{n!}{(n-k)!k!} \]
+                        </p>
+                        <p style="text-align: center">
+                            Po dosadení hodnôt zo zadania dostaneme výsledok:
+                            \[ C(10, 6) = \binom{10}{6} = \frac{10!}{4!6!} = 210 \]
+                            Počet možných kombinácií $10$ postelí, na ktoré sa uloží $6$ turistov je $210$.
+                        </p>
+                        <p style="text-align: center; font-size: 0.5em">
+                            <a href="https://www.flaticon.com/free-icons/bedroom" title="bedroom icons">Bedroom icons created by amoghdesign - Flaticon</a>
+                            <a href="https://www.flaticon.com/free-icons/sleep" title="sleep icons">Sleep icons created by Prosymbols Premium - Flaticon</a>
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(5);">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page6" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Pascalov trojuholník</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(6);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        <u>Pascalova formula</u> je základom pre <b>Pascalov trojuholník</b>,
+                        ktorý predstavuje trojuholníkovú schému pre výpočet kombinačných čísel. Čísla na odvesnách trojuholníka sa rovnajú $1$.
+                        Každé vnútorné kombinačné číslo je súčet dvoch kombinačných čísel nad ním
+                        a ľubovoľné číslo v $n$-tom riadku možno určiť pomocou Pascalovej formuly.
+                    </p>
+                    <p style="text-align: center; background-color: #f3e4bf; font-size: 0.8em; font-style: italic; width: max-content; margin-left: 150px">
+                        Ak prejdete kurzorom ponad binomcký koeficient, zobrazí sa vám jeho číselná hodnota
+                    </p>
+                    <div style="padding-top: 20px; padding-bottom: 40px; display: flex; justify-content: center;">
+                        <table style="place-self: center">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td id="00" onmouseover="colorAndChange(0,0)" onmouseout="changeBack(0,0)">$\binom{0}{0}$</td>
+                                <td id="00hidden" style="color: #ffffff">$\binom{0}{0}$</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td id="10" onmouseover="colorAndChange(1,0)" onmouseout="changeBack(1,0)">$\binom{1}{0}$</td>
+                                <td id="10hidden" style="color: #ffffff">$\binom{1}{0}$</td>
+                                <td id="11" onmouseover="colorAndChange(1,1)" onmouseout="changeBack(1,1)">$\binom{1}{1}$</td>
+                                <td id="11hidden" style="color: #ffffff">$\binom{1}{1}$</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td id="20" onmouseover="colorAndChange(2,0)" onmouseout="changeBack(2,0)">$\binom{2}{0}$</td>
+                                <td id="20hidden" style="color: #ffffff">$\binom{2}{0}$</td>
+                                <td id="21" onmouseover="colorAndChange(2,1)" onmouseout="changeBack(2,1)">$\binom{2}{1}$</td>
+                                <td id="21hidden" style="color: #ffffff">$\binom{2}{1}$</td>
+                                <td id="22" onmouseover="colorAndChange(2,2)" onmouseout="changeBack(2,2)">$\binom{2}{2}$</td>
+                                <td id="22hidden" style="color: #ffffff">$\binom{2}{2}$</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td id="30" onmouseover="colorAndChange(3,0)" onmouseout="changeBack(3,0)">$\binom{3}{0}$</td>
+                                <td id="30hidden" style="color: #ffffff">$\binom{3}{0}$</td>
+                                <td id="31" onmouseover="colorAndChange(3,1)" onmouseout="changeBack(3,1)">$\binom{3}{1}$</td>
+                                <td id="31hidden" style="color: #ffffff">$\binom{3}{1}$</td>
+                                <td id="32" onmouseover="colorAndChange(3,2)" onmouseout="changeBack(3,2)">$\binom{3}{2}$</td>
+                                <td id="32hidden" style="color: #ffffff">$\binom{3}{2}$</td>
+                                <td id="33" onmouseover="colorAndChange(3,3)" onmouseout="changeBack(3,3)">$\binom{3}{3}$</td>
+                                <td id="33hidden" style="color: #ffffff">$\binom{3}{3}$</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td id="40" onmouseover="colorAndChange(4,0)" onmouseout="changeBack(4,0)">$\binom{4}{0}$</td>
+                                <td id="40hidden" style="color: #ffffff">$\binom{4}{0}$</td>
+                                <td id="41" onmouseover="colorAndChange(4,1)" onmouseout="changeBack(4,1)">$\binom{4}{1}$</td>
+                                <td id="41hidden" style="color: #ffffff">$\binom{4}{1}$</td>
+                                <td id="42" onmouseover="colorAndChange(4,2)" onmouseout="changeBack(4,2)">$\binom{4}{2}$</td>
+                                <td id="42hidden" style="color: #ffffff">$\binom{4}{2}$</td>
+                                <td id="43" onmouseover="colorAndChange(4,3)" onmouseout="changeBack(4,3)">$\binom{4}{3}$</td>
+                                <td id="43hidden" style="color: #ffffff">$\binom{4}{3}$</td>
+                                <td id="44" onmouseover="colorAndChange(4,4)" onmouseout="changeBack(4,4)">$\binom{4}{4}$</td>
+                                <td id="44hidden" style="color: #ffffff">$\binom{4}{4}$</td>
+                            </tr>
+
+                            <tr>
+                                <td id="50" onmouseover="colorAndChange(5,0)" onmouseout="changeBack(5,0)">$\binom{5}{0}$</td>
+                                <td id="50hidden" style="color: #ffffff">$\binom{5}{0}$</td>
+                                <td id="51" onmouseover="colorAndChange(5,1)" onmouseout="changeBack(5,1)">$\binom{5}{1}$</td>
+                                <td id="51hidden" style="color: #ffffff">$\binom{5}{1}$</td>
+                                <td id="52" onmouseover="colorAndChange(5,2)" onmouseout="changeBack(5,2)">$\binom{5}{2}$</td>
+                                <td id="52hidden" style="color: #ffffff">$\binom{5}{2}$</td>
+                                <td id="53" onmouseover="colorAndChange(5,3)" onmouseout="changeBack(5,3)">$\binom{5}{3}$</td>
+                                <td id="53hidden" style="color: #ffffff">$\binom{5}{3}$</td>
+                                <td id="54" onmouseover="colorAndChange(5,4)" onmouseout="changeBack(5,4)">$\binom{5}{4}$</td>
+                                <td id="54hidden" style="color: #ffffff">$\binom{5}{4}$</td>
+                                <td id="55" onmouseover="colorAndChange(5,5)" onmouseout="changeBack(5,5)">$\binom{5}{5}$</td>
+                                <td id="55hidden" style="color: #ffffff">$\binom{5}{5}$</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <p>
+                        Súčet čísel v $n$-tom riadku Pascalovho trojuholníka:
+                        \[\sum_{k=0}^{n}\binom{n}{k}= 2^n\]
+                    </p>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(6)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page7" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Kombinácie s opakovaním</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(7);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Predstavujú <u>neusporiadané výbery</u> k prvkov z n-prvkovej množiny, no prvky sa <u>môžu opakovať</u>.
+                        Preto musia byť prvky vždy dostupné v dostatočnom množstve, teda pre každý druh najmenej $k$ prvkov.
+                        Počet kombinácií s opakovaním sa označuje $ C'(n,k) $.
+                        <p>Tento počet sa vyjadrí ako: \[ C'(n,k) = \binom{n+k-1}{k} = \binom{n+k-1}{n-1} \]</p>
+                    </p>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            Do reštaurácie prišlo na večeru $35$ zákazníkov. V jedálnom lístku je v ponuke $12$ druhov jedál
+                            a každý zákazník si objedná jedno z nich. Koľko rôznych objednávok, ktoré bude musieť kuchár pripraviť, môže skupina vytvoriť?
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: right">
+                                <img src="images/serving-dish.png" style="height: 100px; width: 100px" alt="dish">
+                            </div>
+                            <div class="col-sm-4" style="text-align: center">
+                                <img src="images/dinner.png" style="height: 100px; width: 100px" alt="diner">
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">
+                                <img src="images/serving-dish.png" style="height: 100px; width: 100px" alt="dish">
+                            </div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px">
+                            Z pohľadu kuchára, ktorý pripravuje porcie jedla, je nepodstatné, ktorý zákazník si objednal konkrétne jedlo.
+                            Bude mu záležať len na tom, koľko porcií jedného druhu má pripraviť. Z tohto hľadiska hľadáme počet <u>neusporiadnaých</u>
+                            $35$-tíc z $12$-tich druhov jedál. Jedlá sa v objednávke môžu opakovať, pretože jedno jedlo si môže vybrať viacero zákazníkov.
+                            Hľadáme teda počet <u>kombinácií s opakovaním</u> $35$-tej triedy z $12$-tich prvkov.
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Jedných z možných riešení, ak je počet prvkov dostatočne malý, je vymenovanie všetkých možností. Zvoľme si preto počet zákazníkov
+                            $3$ a množinu jedál $M = \{m_{1}, m_{2}, m_{3}\}$. Všetky možnosti budú:</p>
+                        <p style="text-align: center; font-size: 0.8em">
+                            $(m_{1}, m_{1}, m_{1}), (m_{1}, m_{1}, m_{2}),
+                            (m_{1}, m_{1}, m_{3}), (m_{1}, m_{2}, m_{2}), $ <br>
+                            $(m_{1}, m_{2}, m_{3}), (m_{1}, m_{3}, m_{3}), (m_{2}, m_{2}, m_{2}),
+                            (m_{2}, m_{2}, m_{3}), $<br> $(m_{2}, m_{3}, m_{3}), (m_{3}, m_{3}, m_{3})$
+                        </p>
+                        <p style="text-align: center">Ich počet bude $C'(n,k) = 10$.</p>
+                        <p style="text-align: center">
+                            Pre väčšie hodnoty, aké sú uvedené v zadaní príkladu, je vhodné využiť vzorec pre výpočet počtu kombinácií s opakovaním:
+                            \[ C'(n,k) = \binom{n+k-1}{k} = \binom{n+k-1}{n-1} \]
+                        </p>
+                        <p style="text-align: center">
+                            Po dosadení hodnôt zo zadania dostaneme výsledok:
+                            \[ C'(12, 35) = \binom{12+35-1}{35} = \binom{46}{35} = \binom{46}{11}\]
+                            Počet možných kombinácií s opakovaním $12$ jedál pre $35$ zákazníkov je $\binom{46}{11}$.
+                        </p>
+                        <p style="text-align: center">
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/dinner" title="dinner icons">Dinner icons created by Freepik - Flaticon</a>
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by Freepik - Flaticon</a>
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(7)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page8" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Permutácie</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(8);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Permutácie predstavujú <u>bijektívne zobrazenie množiny na samú seba</u>. Permutácia alebo <u>poradie</u> množiny $n$ prvkov
+                        je $n$-tica všetkých $n$ prvkov, v ktorej záleží na poradí. Permutácia predstavuje obmieňanie poradia prvkov.
+                        Počtom permutácií hľadáme počet všetkých týchto možných obmenení prvkov.
+                        Pre množinu $M$,  $ |M| = n $ počet permutácií $P(M_{n})$ vyjadruje vzorec:
+                        \[P(M_{n}) = n!\]
+                    </p>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            Do školskej jedálne prišlo $35$ žiakov. Koľkými spôsobmi sa mohli zoradiť do radu pri výdaji obedov?
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: right">
+                                <img src="images/teamwork.png" style="height: 100px; width: 100px" alt="team">
+                            </div>
+                            <div class="col-sm-4" style="text-align: center">
+                                <img src="images/meal.png" style="height: 100px; width: 100px" alt="meal">
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">
+                                <img src="images/teamwork.png" style="height: 100px; width: 100px" alt="team">
+                            </div>
+                        </div>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Jednotlivé spôsoby sa budú líšiť poradím, v ktorom žiaci pri okienku stoja.
+                            Máme teda určiť počet všetkých permutácií 35 žiakov. Jedným možným riešením, ak je počet prvkov množiny malý,
+                            je vymenovanie všetkých možností. Určime si preto menšiu žiakov $M = \{m_{1}, m_{2}, m_{3}\}$. Všetky permutácie $3$-prvkovej
+                            množiny sú : \[(m_{1}, m_{2}, m_{3}), (m_{1}, m_{3}, m_{2}), (m_{2}, m_{1}, m_{3}), (m_{2}, m_{3}, m_{1}),
+                                            (m_{3}, m_{1}, m_{2}), (m_{3}, m_{2}, m_{1})\]
+                            Ich počet je $6$, teda $P(M_{3}) = 6$<br>
+                        </p>
+                        <p style="text-align: center">
+                            Tento spôsob je pri väčších hodnotách nepraktický a časovo náročný. Ak sa pozrieme na zoznam $3$-prvkových permutácií lepšie,
+                            všimneme si, že začiatočné dve permutácie začínajú prvkom $m_{1}$ a za ním nasledujú permutácie prvkov $m_{2}, m_{3}$ a analogicky
+                            to pokračuje aj s ostatnými prvkami. <br><br> Platí teda, že $P(M_{3}) = 3 \times P(M_{2})$.
+                            Ak túto myšlienku zovšeobecníme, vznikne nám vzorec: \[P(M_{n+1}) = (n+1) \times P(M_{n})\]
+                        </p>
+                        <p style="text-align: center">Všeobecne platí, že $P(M_{1}) = 1$, preto
+                            $P(M_{n}) = n \times (n-1) \times (n-2) \times ... \times 2 \times 1$</p>
+                        <p style="text-align: center">To predstavuje vzorec pre <u>faktoriál</u>, preto zjednodušene $P(M_{n}) = n!$</p>
+                        <p style="text-align: center">Pre $n=3$ to bude $P(M_{3}) = 3! = 6$</p>
+                        <p style="text-align: center">Počet permutácií $35$ žiakov v rade v jedálni bude \[P(M_{35}) = 35!\]</p>
+                        <p style="text-align: center">
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/teamwork" title="teamwork icons">Teamwork icons created by Freepik - Flaticon</a>
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/meal" title="meal icons">Meal icons created by Vectors Tank - Flaticon</a>
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(8)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page9" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Permutácie s opakovaním</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(9);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Permutácie s opakovaním z $n$ prvkov je <u>usporiadaná</u> k-tica zostavená z týchto prvkov tak, že každý sa v nej <u>vyskytuje aspoň raz.</u>
+                        Číslo $n$ vyjadruje počet rôznych prvkov, niektoré z nich sa môžu opakovať. Čísla $k_{1}, k_{2}, ... k_{n}$ označujú počet opakovaní jednotlivých prvkov.
+                        Platí, že $k = k_{1}+k_{2}+ ... +k_{n}$.
+                    </p>
+                    <p>Vzorec pre výpočet permutácií s opakovaním: \[P'(k_{1}, k_{2}, ... k_{n}) = \frac{(k_{1}+k_{2}+ ... +k_{n})!}{k_{1}!k_{2}! ... k_{n}!}\]</p>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">Koľko rôznych slov môže vzniknúť zo slova $ABRAKADABRA$ zmenou poradia písmen?</p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Jedno zo slov, ktoré dostaneme bude $BARBARADAKA$ a iné ťažko vysloviteľné napríklad $AABRARDAAKB$.
+                            Ide vlastne o to určiť, koľko existuje rôznych poradí piatich písmen $A$, dvoch písmen $B$, jedného písmena $D$,
+                            jedného písmena $K$ a dvoch písmen $R$. Keby sme aj písmená písmená rovnakého druhu odlišovali, bolo by celkom
+                            $(5 + 2+ 1 + 1 + 2)! = 11!$ rôznych usporiadní týchto písmen. Do toho by ale boli zarátané aj slová, ktoré sa medzi sebou
+                            líšia len vymeneným poradím písmen rovnakého druhu. V každom uvažovanom slove možno medzi sebou zameniť písmená $A$ $5!$ spôsobmi,
+                            písmená $B$ $2!$ spôsobmi, písmeno $D$ $1!$ spôsobom, písmeno $K$ tiež $1!$ spôsobom a písmená $R$ $2!$ spôsobmi.
+                            Zrejme je možné vykonať celkom $5!\times2!\times1!\times1!\times2!$ zámien písmen toho istého druhu medzi sebou a toľko je teda permutácií
+                            tých jedenástich písmen, dávajúcich rovnaké slovo. Z daného slova možno teda zostaviť celkom
+                            \[P'(5,2,1,1,2!) = \frac{11!}{5!\times2!\times1!\times1!\times2!}\] rôznych slov.
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(9)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page10" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Variácie</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(10);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Variácie $k$-tej triedy z $n$ prvkov predstavujú $k$-členné <u>usporiadané</u> skupiny z $n$ prvkov také,
+                        že každý prvok sa v nich <u>vyskytuje najviac jedenkrát.</u> Počet všetkých $k$-variácií z $n$ prvkov označujeme symbolom $V(n,k)$.
+                    </p>
+                    <p>Vzorec pre výpočet variácií: \[V(n, k) = \frac{n!}{(n-k)!}\]</p>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            V izbe v hosteli sa nachádza $10$ postelí. Koľkými spôsobmi je na ne možné rozmiestniť $6$-tich turistov ?
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: right">
+                                <img src="images/night.png" style="height: 100px; width: 100px" alt="pillow">
+                            </div>
+                            <div class="col-sm-4" style="text-align: center">
+                                <img src="images/sleeping.png" style="height: 100px; width: 100px" alt="bed">
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">
+                                <img src="images/night.png" style="height: 100px; width: 100px" alt="pillow">
+                            </div>
+                        </div>
+                        <p style="text-align: center">
+                            Z hľadiska turistov bude podstatné, na ktorej posteli kto z nich bude spať. Dve uloženia sa budú pokladať za rôzne,
+                            ak aspoň jeden turista bude spať pri jednom z nich na inej posteli než pri druhom. Inými slovami, je pre nich podstatné,
+                            nielen ktoré postele budú obsadené, ale tiež usporiadanie turistov na nich. Hľadaný počet teda bude rovný počtu všetkých
+                            <u>usporiadaných</u> $6$-tíc postelí, ktoré je možné zostaviť zo všetkých $10$ postelí v izbe. Inými slovami hľadáme
+                            počet $6$-prvkových <u>variácií</u> z $10$ prvkov.
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Jedným možným riešením, ak je počet prvkov množiny malý, je vymenovanie všetkých možností. Určíme si počet turistov $3$
+                            a počet množinu postelí $M = \{p_{1}, p_{2}, p_{3}, p_{4}\}$. Všetky možnosti budú
+                        </p>
+                        <div class="row" style="padding-top: 10px; padding-bottom: 20px">
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{1}, p_{2}, p_{3})$,</p><p>$(p_{1}, p_{2}, p_{4})$,</p>
+                                <p>$(p_{1}, p_{3}, p_{2})$,</p><p>$(p_{1}, p_{3}, p_{4})$,</p>
+                            </div>
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{1}, p_{4}, p_{2})$,</p><p>$(p_{1}, p_{4}, p_{3})$,</p>
+                                <p>$(p_{2}, p_{1}, p_{3})$,</p><p>$(p_{2}, p_{1}, p_{4})$,</p>
+                            </div>
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{2}, p_{3}, p_{1})$,</p><p>$(p_{2}, p_{3}, p_{4})$,</p>
+                                <p>$(p_{2}, p_{4}, p_{1})$,</p><p>$(p_{2}, p_{4}, p_{3})$,</p>
+                            </div>
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{3}, p_{1}, p_{2})$,</p><p>$(p_{3}, p_{1}, p_{4})$,</p>
+                                <p>$(p_{3}, p_{2}, p_{1})$,</p><p>$(p_{3}, p_{2}, p_{4})$,</p>
+                            </div>
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{3}, p_{4}, p_{1})$,</p><p>$(p_{3}, p_{4}, p_{2})$,</p>
+                                <p>$(p_{4}, p_{1}, p_{2})$,</p><p>$(p_{4}, p_{1}, p_{3})$,</p>
+                            </div>
+                            <div class="col-sm-2 variations">
+                                <p>$(p_{4}, p_{2}, p_{1})$,</p><p>$(p_{4}, p_{2}, p_{3})$,</p>
+                                <p>$(p_{4}, p_{3}, p_{1})$,</p><p>$(p_{4}, p_{3}, p_{2})$</p>
+                            </div>
+                        </div>
+                        <p style="text-align: center">
+                            Ich počet bude $24$.
+                        </p>
+                        <p style="text-align: center">
+                            Všetky usporiadania $n$-prvkov rozdeľme do skupín tak, že v každej skupine budú práve tie usporiadania,
+                            ktoré sa zhodujú na prvých $k$ miestach. Tieto skupiny budú disjunktné a bude ich práve $V(n, k)$. Ak sa $n=k$, obsahuje
+                            každá skupina jedno usporiadanie, a teda $V(n, k) = P(M_{n})$. Ak $n>k$ obsahuje každá skupina $P(M_{n-k})$ usporiadaní, ktoré
+                            sa líšia usporiadaním zvyšných $n-k$ prvkov. V tomto prípade platí
+                            \[V(n,k) = \frac{P(M_{n})}{P(M_{n-k})} = \frac{n!}{(n-k)!}\]
+                            Konkrétne pre hodnoty $n=4, k=3$
+                            \[V(4, 3) = \frac{4!}{(4-3)!} = 4! = 24\]
+                            Pre hodnoty zo zadania $n=10, k=6$
+                            \[V(10, 6) = \frac{10!}{4!} = 10\times 9\times 8\times 7\times 6\times 5 = 151200\]
+                        </p>
+                        <p style="text-align: center; font-size: 0.5em">
+                            <a href="https://www.flaticon.com/free-icons/bedroom" title="bedroom icons">Bedroom icons created by amoghdesign - Flaticon</a>
+                            <a href="https://www.flaticon.com/free-icons/sleep" title="sleep icons">Sleep icons created by Prosymbols Premium - Flaticon</a>
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(10)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page11" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Variácie s opakovaním</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(11);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Variácie množiny $M_{n}$ s opakovaním prvkov predstavujú usporiadané $k$-tice,
+                        v ktorých sa prvky množiny môžu opakovať. Počet všetkých $k$-variácií s opakovaním množiny $M_{n}$ budeme označovať symbolom $V'(n,k)$
+                    </p>
+                    <p>Vzorec pre výpočet variácií s opakovaním: \[V'(n, k) = n^k\]</p>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            Do reštaurácie prišlo na večeru $35$ zákazníkov. V jedálnom lístku je v ponuke $12$ druhov jedál
+                            a každý zákazník si objedná jedno z nich. Koľko rôznych objednávok môže skupina vytvoriť?
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-4" style="text-align: right">
+                                <img src="images/serving-dish.png" style="height: 100px; width: 100px" alt="dish">
+                            </div>
+                            <div class="col-sm-4" style="text-align: center">
+                                <img src="images/dinner.png" style="height: 100px; width: 100px" alt="diner">
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">
+                                <img src="images/serving-dish.png" style="height: 100px; width: 100px" alt="dish">
+                            </div>
+                        </div>
+                        <p style="text-align: center">
+                            Z hľadiska časníka a zákazníkov je dôležité, ktoré jedlo si konkrétny zákazník objedná - záleží na poradí.
+                            Pôjde teda o <u>usporiadané</u> $35$-tice z $12$-tich prvkov. Jeden druh jedla si môže objednať viacero zákazníkov, preto sa
+                            prvky môžu opakovať. Hľadáme teda $35$ prvkové <u>variácie s opakovaním</u> z $12$-tich prvkov.
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Jedným možným riešením, ak je počet prvkov množiny malý, je vymenovanie všetkých možností. Napríklad z $3$ prvkov množiny
+                            $M=\{m_{1}, m_{2}, m_{3}\}$ vieme vytvoriť $27$ trojprvkových variácií s opakovaním:
+                        </p>
+                        <p style="text-align: center; font-size: 0.8em; padding-left: 10px; padding-right: 10px">
+                            $(m_{1}, m_{1}, m_{1})$, $(m_{1}, m_{1}, m_{2})$, $(m_{1}, m_{2}, m_{1})$, $(m_{2}, m_{1}, m_{1})$, $(m_{1}, m_{1}, m_{3})$,
+                            $(m_{1}, m_{3}, m_{1})$, $(m_{3}, m_{1}, m_{1})$, $(m_{1}, m_{2}, m_{2})$, $(m_{2}, m_{1}, m_{2})$, $(m_{2}, m_{2}, m_{1})$,
+                            $(m_{1}, m_{3}, m_{3})$, $(m_{3}, m_{1}, m_{3})$, $(m_{3}, m_{3}, m_{1})$, $(m_{1}, m_{2}, m_{3})$, $(m_{2}, m_{1}, m_{3})$,
+                            $(m_{3}, m_{2}, m_{1})$, $(m_{2}, m_{3}, m_{1})$, $(m_{3}, m_{1}, m_{2})$, $(m_{1}, m_{3}, m_{2})$, $(m_{2}, m_{2}, m_{2})$,
+                            $(m_{2}, m_{2}, m_{3})$, $(m_{2}, m_{3}, m_{2})$, $(m_{3}, m_{2}, m_{2})$, $(m_{3}, m_{3}, m_{2})$, $(m_{3}, m_{2}, m_{3})$,
+                            $(m_{2}, m_{3}, m_{3})$, $(m_{3}, m_{3}, m_{3})$
+                        </p>
+                        <p style="text-align: center">
+                            Rozdeľme všetky $(k + 1)$-prvkové variácie s opakovaním z $n$ prvkov na $n$ disjunktných skupín podľa toho,
+                            ktorý prvok majú na prvom mieste. V každej skupine je potom zrejme práve toľko variácií,
+                            koľko je všetkých $k$-prvkových variácií s opakovaním z $n$ prvkov. Platí teda $V'(n + 1, k) = kV'(n, k)$
+                            Vzhľadom k tomu, že existuje práve $n$ jednoprvkových variácií s opakovaním z $n$ prvkov, dostávame:
+                            \[V'(n, k) = n^k\]
+                        </p>
+                        <p style="text-align: center">
+                            Pre konkrétne hodnoty $n=12, k=35$ sa výsledný počet rovná:
+                            \[V'(12, 35) = 12^{35}\]
+                        </p>
+                        <p style="text-align: center">
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/dinner" title="dinner icons">Dinner icons created by Freepik - Flaticon</a>
+                            <a style="font-size: 0.5em" href="https://www.flaticon.com/free-icons/food" title="food icons">Food icons created by Freepik - Flaticon</a>
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(11)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page12" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Princíp inklúzie a exklúzie</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(12);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <p style="text-align: center">
+                        Princíp inklúzie a exklúzie, alebo princíp <u>zapojenia a vypojenia</u> je v kombinatorike technikou počítania,
+                        ktorá reprezentuje výpočet počtu prvkov v zjednotení konečných množín.
+                        Základný vzťah je symbolicky reprezentovaný ako:
+                        \[|A \cup B| = |A| + |B| - |A\cap B|\]
+                    </p>
+                    <p>Všeobecne teda platí výraz: \[\Bigg|\bigcup_{i=1}^{n}A_{i}\Bigg| = |A_{1}| + |A_{2}| + ... + |A_{n}| - \]
+                        \[|A_{1} \cap A_{2}| -...- |A_{n-1} \cap A_{n}| + \] \[|A_{1} \cap A_{2} \cap A_{3}| + ... + (-1)^{n+1} |A_{1} \cap A_{2} \cap ... \cap A_{n}| = \]
+                        \[\sum_{k=1}^{n}(-1)^{k+1} \sum_{l \in \binom{[n]}{k}} \Bigg|\bigcap_{i\in l}A_{i}\Bigg|\]</p>
+                    <p style="text-align: center">Na začiatku výpočtu sčítame počty prvkov jednotlivých množín
+                        $($ každú môžeme chápať ako prienik systému pozostávajúceho z jedinej množiny $)$
+                        a striedavo odpočítavame a pripočítavame prieniky všetkých dvojíc, trojíc, štvoríc, atď.</p>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:right; margin-top: 250px; font-size: 1.5em" onclick="nextPage(12)">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page13" style="display:none">
+    <div class="introPage">
+        <h2 class="introName" style="margin-top: 40px"><i class="fa fa-paperclip"></i> Princíp inklúzie a exklúzie</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-warning" style="float:left; margin-top: 250px; font-size: 1.5em" onclick="prevPage(13);">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <div class="col-sm-10 theoryPage">
+                <blockquote>
+                    <div style="background-color: #f3e4bf; padding: 10px">
+                        <p><i class="fa fa-lightbulb-o"></i> <b>príklad</b></p>
+                        <p style="text-align: center">
+                            Koľko z čísel $1, 2, ... 30$ je deliteľných niektorým z čísel $2, 3, 5$ ?
+                        </p>
+                        <p><i class="fa fa-pencil"></i> <b>riešenie</b></p>
+                        <p style="text-align: center">
+                            Čísel deliteľných $2$ bude $30/2 = 15$, deliteľných $3$ bude $30/3 = 10$ a deliteľných $5$ bude $30/5 = 6$.
+                        </p>
+                        <p style="text-align: center; margin-bottom: 20px"> Dohromady teda $15 + 10 + 6 = 31$ - <u>to ale nie je správny výsledok!</u></p>
+                        <p><i class="fa fa-circle-o"></i><b> Vennov diagram ilustrujúci prieniky množín</b></p>
+                        <div class="row" style="text-align: center; margin-bottom: 15px; font-size: 0.9em">
+                            <div class="col-sm-4">
+                                <p><i class="fa fa-circle" style="color: #cc4b3f"></i> - čísla deliteľné 5</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p><i class="fa fa-circle" style="color: #18859b"></i> - čísla deliteľné 2</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p><i class="fa fa-circle" style="color: #7621a7"></i> - čísla deliteľné 3</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center; padding-bottom: 20px">
+                            <img src="images/venn.png" style="height: 300px; width: 400px">
+                        </div>
+                        <p style="text-align: center">
+                            Musíme si uvedomiť, že čísla, ktoré sú deliteľné zároveň dvomi z čísel $2, 3, 5$ sme započítali dvakrát,
+                            teda ich počet musíme <u>od výsledku odpočítať</u>. To sa týka čísel deliteľných $2$ a $3$, $2\times3 = 6$, tých bude $ 30/6 = 5$,
+                            následne čísel deliteľných $2$ a $5$, $2\times5 = 10$, tie sú $ 30/10 = 3$ a na záver čísel deliteľných $3$ a $5$,
+                            $3\times5 = 15$, ich počet je $ 30/15 = 2$. Po odčítaní týchto čísel od výsledku zistíme, že čísla,
+                            ktoré sú deliteľné zároveň $2,3,5$ sme trikrát pripočítali a trikrát odpočítali,
+                            teda ich na koniec musíme ešte raz <u>pripočítať</u>. Bude to len jedno číslo $30/(2\times3\times5) = 1$.</p>
+                        <p style="text-align: center">
+                            Celkovo nám teda vyjde, že z čísel $1, 2, ... 30$ je \[\mathbf{6+10+15-5-3-2+1=22}\] deliteľných niektorým z čísel $2, 3, 5$.
+                        </p>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-warning disabled" style="float:right; margin-top: 250px; font-size: 1.5em">
+                    <i class="fa fa-times-rectangle"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/theory.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/usebootstrap.js"></script>
+
+</body>
+<footer>
+    <div class="footer navbar-fixed-bottom">
+        Vytvorila Lenka Čakurdová ako bakalársku prácu, FMFI UK 2023
+    </div>
+</footer>
+</html>

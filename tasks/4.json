@@ -1,0 +1,59 @@
+[
+  {
+    "number": "1",
+    "keyword": "karty",
+    "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 kariet?",
+    "result": "32!"
+  },
+  {
+    "number": "2",
+    "keyword": "konferencia",
+    "text": "Konferencie sa zúčastnilo 90 delegátov. Zvolili štvorčlenný výbor (predseda, podpredseda, konateľ a pokladník). Určite, koľko bolo možností pre výber členov výboru.",
+    "result": "V(90, 4)"
+  },
+  {
+    "number": "3",
+    "keyword": "stretnutie priateľov",
+    "text": "Zišlo sa 5 priateľov a navzájom si potriasli rukami. Určite počet potrasení.",
+    "result": "C(5, 2)"
+  },
+  {
+    "number": "4",
+    "keyword": "cestovné lístky",
+    "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zistite, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
+    "result": "V(3174,2)"
+  },
+  {
+    "number": "5",
+    "keyword": "tipovanie",
+    "text": "V športke sa tipuje 6 zo 49 športov. Koľko je všetkých možných tipov?",
+    "result": "C(49, 6)"
+  },
+  {
+    "number": "6",
+    "keyword": "čísla",
+    "text": "Koľko štvorciferných čísel, v ktorých sa žiadna číslica neopakuje, je možné zostaviť z číslic 1, 2, 3, 4, 5, 6, 7",
+    "result": "V(7, 4)"
+  },
+  {
+    "number": "7",
+    "keyword": "kúpeľňa",
+    "text": "Koľko slov je možné vytvoriť zo slova kúpeľňa zmenou poradia písmen? (Neberieme ohľad na to, či vzniknuté slová majú zmysel.)",
+    "result": "8!"
+  },
+  {
+    "number": "8",
+    "text": "Na štvorčekovom papieri zvoľte dva priesečníky liniek. Určite, koľkými rôznymi cestami sa môžete dostať z jedného do druhého tak, že pôjdete po linkách len hore alebo doprava.",
+    "result": "35!"
+  },
+  {
+    "number": "9",
+    "text": "Blabla",
+    "result": "35!"
+  },
+  {
+    "number": "10",
+    "text": "Blabla",
+    "result": "35!"
+  }
+]
