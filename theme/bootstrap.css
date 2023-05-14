@@ -258,7 +258,6 @@ td{
 }
 
 .userButton{
-  float: right;
   background-color: #20252d;
   font-size: 17px;
   height: 50px;
@@ -273,6 +272,22 @@ td{
   background-color: #b6aeae;
 }
 
+#user{
+  display: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  height: 50px;
+  padding: 5px;
+  border: 1px solid #798d8f;
+  font-size: 1em;
+}
+
+#userName{
+  font-weight: bold;
+  color: #c87f0a;
+  font-size: 1.2em;
+}
 /**********************************************************/
 body {
   margin: 0;
@@ -1913,7 +1928,6 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -4523,7 +4537,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
   line-height: 1;
   color: #ffffff;
   text-align: center;

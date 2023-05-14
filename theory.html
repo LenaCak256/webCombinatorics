@@ -31,8 +31,13 @@
         <li><a href="theory.html"><i class="fa fa-book"></i> Teória</a></li>
         <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
     </ul>
-    <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Prihlásiť sa</button>
-    <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Odhlásiť sa</button>
+    <ul class="nav navbar-nav navbar-right">
+        <li><label class="label" id="user" style="float: right"><p>prihlásený</p><p id="userName"></p></label></li>
+        <li>
+            <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Prihlásiť sa</button>
+            <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Odhlásiť sa</button>
+        </li>
+    </ul>
 </div>
 
 <div id="page1" style="display:inline">
@@ -366,7 +371,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id="00" onmouseover="colorAndChange(0,0)" onmouseout="changeBack(0,0)">$\binom{0}{0}$</td>
+                                <td id="00" style="color: black" onmouseover="colorAndChange(0,0)" onmouseout="changeBack(0,0)">$\binom{0}{0}$</td>
                                 <td id="00hidden" style="color: #ffffff">$\binom{0}{0}$</td>
                                 <td></td>
                                 <td></td>
@@ -379,9 +384,9 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id="10" onmouseover="colorAndChange(1,0)" onmouseout="changeBack(1,0)">$\binom{1}{0}$</td>
+                                <td id="10" style="color: black" onmouseover="colorAndChange(1,0)" onmouseout="changeBack(1,0)">$\binom{1}{0}$</td>
                                 <td id="10hidden" style="color: #ffffff">$\binom{1}{0}$</td>
-                                <td id="11" onmouseover="colorAndChange(1,1)" onmouseout="changeBack(1,1)">$\binom{1}{1}$</td>
+                                <td id="11" style="color: black" onmouseover="colorAndChange(1,1)" onmouseout="changeBack(1,1)">$\binom{1}{1}$</td>
                                 <td id="11hidden" style="color: #ffffff">$\binom{1}{1}$</td>
                                 <td></td>
                                 <td></td>
@@ -392,11 +397,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td id="20" onmouseover="colorAndChange(2,0)" onmouseout="changeBack(2,0)">$\binom{2}{0}$</td>
+                                <td id="20" style="color: black" onmouseover="colorAndChange(2,0)" onmouseout="changeBack(2,0)">$\binom{2}{0}$</td>
                                 <td id="20hidden" style="color: #ffffff">$\binom{2}{0}$</td>
-                                <td id="21" onmouseover="colorAndChange(2,1)" onmouseout="changeBack(2,1)">$\binom{2}{1}$</td>
+                                <td id="21" style="color: black" onmouseover="colorAndChange(2,1)" onmouseout="changeBack(2,1)">$\binom{2}{1}$</td>
                                 <td id="21hidden" style="color: #ffffff">$\binom{2}{1}$</td>
-                                <td id="22" onmouseover="colorAndChange(2,2)" onmouseout="changeBack(2,2)">$\binom{2}{2}$</td>
+                                <td id="22" style="color: black" onmouseover="colorAndChange(2,2)" onmouseout="changeBack(2,2)">$\binom{2}{2}$</td>
                                 <td id="22hidden" style="color: #ffffff">$\binom{2}{2}$</td>
                                 <td></td>
                                 <td></td>
@@ -405,43 +410,43 @@
                             <tr>
                                 <td></td>
                                 <td></td>
-                                <td id="30" onmouseover="colorAndChange(3,0)" onmouseout="changeBack(3,0)">$\binom{3}{0}$</td>
+                                <td id="30" style="color: black" onmouseover="colorAndChange(3,0)" onmouseout="changeBack(3,0)">$\binom{3}{0}$</td>
                                 <td id="30hidden" style="color: #ffffff">$\binom{3}{0}$</td>
-                                <td id="31" onmouseover="colorAndChange(3,1)" onmouseout="changeBack(3,1)">$\binom{3}{1}$</td>
+                                <td id="31" style="color: black" onmouseover="colorAndChange(3,1)" onmouseout="changeBack(3,1)">$\binom{3}{1}$</td>
                                 <td id="31hidden" style="color: #ffffff">$\binom{3}{1}$</td>
-                                <td id="32" onmouseover="colorAndChange(3,2)" onmouseout="changeBack(3,2)">$\binom{3}{2}$</td>
+                                <td id="32" style="color: black" onmouseover="colorAndChange(3,2)" onmouseout="changeBack(3,2)">$\binom{3}{2}$</td>
                                 <td id="32hidden" style="color: #ffffff">$\binom{3}{2}$</td>
-                                <td id="33" onmouseover="colorAndChange(3,3)" onmouseout="changeBack(3,3)">$\binom{3}{3}$</td>
+                                <td id="33" style="color: black" onmouseover="colorAndChange(3,3)" onmouseout="changeBack(3,3)">$\binom{3}{3}$</td>
                                 <td id="33hidden" style="color: #ffffff">$\binom{3}{3}$</td>
                                 <td></td>
                             </tr>
 
                             <tr>
                                 <td></td>
-                                <td id="40" onmouseover="colorAndChange(4,0)" onmouseout="changeBack(4,0)">$\binom{4}{0}$</td>
+                                <td id="40" style="color: black" onmouseover="colorAndChange(4,0)" onmouseout="changeBack(4,0)">$\binom{4}{0}$</td>
                                 <td id="40hidden" style="color: #ffffff">$\binom{4}{0}$</td>
-                                <td id="41" onmouseover="colorAndChange(4,1)" onmouseout="changeBack(4,1)">$\binom{4}{1}$</td>
+                                <td id="41" style="color: black" onmouseover="colorAndChange(4,1)" onmouseout="changeBack(4,1)">$\binom{4}{1}$</td>
                                 <td id="41hidden" style="color: #ffffff">$\binom{4}{1}$</td>
-                                <td id="42" onmouseover="colorAndChange(4,2)" onmouseout="changeBack(4,2)">$\binom{4}{2}$</td>
+                                <td id="42" style="color: black" onmouseover="colorAndChange(4,2)" onmouseout="changeBack(4,2)">$\binom{4}{2}$</td>
                                 <td id="42hidden" style="color: #ffffff">$\binom{4}{2}$</td>
-                                <td id="43" onmouseover="colorAndChange(4,3)" onmouseout="changeBack(4,3)">$\binom{4}{3}$</td>
+                                <td id="43" style="color: black" onmouseover="colorAndChange(4,3)" onmouseout="changeBack(4,3)">$\binom{4}{3}$</td>
                                 <td id="43hidden" style="color: #ffffff">$\binom{4}{3}$</td>
-                                <td id="44" onmouseover="colorAndChange(4,4)" onmouseout="changeBack(4,4)">$\binom{4}{4}$</td>
+                                <td id="44" style="color: black" onmouseover="colorAndChange(4,4)" onmouseout="changeBack(4,4)">$\binom{4}{4}$</td>
                                 <td id="44hidden" style="color: #ffffff">$\binom{4}{4}$</td>
                             </tr>
 
                             <tr>
-                                <td id="50" onmouseover="colorAndChange(5,0)" onmouseout="changeBack(5,0)">$\binom{5}{0}$</td>
+                                <td id="50" style="color: black" onmouseover="colorAndChange(5,0)" onmouseout="changeBack(5,0)">$\binom{5}{0}$</td>
                                 <td id="50hidden" style="color: #ffffff">$\binom{5}{0}$</td>
-                                <td id="51" onmouseover="colorAndChange(5,1)" onmouseout="changeBack(5,1)">$\binom{5}{1}$</td>
+                                <td id="51" style="color: black" onmouseover="colorAndChange(5,1)" onmouseout="changeBack(5,1)">$\binom{5}{1}$</td>
                                 <td id="51hidden" style="color: #ffffff">$\binom{5}{1}$</td>
-                                <td id="52" onmouseover="colorAndChange(5,2)" onmouseout="changeBack(5,2)">$\binom{5}{2}$</td>
+                                <td id="52" style="color: black" onmouseover="colorAndChange(5,2)" onmouseout="changeBack(5,2)">$\binom{5}{2}$</td>
                                 <td id="52hidden" style="color: #ffffff">$\binom{5}{2}$</td>
-                                <td id="53" onmouseover="colorAndChange(5,3)" onmouseout="changeBack(5,3)">$\binom{5}{3}$</td>
+                                <td id="53" style="color: black" onmouseover="colorAndChange(5,3)" onmouseout="changeBack(5,3)">$\binom{5}{3}$</td>
                                 <td id="53hidden" style="color: #ffffff">$\binom{5}{3}$</td>
-                                <td id="54" onmouseover="colorAndChange(5,4)" onmouseout="changeBack(5,4)">$\binom{5}{4}$</td>
+                                <td id="54" style="color: black" onmouseover="colorAndChange(5,4)" onmouseout="changeBack(5,4)">$\binom{5}{4}$</td>
                                 <td id="54hidden" style="color: #ffffff">$\binom{5}{4}$</td>
-                                <td id="55" onmouseover="colorAndChange(5,5)" onmouseout="changeBack(5,5)">$\binom{5}{5}$</td>
+                                <td id="55" style="color: black" onmouseover="colorAndChange(5,5)" onmouseout="changeBack(5,5)">$\binom{5}{5}$</td>
                                 <td id="55hidden" style="color: #ffffff">$\binom{5}{5}$</td>
                             </tr>
                         </table>
