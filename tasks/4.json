@@ -1,59 +1,37 @@
 [
   {
     "number": "1",
-    "keyword": "karty",
-    "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 kariet?",
-    "result": "32!"
+    "keyword": "matematika",
+    "text": "Koľkými spôsobmi vieš z tabuľky na ploche prečítať názov svojho najobľúbenejšieho predmetu?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "2",
-    "keyword": "konferencia",
-    "text": "Konferencie sa zúčastnilo 90 delegátov. Zvolili štvorčlenný výbor (predseda, podpredseda, konateľ a pokladník). Určite, koľko bolo možností pre výber členov výboru.",
-    "result": "V(90, 4)"
+    "keyword": "generál",
+    "text": "V generálnom štábe je 13 generálov. Rozhodli sa, že si na tajné materiály zadovážia trezor, ktorý bude možné otvoriť, len ak bude prítomná nadpolovičná väčšina generálov. Aký je najmenší možný počet zámkov, ktoré budú na trezore? Aký je najmenší možný počet kľúčov, ktoré so sebou bude nosiť generál?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "3",
-    "keyword": "stretnutie priateľov",
-    "text": "Zišlo sa 5 priateľov a navzájom si potriasli rukami. Určite počet potrasení.",
-    "result": "C(5, 2)"
+    "keyword": "menu",
+    "text": "Na jedálnom lístku sú 4 aperitívy, 6 predjedál, 3 polievky, 23 hlavných jedál, 4 studené nápoje, 5 múčnikov, 2 teplé nápoje a 12 vín. Koľkými spôsobmi je možné zostaviť menu skladajúce sa zo všetkých ôsmich súčastí?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "4",
-    "keyword": "cestovné lístky",
-    "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zistite, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
-    "result": "V(3174,2)"
+    "keyword": "zápasy",
+    "text": "V stávke sa tipujú výsledky 12 zápasov - či vyhrajú domáci, hostia alebo zápasy skončia nerozhodne. Koľko je všetkých možných tipov ?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "5",
-    "keyword": "tipovanie",
-    "text": "V športke sa tipuje 6 zo 49 športov. Koľko je všetkých možných tipov?",
-    "result": "C(49, 6)"
-  },
-  {
-    "number": "6",
-    "keyword": "čísla",
-    "text": "Koľko štvorciferných čísel, v ktorých sa žiadna číslica neopakuje, je možné zostaviť z číslic 1, 2, 3, 4, 5, 6, 7",
-    "result": "V(7, 4)"
-  },
-  {
-    "number": "7",
-    "keyword": "kúpeľňa",
-    "text": "Koľko slov je možné vytvoriť zo slova kúpeľňa zmenou poradia písmen? (Neberieme ohľad na to, či vzniknuté slová majú zmysel.)",
-    "result": "8!"
-  },
-  {
-    "number": "8",
-    "text": "Na štvorčekovom papieri zvoľte dva priesečníky liniek. Určite, koľkými rôznymi cestami sa môžete dostať z jedného do druhého tak, že pôjdete po linkách len hore alebo doprava.",
-    "result": "35!"
-  },
-  {
-    "number": "9",
-    "text": "Blabla",
-    "result": "35!"
-  },
-  {
-    "number": "10",
-    "text": "Blabla",
-    "result": "35!"
+    "keyword": "zoradenie vagónov",
+    "text": "Na zoraďovacej stanici stojí 5 lôžkových, 7 jedálnych a 20 obyčajných osobných vagónov. Bude z nich zostavená súprava s piatimi vagónmi. Koľko rôznych súprav je možno zoradiť?",
+    "hint": "",
+    "result": ""
   }
 ]

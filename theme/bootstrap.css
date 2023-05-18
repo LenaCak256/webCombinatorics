@@ -213,7 +213,6 @@ td{
 
 .listLabel{
   margin-left: 5px;
-  margin-top: 10px;
   font-size: 1.8em;
   color: #ffffff;
   display: inline-block;
@@ -273,7 +272,7 @@ td{
 }
 
 #user{
-  display: none;
+  display: inline;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 10px;

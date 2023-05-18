@@ -123,11 +123,11 @@ function loadListOfTasks() {
 
         let newLabel = document.createElement("span")
         newLabel.classList.add("listLabel")
-        if(logged === true && i+1 < 5){
-            newLabel.classList.add("label-success")
+        if(i+1 < 5){
+            newLabel.style.backgroundColor = "#447334"
             newLabel.innerHTML = "<i class='fa fa-thumbs-up'></i>"
         }else{
-            newLabel.classList.add("label-danger")
+            newLabel.style.backgroundColor = "#a82a1c"
             newLabel.innerHTML = "<i class='fa fa-thumbs-down'></i>"
         }
 

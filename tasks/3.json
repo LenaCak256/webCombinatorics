@@ -1,59 +1,37 @@
 [
   {
     "number": "1",
-    "keyword": "karty",
-    "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 kariet?",
-    "result": "32!"
+    "keyword": "telovýchovný spolok",
+    "text": "Telovýchovný spolok má štyri oddiely: atletický (A), futbalový (F), volejbalový (V) a šachový (S). Každý člen športuje v niektorom oddieli, niektorí aj vo viacerých naraz. Koľko členov má telovýchovný spolok?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "2",
-    "keyword": "konferencia",
-    "text": "Konferencie sa zúčastnilo 90 delegátov. Zvolili štvorčlenný výbor (predseda, podpredseda, konateľ a pokladník). Určite, koľko bolo možností pre výber členov výboru.",
-    "result": "V(90, 4)"
+    "keyword": "telovýchovný spolok - pokračovanie",
+    "text": "Koľko športovcov z predchádzajúcej úlohy vykonáva aspoň 2 športy ?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "3",
-    "keyword": "stretnutie priateľov",
-    "text": "Zišlo sa 5 priateľov a navzájom si potriasli rukami. Určite počet potrasení.",
-    "result": "C(5, 2)"
+    "keyword": "kino",
+    "text": "Koľkými spôsobmi sa vie v kine usadiť n manželských párov do posledného radu, kde je 2n miest tak, aby žiadny manželský pár nesedel vedľa seba?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "4",
-    "keyword": "cestovné lístky",
-    "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zistite, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
-    "result": "V(3174,2)"
+    "keyword": "farebné guličky",
+    "text": "Z vrecka, v ktorom sú 3 žlté, 1 modrá, 10 červených a 10 zelených guličiek, naberieme hrsť desiatich guličiek. Koľko rôznych hrstí môžeme dostať?",
+    "hint": "",
+    "result": ""
   },
   {
     "number": "5",
-    "keyword": "tipovanie",
-    "text": "V športke sa tipuje 6 zo 49 športov. Koľko je všetkých možných tipov?",
-    "result": "C(49, 6)"
-  },
-  {
-    "number": "6",
-    "keyword": "čísla",
-    "text": "Koľko štvorciferných čísel, v ktorých sa žiadna číslica neopakuje, je možné zostaviť z číslic 1, 2, 3, 4, 5, 6, 7",
-    "result": "V(7, 4)"
-  },
-  {
-    "number": "7",
-    "keyword": "kúpeľňa",
-    "text": "Koľko slov je možné vytvoriť zo slova kúpeľňa zmenou poradia písmen? (Neberieme ohľad na to, či vzniknuté slová majú zmysel.)",
-    "result": "8!"
-  },
-  {
-    "number": "8",
-    "text": "Na štvorčekovom papieri zvoľte dva priesečníky liniek. Určite, koľkými rôznymi cestami sa môžete dostať z jedného do druhého tak, že pôjdete po linkách len hore alebo doprava.",
-    "result": "35!"
-  },
-  {
-    "number": "9",
-    "text": "Blabla",
-    "result": "35!"
-  },
-  {
-    "number": "10",
-    "text": "Blabla",
-    "result": "35!"
+    "keyword": "tlmočníci",
+    "text": "Koľko tlmočníkov je zamestnaných v stredisku, ak vieme, že 36 z nich vie anglicky, 32 nemecky, 31 rusky, 30 francúzsky, 28 poľsky a 26 po španielsky, pričom 53 z nich pozná viac ako jeden z uvedených jazykov. 24 tlmočníci poznajú aspoň tri jazyky, 9 aspoň štyri, 3 aspoň päť a 1 všetkých šesť.",
+    "hint": "",
+    "result": ""
   }
 ]
