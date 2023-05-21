@@ -9,6 +9,7 @@
 
   <link rel="stylesheet" href="theme/bootstrap.css" media="screen">
   <link rel="stylesheet" href="theme/usebootstrap.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
   <script src="bootstrap/html5shiv.js"></script>
   <script src="bootstrap/respond.min.js"></script>
@@ -25,7 +26,7 @@
 </head>
 
 <body>
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top" id="nav">
   <img style="width: 60px; height: 60px; float: left" src="images/dice-six-faces-five.png" alt="logo">
   <ul class="nav navbar-nav">
     <li id="name" class="introName"><a href="index.html">Kombinatorika</a></li>
@@ -33,10 +34,10 @@
     <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li><label class="label" id="user" style="float: right"><p>prihlásený</p><p id="userName"> Lenka Čakurdová</p></label></li>
+    <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user"></i> prihlásený</p><p id="userName"></p></label></li>
     <li>
-      <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Prihlásiť sa</button>
-      <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-user" style="font-size: 20px;"></i> Odhlásiť sa</button>
+      <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #be780a"></i> Prihlásiť sa</button>
+      <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
     </li>
   </ul>
 </div>
@@ -157,7 +158,7 @@
     </button>
     <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask()"> <i class="fa fa-arrow-left"></i> </button>
   </div>
-  <div class="col-lg-8">
+  <div class="col-lg-8" id="taskCol">
     <div id="task">
       <blockquote style="background-color: #f3e4bf; margin-bottom: 0">
         <h4 id="taskNum" style="font-weight: bold">
@@ -171,49 +172,53 @@
     <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask()"> <i class="fa fa-arrow-right"></i> </button>
   </div>
   <div class="col-lg-12">
-    <div class="col-lg-2 tools">
-      <div class="bs-component" style="width: 200px; height: 700px; text-align: right">
-        <button type="button" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche" onclick="addInput()">
-          <i class="fa fa-comment"></i> Text
-        </button>
-        <button type="button" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nakresli si na plochu pomôcky" onclick="pen()">
+    <div class="col-lg-2 tools" id="leftCol">
+      <div class="bs-component" style="width: 200px; float: right">
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Po kliknutí môžeš kresliť na plochu. Nižšie si vieš nastaviť farbu a hrúbku pera. " onclick="pen()">
           <i class="fa fa-pencil"></i> Pero
         </button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
+        <div id="penSettings">
+          <label for="stroke" style="margin-right: 6px">farba pera</label><input id="stroke" name='stroke' type="color">
+          <label for="lineWidth" style="margin-right: 6px">hrúbka pera</label><input id="lineWidth" name='lineWidth' type="number" value="2" style="width: 40px">
+        </div>
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche." onclick="addInput(); penOff()">
+          <i class="fa fa-comment"></i> Text
+        </button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
       </div>
     </div>
-    <div class="col-lg-8">
-
-      <div id="canvasArea">
-        <div style="width: inherit; text-align: center" class="bs-component">
-          <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" onclick="displayHelpModal()">
-            <i class="fa fa-lightbulb-o" style="color: #1a242f; font-size: 1.5em;"></i>
-          </button>
-          <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" onclick="undo()">
-            <i class="fa fa-undo" style="color: #1a242f; font-size: 1em;"></i>
-          </button>
-          <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" onclick="redo()">
-            <i class="fa fa-repeat" style="color: #1a242f; font-size: 1em;"></i>
-          </button>
-          <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" onclick="displayTrashModal()">
-            <i class="fa fa-trash" style="color: #1a242f; font-size: 1.5em;"></i>
-          </button>
-        </div>
+    <div class="col-lg-8" id="taskSolving">
+      <div class="bs-component" id="canvasButtons">
+        <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" onclick="displayHelpModal()">
+          <i class="fa fa-lightbulb-o" style="color: #1a242f; font-size: 1.5em;"></i>
+        </button>
+        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" onclick="undo()">
+          <i class="fa fa-undo" style="color: #1a242f; font-size: 1em;"></i>
+        </button>
+        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" onclick="redo()">
+          <i class="fa fa-repeat" style="color: #1a242f; font-size: 1em;"></i>
+        </button>
+        <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" onclick="displayTrashModal()">
+          <i class="fa fa-trash" style="color: #1a242f; font-size: 1.5em;"></i>
+        </button>
         <div id="inputArea"></div>
-        <canvas id="canvas" width="932px" height="630px"></canvas>
+      </div>
+      <div id="canvasArea">
+        <canvas id="canvas">
+        </canvas>
       </div>
     </div>
     <div class="col-lg-2 tools">
-      <div class="bs-component" style="width: 200px; height: 700px; text-align: left">
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool">Nástroj</button>
-        <button type="button" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" onclick="displayResultModal()">
+      <div class="bs-component" style="width: 200px; float: left">
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" onclick="displayResultModal()">
           <i class="fa fa-question-circle"></i> Výsledok</button>
       </div>
     </div>
@@ -229,7 +234,7 @@
 <script src="bootstrap/usebootstrap.js"></script>
 </body>
 <footer>
-  <div class="footer navbar-fixed-bottom">
+  <div class="footer navbar-fixed-bottom" id="footer">
     Vytvorila Lenka Čakurdová ako bakalársku prácu, FMFI UK 2023
   </div>
 </footer>

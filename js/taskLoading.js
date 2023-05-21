@@ -1,7 +1,7 @@
 //important variables / default values
 let listOfTasks
-var currentSet = 1
-var currentTask = 1
+let currentSet = 1;
+let currentTask = 1;
 let prevBtn = document.getElementById("prevTask")
 let nextBtn = document.getElementById("nextTask")
 prevBtn.classList.add('disabled')
@@ -93,6 +93,7 @@ async function set(num) {
     listOfTasks = await response.json()
     loadListOfTasks()
     setTask(currentTask)
+    setCanvas();
 }
 
 //sets the number and text of given task
