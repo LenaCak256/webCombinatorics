@@ -207,5 +207,11 @@ document.addEventListener('click', function(event) {
         currentButton = event.target;
         currentButton.style.backgroundColor = "#d2850b";
         currentButton.style.fontWeight = "bold";
+
+        let inputElement = document.getElementById("inputArea");
+        if(clickedElement.id !== "text" && inputElement.childNodes.length > 0){
+            inputElement.removeChild(inputElement.firstChild);
+            inputArea = false;
+        }
     }
 });

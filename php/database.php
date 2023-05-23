@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli('localhost:3306', 'kombinatorika', 'MariaTerezia123', 'kombinatorika');
+$mysqli = new mysqli('localhost:3306', 'kombinatorika', '***************', 'kombinatorika');
 if ($mysqli->connect_errno) {
     echo '<p>Nepodarilo sa spojiť s databázou!</p>';
 } else {
