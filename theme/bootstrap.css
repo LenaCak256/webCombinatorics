@@ -99,6 +99,7 @@ td{
   height: 250px;
   color: #252c36;
   background-color: #ffffff;
+  background-image: url("../images/white-texture.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   border: 10px solid #6c6868;
@@ -213,7 +214,6 @@ td{
   border-radius: 7px;
   text-align: left;
   font-size: 1.2em;
-  display: inline-block;
 }
 
 .listButton:hover{
@@ -221,15 +221,15 @@ td{
 }
 
 .listLabel{
+  cursor: auto;
+  margin-top: 10px;
   margin-left: 5px;
-  font-size: 1.8em;
+  font-size: 1.2em;
   color: #ffffff;
-  display: inline-block;
   width: 50px;
   height: 50px;
   border: solid 1px #3e4653;
   border-radius: 7px;
-  padding: 2px 0;
   text-align: center;
 }
 
@@ -307,6 +307,22 @@ td{
   font-weight: bold;
   color: #c87f0a;
   font-size: 1.2em;
+}
+
+#ups{
+  padding-top: 200px;
+  text-align: center;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.progres{
+  margin-top: 60px;
+}
+
+#tables{
+  display: inline;
 }
 
 /**********************************************************/
@@ -3797,7 +3813,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li > a {
   margin-right: 2px;
   line-height: 1.42857143;
-  border: 1px solid transparent;
+  border: 1px solid #2c3e50;
+  background-color: #ffffff;
+  color: #2c3e50;
   border-radius: 4px 4px 0 0;
 }
 .nav-tabs > li > a:hover {
@@ -3807,8 +3825,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #2c3e50;
-  background-color: #ffffff;
-  border: 1px solid #ecf0f1;
+  font-weight: bold;
+  background-color: #f3a620;
+  border: 1px solid #f3a620;
   border-bottom-color: transparent;
   cursor: default;
 }

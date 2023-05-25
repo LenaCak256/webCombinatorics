@@ -122,7 +122,7 @@ function loadListOfTasks() {
         newElement.setAttribute('onclick', 'setTask(' + (i + 1).toString() + '), closeModal()')
         newElement.textContent = (i + 1).toString() + ". úloha - " + listOfTasks[i].keyword
 
-        let newLabel = document.createElement("span")
+        let newLabel = document.createElement("button")
         newLabel.classList.add("listLabel")
         if(i+1 < 3){
             newLabel.style.backgroundColor = "#447334"
@@ -133,6 +133,7 @@ function loadListOfTasks() {
         }
 
         let newDiv = document.createElement("div")
+        newDiv.classList.add("btn-group");
         newDiv.appendChild(newElement)
         newDiv.appendChild(newLabel)
 
