@@ -99,7 +99,7 @@ td{
   height: 250px;
   color: #252c36;
   background-color: #ffffff;
-  background-image: url("../images/white-texture.jpg");
+  background-image: url("../images/white-texture1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   border: 10px solid #6c6868;
@@ -318,11 +318,53 @@ td{
 }
 
 .progres{
-  margin-top: 60px;
+  margin-top: 50px;
+  margin-bottom: 15px;
 }
 
 #tables{
   display: inline;
+}
+
+#colNames{
+  background-color: #20252d;
+  color: #f3e4bf;
+  border: 1px solid #f3e4bf;
+  width: max-content;
+}
+
+.colName{
+  font-family: 'Georgia', serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.tbodyStyle{
+  background-color: #ffffff;
+  color: #20252d;
+  border: 4px solid #ecf0f1;
+}
+
+#tbody{
+  font-family: 'Georgia', serif;
+  background-color: #f3e4bf;
+  border: 1px solid #f3e4bf;
+}
+
+.tableRow{
+  border-bottom: 1px solid #20252d;
+  color: #798d8f;
+}
+
+.highlight{
+  border-bottom: 2px solid #20252d;
+  color: #20252d;
+  font-weight: bold;
+  background-color: #c87f0a;
+}
+
+.first{
+  border-top: 1px solid #f3e4bf;
 }
 
 /**********************************************************/
@@ -3804,7 +3846,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   max-width: none;
 }
 .nav-tabs {
-  border-bottom: 1px solid #ecf0f1;
+  border-bottom: 3px solid #ecf0f1;
 }
 .nav-tabs > li {
   float: left;
@@ -3816,7 +3858,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid #2c3e50;
   background-color: #ffffff;
   color: #2c3e50;
-  border-radius: 4px 4px 0 0;
+  border-radius: 8px 8px 0 0;
 }
 .nav-tabs > li > a:hover {
   border-color: #ecf0f1 #ecf0f1 #ecf0f1;

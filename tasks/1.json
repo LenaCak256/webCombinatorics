@@ -3,7 +3,7 @@
     "number": "1",
     "keyword": "karty",
     "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 kariet?",
-    "hint": "zamysli sa, či záleží na poradí prvkov | vyskúšaj si to na menšej množine kariet",
+    "hint": "zamysli sa, či záleží na poradí | vyskúšaj si to na menšej množine prvkov",
     "result": "32!"
   },
   {

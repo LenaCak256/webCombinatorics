@@ -4,7 +4,6 @@ let storedSteps = []; //all steps (also with deleted and restored)
 let currentStep = 0;
 let inputArea = false;
 let hasInput = false;
-let stroke = 2;
 
 let canvas = document.getElementById("canvas");
 let parent = document.getElementById('canvasArea');
@@ -30,14 +29,18 @@ function setCanvas() {
     canvas.height = parent.offsetHeight;
     canvasWidth = canvas.width;
     canvasHeight = canvas.height;
-
-    offsetX = ((window.innerWidth - parent.offsetWidth) / 2);
-    offsetY = nav.offsetHeight + col.offsetHeight + row.offsetHeight - 10;
+    setOffsets();
 }
 
-window.addEventListener('resize', function() {
-    setCanvas();
-});
+function setOffsets(){
+    let canvasOffsets = canvas.getBoundingClientRect();
+    offsetX = canvasOffsets.left;
+    offsetY = canvasOffsets.top;
+}
+
+window.onresize = function () {setOffsets();}
+canvas.onresize = function () {setOffsets();}
+window.onscroll = function () {setOffsets();}
 
 //deletes all steps
 function deleteAll(){
@@ -97,6 +100,7 @@ class Element{
             case "text":{
                 context.fillStyle = this.args.color;
                 context.font = "20px Arial";
+                context.textBaseline = "top";
                 context.fillText(this.args.text, this.args.x - 4, this.args.y - 4);
             }break;
             case "line":{
@@ -125,8 +129,6 @@ function addInput() {
         input.type = 'text';
         input.id = "notes"
         input.style.color = "black"
-        input.style.left = (30 - 4) + 'px';
-        input.style.top = (50 - 4) + 'px';
 
         input.onkeydown = handleEnter;
 
@@ -143,7 +145,7 @@ function addInput() {
 function handleEnter(e) {
     const keyCode = e.keyCode;
     if (keyCode === 13) {
-        let element = new Element("text", {text: this.value, x: parseInt(this.style.left, 10), y: parseInt(this.style.top, 10), color: "black"});
+        let element = new Element("text", {text: this.value, x: 50, y: 30, width: this.value.length*12, height: 20,color: "black"});
         steps.push(element);
         currentStep++;
         console.log(steps, currentStep);
@@ -155,11 +157,15 @@ function handleEnter(e) {
     }
 }
 
+//dragging objects
+let isDragging = false;
+let currentIndex = 0;
 
 //drawing with pen
 let isPainting = false;
 let lineWidth = 2;
 let points = []; //array to store points while drawing
+
 let startX;
 let startY;
 
@@ -185,42 +191,101 @@ toolbar.addEventListener('change', e => {
 
 });
 
-const draw = (e) => {
-    if(!isPainting) {
-        return;
-    }
+let insideObject = function(x, y, object){
+    let left = object.args.x;
+    let right = object.args.x + object.args.width;
+    let top = object.args.y;
+    let bottom = object.args.y + object.args.height;
 
-    context.lineWidth = lineWidth;
-    context.lineCap = 'round';
-
-    context.lineTo(parseInt(e.clientX) - offsetX, parseInt(e.clientY) - offsetY);
-    points.push({x: parseInt(e.clientX) - offsetX, y: parseInt(e.clientY) - offsetY});
-    context.stroke();
+    return x >= left && x <= right && y >= top && y <= bottom;
 }
 
 canvas.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+
     if(penOn) {
         isPainting = true;
         startX = e.clientX;
         startY = e.clientY;
     }
+
+    startX = parseInt(e.clientX) - offsetX;
+    startY = parseInt(e.clientY) - offsetY;
+
+    //clicking on object and dragging it
+    for(let i=0; i<steps.length; i++){
+        if(insideObject(startX, startY, steps[i])){
+            currentIndex = i;
+            isDragging = true;
+            canvas.style.cursor = "grab";
+            return;
+        }
+    }
 });
 
 canvas.addEventListener('mouseup', e => {
-    isPainting = false;
-    let element = new Element("line", {points: points, lineWidth, color: context.strokeStyle});
-    steps.push(element);
-    currentStep++;
-    storedSteps.push(element);
-    console.log(steps, currentStep);
-    points = [];
-    context.stroke();
-    context.beginPath();
+    e.preventDefault();
+
+    if(isPainting) {
+        isPainting = false;
+        if(!isDragging) {
+            let element = new Element("line", {points: points, lineWidth, color: context.strokeStyle});
+            steps.push(element);
+            currentStep++;
+            storedSteps.push(element);
+            console.log(steps, currentStep);
+            points = [];
+            context.stroke();
+            context.beginPath();
+        }
+    }
+
+    if(isDragging){
+        isDragging = false;
+        canvas.style.cursor = "auto";
+    }
 });
 
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseout', e => {
+    e.preventDefault();
+
+    if(isDragging){
+        isDragging = false;
+        canvas.style.cursor = "auto";
+    }
+});
+
+canvas.addEventListener('mousemove', e => {
+    e.preventDefault();
+    if (isDragging){
+        let mouseX = parseInt(e.clientX) - offsetX;
+        let mouseY = parseInt(e.clientY) - offsetY;
+
+        let dx = mouseX - startX;
+        let dy = mouseY - startY;
+
+        let current = steps[currentIndex];
+        current.args.x += dx;
+        current.args.y += dy;
+
+        redrawCanvas();
+
+        startX = mouseX;
+        startY = mouseY;
+    }
+
+    if(isPainting && !isDragging){
+        context.lineWidth = lineWidth;
+        context.lineCap = 'round';
+
+        context.lineTo(parseInt(e.clientX) - offsetX, parseInt(e.clientY) - offsetY);
+        points.push({x: parseInt(e.clientX) - offsetX, y: parseInt(e.clientY) - offsetY});
+        context.stroke();
+    }
+});
 
 
+//highlighting of tool buttons
 let prevButton;
 let currentButton;
 

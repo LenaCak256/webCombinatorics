@@ -32,12 +32,12 @@
     <li id="name" class="introName"><a href="index.html">Kombinatorika</a></li>
     <li><a href="theory.html"><i class="fa fa-book"></i> Teória</a></li>
     <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
-    <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #be780a"></i> Môj progres</a></li>
+    <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user"></i> prihlásený</p><p id="userName"></p></label></li>
     <li>
-      <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #be780a"></i> Prihlásiť sa</button>
+      <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa</button>
       <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
     </li>
   </ul>
@@ -157,7 +157,7 @@
     <button class="btn btn-warning" id="listOfTasks" onclick="displayModal()">
       <i class="fa fa-align-justify"></i> Zoznam úloh
     </button>
-    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask()"> <i class="fa fa-arrow-left"></i> </button>
+    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask(), setOffsets()"> <i class="fa fa-arrow-left"></i> </button>
   </div>
   <div class="col-lg-8" id="taskCol">
     <div id="task">
@@ -170,7 +170,7 @@
     </div>
   </div>
   <div class="col-lg-2">
-    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask()"> <i class="fa fa-arrow-right"></i> </button>
+    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask(), setOffsets()"> <i class="fa fa-arrow-right"></i> </button>
   </div>
   <div class="col-lg-12">
     <div class="col-lg-2 tools" id="leftCol">
@@ -238,6 +238,7 @@
 <footer>
   <div class="footer navbar-fixed-bottom" id="footer">
     Vytvorila Lenka Čakurdová ako bakalársku prácu, FMFI UK 2023
+    <p style="font-size: 12px; width: max-content; float: right; margin-right: 20px"><a href="https://www.freepik.com/free-photo/design-space-paper-textured-background_19138832.htm#query=paper%20texture&position=6&from_view=keyword&track=ais">Image by rawpixel.com</a> on Freepik</p>
   </div>
 </footer>
 </html>
