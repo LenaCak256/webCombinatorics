@@ -178,7 +178,7 @@ td{
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 55%;
   color: #1a242f;
 }
 
@@ -209,7 +209,7 @@ td{
 .listButton{
   margin-top: 10px;
   height: 50px;
-  width: 850px;
+  width: 700px;
   border: solid 1px;
   border-radius: 7px;
   text-align: left;
@@ -277,30 +277,18 @@ td{
   cursor: pointer;
 }
 
-.userButton{
-  background-color: #20252d;
-  font-size: 17px;
-  height: 50px;
-  width: max-content;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 20px;
-}
-
-.userButton:hover{
-  color: #164905;
-  background-color: #b6aeae;
-}
-
 #user{
   display: none;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 10px;
   height: 50px;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
   border: 1px solid #798d8f;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 #userName{
@@ -308,6 +296,22 @@ td{
   color: #c87f0a;
   font-size: 1.2em;
 }
+
+.userButton{
+  background-color: #20252d;
+  font-size: 17px;
+  height: 50px;
+  width: max-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.userButton:hover{
+  color: #164905;
+  background-color: #b6aeae;
+}
+
 
 #ups{
   padding-top: 200px;
@@ -323,7 +327,7 @@ td{
 }
 
 #tables{
-  display: inline;
+  display: none;
 }
 
 #colNames{

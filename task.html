@@ -14,6 +14,8 @@
   <script src="bootstrap/html5shiv.js"></script>
   <script src="bootstrap/respond.min.js"></script>
 
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
@@ -34,14 +36,19 @@
     <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
     <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
   </ul>
-  <ul class="nav navbar-nav navbar-right">
-    <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user"></i> prihlásený</p><p id="userName"></p></label></li>
+  <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
+    <li><label class="label" id="user" style="float: right"><p> prihlásený</p><p id="userName"></p></label></li>
     <li>
-      <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa</button>
-      <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
+      <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Prihlásiť sa</button>
+      <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Odhlásiť sa</button>
+    </li>
+    <li>
+      <button type="button" class="btn userButton" id="signup" style="display: none"><i class="fa fa-pencil-square-o" style="font-size: 15px"></i> Zaregistrovať sa</button>
     </li>
   </ul>
 </div>
+
+<script src="/js/authModals.js"></script>
 
 <div id="myModal" class="mymodal">
   <div class="modalContent" id="list">
@@ -109,6 +116,7 @@
       </div>
     </div>
   </div>
+  <p style="font-size: 12px; text-align: center; color: #164905"><a href="https://www.freepik.com/free-photo/design-space-paper-textured-background_19138832.htm#query=paper%20texture&position=6&from_view=keyword&track=ais">Image by rawpixel.com</a> on Freepik</p>
 </div>
 
 
@@ -157,7 +165,7 @@
     <button class="btn btn-warning" id="listOfTasks" onclick="displayModal()">
       <i class="fa fa-align-justify"></i> Zoznam úloh
     </button>
-    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask(), setOffsets()"> <i class="fa fa-arrow-left"></i> </button>
+    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask()"> <i class="fa fa-arrow-left"></i> </button>
   </div>
   <div class="col-lg-8" id="taskCol">
     <div id="task">
@@ -170,7 +178,7 @@
     </div>
   </div>
   <div class="col-lg-2">
-    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask(), setOffsets()"> <i class="fa fa-arrow-right"></i> </button>
+    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask()"> <i class="fa fa-arrow-right"></i> </button>
   </div>
   <div class="col-lg-12">
     <div class="col-lg-2 tools" id="leftCol">
@@ -226,7 +234,7 @@
   </div>
 </div>
 
-<script src="js/login.js"></script>
+<script type="module" src="js/auth.js"></script>
 <script src="js/taskLoading.js"></script>
 <script src="js/taskSolving.js"></script>
 <script src="js/objectManaging.js"></script>
@@ -238,7 +246,6 @@
 <footer>
   <div class="footer navbar-fixed-bottom" id="footer">
     Vytvorila Lenka Čakurdová ako bakalársku prácu, FMFI UK 2023
-    <p style="font-size: 12px; width: max-content; float: right; margin-right: 20px"><a href="https://www.freepik.com/free-photo/design-space-paper-textured-background_19138832.htm#query=paper%20texture&position=6&from_view=keyword&track=ais">Image by rawpixel.com</a> on Freepik</p>
   </div>
 </footer>
 </html>

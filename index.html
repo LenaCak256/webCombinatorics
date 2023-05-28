@@ -13,6 +13,8 @@
       <script src="bootstrap/html5shiv.js"></script>
       <script src="bootstrap/respond.min.js"></script>
 
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
   </head>
   <body>
 
@@ -24,14 +26,19 @@
       <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
       <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user"></i> prihlásený</p><p id="userName"></p></label></li>
+    <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
+      <li><label class="label" id="user" style="float: right"><p> prihlásený používateľ</p><p id="userName"></p></label></li>
       <li>
-        <button type="button" class="btn userButton" id="login" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa</button>
-        <button type="button" class="btn userButton" id="logout" style="display: none" onclick="changeButton()"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
+        <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Prihlásiť sa</button>
+        <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Odhlásiť sa</button>
+      </li>
+      <li>
+        <button type="button" class="btn userButton" id="signup" style="display: none"><i class="fa fa-pencil-square-o" style="font-size: 15px"></i> Zaregistrovať sa</button>
       </li>
     </ul>
   </div>
+
+  <script src="/js/authModals.js"></script>
 
   <div class="introPage">
     <h1 class="introName" style="margin-top: 40px">Kombinatorika</h1>
@@ -58,7 +65,10 @@
           </div>
         </div>
     </div>
-  <script src="js/login.js"></script>
+
+  <script type="module" src="js/config.js"></script>
+  <script type="module" src="js/auth.js"></script>
+
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="bootstrap/bootstrap.min.js"></script>
   <script src="bootstrap/usebootstrap.js"></script>

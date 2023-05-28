@@ -67,7 +67,7 @@ function closeResultModal() {
     document.getElementById("incorrectLabel").style.display = "none";
 }
 
-window.onclick = function(event) {
+document.addEventListener('click', function(event) {
     if (event.target === modal) {
         modal.style.display = "none";
         document.getElementById("taskNum").style.color = "#252c36"
@@ -82,7 +82,7 @@ window.onclick = function(event) {
             helpContent.removeChild(helpContent.firstChild);
         }
     }
-}
+})
 
 //redirection from options to task with respective task set
 async function set(num) {
