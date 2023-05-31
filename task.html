@@ -14,8 +14,6 @@
   <script src="bootstrap/html5shiv.js"></script>
   <script src="bootstrap/respond.min.js"></script>
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
@@ -37,25 +35,21 @@
     <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
-    <li><label class="label" id="user" style="float: right"><p> prihlásený</p><p id="userName"></p></label></li>
+    <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user" style="font-size: 15px"></i> prihlásený</p><p id="userName"></p></label></li>
     <li>
-      <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Prihlásiť sa</button>
-      <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Odhlásiť sa</button>
-    </li>
-    <li>
-      <button type="button" class="btn userButton" id="signup" style="display: none"><i class="fa fa-pencil-square-o" style="font-size: 15px"></i> Zaregistrovať sa</button>
+      <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa s Google</button>
+      <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
     </li>
   </ul>
 </div>
 
-<script src="/js/authModals.js"></script>
-
 <div id="myModal" class="mymodal">
-  <div class="modalContent" id="list">
-    <span class="close" onclick="closeModal()"><i class="fa fa-window-close"></i></span>
+  <div class="modalContent">
+    <span class="close" id="closeModal"><i class="fa fa-window-close"></i></span>
     <h3 style="margin-bottom: 20px; font-weight: bold" id="modalName">
       <i class="fa fa-paperclip"></i>
     </h3>
+    <div id="list"></div>
   </div>
 </div>
 
@@ -68,7 +62,7 @@
           <div class="col-sm-3"><img src="images/pascal.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
           <div class="col-sm-6">
             <p class="setTheme">Kombinácie, variácie, permutácie, Pascalov trojuholník</p>
-            <button class="btn btn-warning" onclick="set(1)">Vyber</button>
+            <button class="btn btn-warning" name="choose" id="1">Vyber</button>
           </div>
           <div class="col-sm-3"><img src="images/card.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
         </div>
@@ -81,7 +75,7 @@
           <div class="col-sm-3"><img src="images/locomotive.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
           <div class="col-sm-6">
             <p class="setTheme">Kombinácie, variácie, a permutácie s opakovaním</p>
-            <button class="btn btn-warning" onclick="set(2)">Vyber</button>
+            <button class="btn btn-warning" name="choose" id="2">Vyber</button>
           </div>
           <div class="col-sm-3"><img src="images/letter.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
         </div>
@@ -96,7 +90,7 @@
           <div class="col-sm-3"><img src="images/diagram.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
           <div class="col-sm-6">
             <p class="setTheme">Princíp inklúzie a exklúzie</p>
-            <button class="btn btn-warning" onclick="set(3)">Vyber</button>
+            <button class="btn btn-warning" name="choose" id="3">Vyber</button>
           </div>
           <div class="col-sm-3"><img src="images/football.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
         </div>
@@ -109,7 +103,7 @@
           <div class="col-sm-3"><img src="images/lock.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
           <div class="col-sm-6">
             <p class="setTheme">Výber úloh na olympiádu</p>
-            <button class="btn btn-warning" onclick="set(4)">Vyber</button>
+            <button class="btn btn-warning" name="choose" id="4">Vyber</button>
           </div>
           <div class="col-sm-3"><img src="images/brick.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
         </div>
@@ -122,13 +116,13 @@
 
 <div id="trashModal" class="mymodal">
   <div class="modalContent">
-    <span class="close" onclick="closeTrashModal()"><i class="fa fa-window-close"></i></span>
+    <span class="close" id="closeTrash"><i class="fa fa-window-close"></i></span>
     <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
       <i class="fa fa-question"></i> Naozaj chceš vymazať <u>všetko</u> z plochy <i class="fa fa-question"></i>
     </h4>
     <div style="text-align: center">
-      <button class="btn btn-default" style="font-weight: bold; background-color: #66a650; border: solid 1px #1a242f" onclick="closeTrashModal(), deleteAll()">Áno</button>
-      <button class="btn btn-default" style="font-weight: bold; background-color: #b6372a; border: solid 1px #1a242f" onclick="closeTrashModal()">Nie</button>
+      <button class="btn btn-default" style="font-weight: bold; background-color: #66a650; border: solid 1px #1a242f" id="delete">Áno</button>
+      <button class="btn btn-default" style="font-weight: bold; background-color: #b6372a; border: solid 1px #1a242f" id="notDelete">Nie</button>
     </div>
   </div>
 </div>
@@ -136,7 +130,7 @@
 
 <div id="helpModal" class="mymodal">
   <div class="modalContent">
-    <span class="close" onclick="closeHelpModal()"><i class="fa fa-window-close"></i></span>
+    <span class="close" id="closeHelp"><i class="fa fa-window-close"></i></span>
     <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
       <i class="fa fa-lightbulb-o"></i> <u>Nápoveda</u>
     </h4>
@@ -162,10 +156,10 @@
 
 <div class="col-lg-12" id="taskPage" style="display: none">
   <div class="col-lg-2">
-    <button class="btn btn-warning" id="listOfTasks" onclick="displayModal()">
+    <button class="btn btn-warning" id="listOfTasks">
       <i class="fa fa-align-justify"></i> Zoznam úloh
     </button>
-    <button class="btn btn-warning btn-sm" id="prevTask" onclick="prevTask()"> <i class="fa fa-arrow-left"></i> </button>
+    <button class="btn btn-warning btn-sm" id="prevTask"> <i class="fa fa-arrow-left"></i> </button>
   </div>
   <div class="col-lg-8" id="taskCol">
     <div id="task">
@@ -178,22 +172,22 @@
     </div>
   </div>
   <div class="col-lg-2">
-    <button class="btn btn-warning btn-sm" id="nextTask" onclick="nextTask()"> <i class="fa fa-arrow-right"></i> </button>
+    <button class="btn btn-warning btn-sm" id="nextTask"> <i class="fa fa-arrow-right"></i> </button>
   </div>
   <div class="col-lg-12">
     <div class="col-lg-2 tools" id="leftCol">
       <div class="bs-component" style="width: 200px; float: right">
-        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Po kliknutí môžeš kresliť na plochu. Nižšie si vieš nastaviť farbu a hrúbku pera. " onclick="pen()">
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Po kliknutí môžeš kresliť na plochu. Nižšie si vieš nastaviť farbu a hrúbku pera. " id="pen">
           <i class="fa fa-pencil"></i> Pero
         </button>
         <div id="penSettings">
           <label for="stroke" style="margin-right: 6px">farba pera</label><input id="stroke" name='stroke' type="color">
           <label for="lineWidth" style="margin-right: 6px">hrúbka pera</label><input id="lineWidth" name='lineWidth' type="number" value="2" min="1" max="100" style="width: 40px">
         </div>
-        <button type="button" name="tool" id= "text" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche." onclick="addInput(); penOff()">
+        <button type="button" name="tool" id="text" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche.">
           <i class="fa fa-comment"></i> Text
         </button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <button type="button" name="tool" class="btn tool" id="load">Load</button>
         <button type="button" name="tool" class="btn tool">Nástroj</button>
         <button type="button" name="tool" class="btn tool">Nástroj</button>
         <button type="button" name="tool" class="btn tool">Nástroj</button>
@@ -201,16 +195,16 @@
     </div>
     <div class="col-lg-8" id="taskSolving">
       <div class="bs-component" id="canvasButtons">
-        <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" onclick="displayHelpModal()">
+        <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" id="modalHelp">
           <i class="fa fa-lightbulb-o" style="color: #1a242f; font-size: 1.5em;"></i>
         </button>
-        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" onclick="undo()">
+        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" id="undo">
           <i class="fa fa-undo" style="color: #1a242f; font-size: 1em;"></i>
         </button>
-        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" onclick="redo()">
+        <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" id="redo">
           <i class="fa fa-repeat" style="color: #1a242f; font-size: 1em;"></i>
         </button>
-        <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" onclick="displayTrashModal()">
+        <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" id="modalTrash">
           <i class="fa fa-trash" style="color: #1a242f; font-size: 1.5em;"></i>
         </button>
         <div id="inputArea"></div>
@@ -227,7 +221,7 @@
         <button type="button" name="tool" class="btn tool">Nástroj</button>
         <button type="button" name="tool" class="btn tool">Nástroj</button>
         <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" onclick="displayResultModal()">
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="result">
           <i class="fa fa-question-circle"></i> Výsledok</button>
       </div>
     </div>
@@ -235,9 +229,9 @@
 </div>
 
 <script type="module" src="js/auth.js"></script>
-<script src="js/taskLoading.js"></script>
-<script src="js/taskSolving.js"></script>
-<script src="js/objectManaging.js"></script>
+<script type="module" src="js/taskLoading.js"></script>
+<script type="module" src="js/taskSolving.js"></script>
+<script type="module" src="js/objectManaging.js"></script>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="bootstrap/bootstrap.min.js"></script>

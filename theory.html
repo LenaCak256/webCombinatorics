@@ -13,8 +13,6 @@
     <script src="bootstrap/html5shiv.js"></script>
     <script src="bootstrap/respond.min.js"></script>
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
@@ -36,18 +34,13 @@
         <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
-        <li><label class="label" id="user" style="float: right"><p> prihlásený</p><p id="userName"></p></label></li>
+        <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user" style="font-size: 15px"></i> prihlásený</p><p id="userName"></p></label></li>
         <li>
-            <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Prihlásiť sa</button>
-            <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Odhlásiť sa</button>
-        </li>
-        <li>
-            <button type="button" class="btn userButton" id="signup" style="display: none"><i class="fa fa-pencil-square-o" style="font-size: 15px"></i> Zaregistrovať sa</button>
+            <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa s Google</button>
+            <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
         </li>
     </ul>
 </div>
-
-<script src="/js/authModals.js"></script>
 
 <div id="page1" style="display:inline">
     <div class="introPage">

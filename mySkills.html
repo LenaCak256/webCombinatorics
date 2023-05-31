@@ -12,8 +12,6 @@
   <script src="bootstrap/html5shiv.js"></script>
   <script src="bootstrap/respond.min.js"></script>
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
@@ -34,23 +32,18 @@
     <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
-    <li><label class="label" id="user" style="float: right"><p> prihlásený</p><p id="userName"></p></label></li>
+    <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user" style="font-size: 15px"></i> prihlásený</p><p id="userName"></p></label></li>
     <li>
-      <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Prihlásiť sa</button>
-      <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-user" style="font-size: 20px"></i> Odhlásiť sa</button>
-    </li>
-    <li>
-      <button type="button" class="btn userButton" id="signup" style="display: none"><i class="fa fa-pencil-square-o" style="font-size: 15px"></i> Zaregistrovať sa</button>
+      <button type="button" class="btn userButton" id="login" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #f3a620"></i> Prihlásiť sa s Google</button>
+      <button type="button" class="btn userButton" id="logout" style="display: none"><i class="fa fa-google" style="font-size: 20px; color: #b6372a"></i> Odhlásiť sa</button>
     </li>
   </ul>
 </div>
 
-<script src="/js/authModals.js"></script>
-
 <div class="col-lg-12" id="ups">
   <div class="alert alert-warning" style="width: max-content">
     <h3 style="color: #1c2533; font-weight: bold">Ups ... <i class="fa fa-frown-o"></i></h3>
-    <h4>Na získanie prístupu k prehľadu vyriešených úloh a nadobutnutých schopností sa musíš prihlásiť !</h4>
+    <h4>Na získanie prístupu k prehľadu vyriešených úloh a nadobudnutých schopností sa musíš prihlásiť !</h4>
   </div>
 </div>
 
@@ -103,45 +96,45 @@
       </tr>
       </thead>
       <tbody id="tbody">
-      <tr class="tableRow highlight first">
+      <tr class="tableRow first">
         <td>Faktoriál</td>
-        <td><i class="fa fa-trophy" style="font-size: 1.3em"></i></td>
+        <td id="factorial">x</td>
       </tr>
-      <tr class="tableRow highlight">
+      <tr class="tableRow">
         <td>Permutácie</td>
-        <td><i class="fa fa-trophy" style="font-size: 1.3em"></i></td>
+        <td id="permutations">x</td>
       </tr>
       <tr class="tableRow">
         <td>Variácie</td>
-        <td>x</td>
+        <td id="variations">x</td>
       </tr>
       <tr class="tableRow">
         <td>Kombinácie</td>
-        <td>x</td>
+        <td id="combinations">x</td>
       </tr>
       <tr class="tableRow">
         <td>Počítanie s kombinačnými číslami</td>
-        <td>x</td>
+        <td id="binom">x</td>
       </tr>
       <tr class="tableRow">
         <td>Pascalov trohujholník</td>
-        <td>x</td>
+        <td id="pascal">x</td>
       </tr>
       <tr class="tableRow">
         <td>Permutácie s opakovaním</td>
-        <td>x</td>
+        <td id="permutationsR">x</td>
       </tr>
       <tr class="tableRow">
         <td>Kombinácie s opakovaním</td>
-        <td>x</td>
+        <td id="combinationsR">x</td>
       </tr>
       <tr class="tableRow">
         <td>Variácie s opakovaním</td>
-        <td>x</td>
+        <td id="variationsR">x</td>
       </tr>
       <tr class="tableRow">
         <td>Princíp inklúzie a exklúzie</td>
-        <td>x</td>
+        <td id="IE">x</td>
       </tr>
       </tbody>
     </table>

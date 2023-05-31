@@ -1,3 +1,7 @@
+import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+import {auth, db} from "./config.js"
+
 //stores steps taken while solving current task
 let steps = []; //steps
 let storedSteps = []; //all steps (also with deleted and restored)
@@ -57,26 +61,23 @@ function clearCanvas(){
 }
 
 let redoOk = false;
-function undo(){
+document.querySelector("#undo").onclick = function (){
     let message = "UNDO";
     if(currentStep > 0) {
         steps.pop();
         currentStep--;
-        console.log(message, currentStep);
         redrawCanvas();
         redoOk = true;
     }
 }
 
-function redo(){
-    let message = "REDO";
+document.querySelector("#redo").onclick = function (){
     if(redoOk) {
         let element = storedSteps[currentStep];
         steps.push(element);
         redrawCanvas();
         currentStep++;
         if(currentStep === storedSteps.length){redoOk = false;}
-        console.log(message, currentStep);
     }
 }
 
@@ -120,8 +121,9 @@ class Element{
     }
 }
 
+
 //adds input element
-function addInput() {
+document.querySelector("#text").onclick = function (){
     if(!inputArea) {
         const input = document.createElement('input');
         input.style.marginTop = "10px";
@@ -148,7 +150,6 @@ function handleEnter(e) {
         let element = new Element("text", {text: this.value, x: 50, y: 30, width: this.value.length*12, height: 20,color: "black"});
         steps.push(element);
         currentStep++;
-        console.log(steps, currentStep);
         storedSteps.push(element);
         element.draw();
         document.getElementById("inputArea").removeChild(this);
@@ -171,9 +172,7 @@ let startY;
 
 //pen only paints if button Pen was clicked, if another tools is in use, pen is off
 let penOn = false;
-function pen(){
-    penOn = true;
-}
+document.querySelector("#pen").onclick = function (){ penOn = true }
 
 function penOff(){
     penOn = false;
@@ -233,7 +232,6 @@ canvas.addEventListener('mouseup', e => {
             steps.push(element);
             currentStep++;
             storedSteps.push(element);
-            console.log(steps, currentStep);
             points = [];
             context.stroke();
             context.beginPath();
@@ -293,6 +291,7 @@ document.addEventListener('click', function(event) {
     let clickedElement = event.target;
 
     if (clickedElement.name === 'tool') {
+        if(clickedElement.id !== "pen"){ penOff() }
         if(currentButton != null){
             prevButton = currentButton;
             prevButton.style.backgroundColor = "#f3e4bf";
@@ -309,3 +308,5 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
+export {deleteAll, setCanvas, steps, Element}
