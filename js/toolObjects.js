@@ -49,10 +49,10 @@ function loadTools(set, task){
         tool.innerHTML = `
         <div style="text-align: center"><label class="objectCaption">Klikni na 2 obrázky a vymeň ich</label></div>
         <div class="container" style="padding: 5px; width: max-content">
-            <div class="col-sm-3" id="e1" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/cardA.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e2" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/card10.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e3" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/card6.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e4" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/cardJ.svg" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e1" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./cardA.svg" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e2" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card10.svg" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e3" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card6.svg" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e4" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./cardJ.svg" height="180px" width="90px"></div>
         </div>
     `;
         addDragAndDrop(tool);
