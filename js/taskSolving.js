@@ -1,52 +1,58 @@
 import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 import {auth, db} from "./config.js";
-import {currentUser, currentSet, currentTask} from "./taskLoading.js";
+import {currentUser, currentSet, currentTask, listOfTasks, saveTask} from "./taskLoading.js";
 import {steps, Element} from "./objectManaging.js";
 
-function convert(array){
-    let result = [];
-    array.forEach((e) =>{
-        let object = JSON.parse(e);
-        let type = object.type;
-        delete object.type;
-        let element = new Element(type, object);
-        result.push(element);
-    })
-    return result;
+function displaySkillModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block';
+
+    setTimeout(function () {
+        let skillName = document.querySelector("#skillName");
+        skillName.removeChild(skillName.firstChild);
+        modal.style.display = 'none';
+    }, 2000); // Change the duration (in milliseconds) as needed
 }
 
-document.querySelector("#result").onclick = async function () {
-    let array = [];
-    steps.forEach((step) => {
-        step.args.type = step.type;
-        array.push(JSON.stringify(step.args));
-    });
-    console.log(array);
+function closeResultModal(){
+    document.getElementById("resultModal").style.display = "none";
+}
+
+document.querySelector("#checkResult").onclick = function (){
     //document.getElementById("resultModal").style.display = "block";
-    await firestore.setDoc(firestore.doc(firestore.collection(db, 'tasks')), {
-        set: currentSet,
-        task: currentTask,
-        userID: currentUser.uid,
-        solved: false,
-        list: array
-    });
 }
 
-document.querySelector("#load").onclick = async function () {
-    if (currentUser) {
-        const tasksRef = firestore.collection(db, "tasks");
-        const q = firestore.query(tasksRef, firestore.where("userID", "==", currentUser.uid), firestore.where("set", "==", currentSet), firestore.where("task", "==", currentTask));
+document.querySelector("#closeResultModal").onclick = function () { closeResultModal() }
 
-        const querySnapshot = await firestore.getDocs(q);
-        if (!querySnapshot.empty) {
-            querySnapshot.forEach((doc) => {
-                const array = doc.get("list");
-                let steps = convert(array);
-                steps.forEach(step =>{
-                    step.draw();
-                })
-            });
-        }
+document.querySelector("#result").onclick = function (){
+    /*let input = document.querySelector("#searchTxt");
+    let value = input.value;
+    let correctResult = listOfTasks[currentTask - 1].result;
+
+    if(value === correctResult){
+        document.querySelector("#correctLabel").style.display = "block";
+        saveTask(true);
+        updateSkills("factorial");
+        closeResultModal();
+        document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Faktoriál";
+        displaySkillModal();
+        console.log("Získal si skill faktoriál !!! :)");
+    }*/
+}
+
+async function updateSkills(skill) {
+    const ref = firestore.doc(db, "users", currentUser.uid);
+    const docSnap = await firestore.getDoc(ref);
+
+    if(! docSnap.empty){
+        let skills = docSnap.data().skills;
+        skills.push(skill);
+        console.log(skills);
+        await firestore.updateDoc(ref, {
+            skills: skills
+        });
     }
 }
+
+export{updateSkills, displaySkillModal}

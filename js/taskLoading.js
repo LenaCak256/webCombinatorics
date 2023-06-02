@@ -1,6 +1,8 @@
 import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 import {auth, db} from "./config.js"
-import {deleteAll, setCanvas} from "./objectManaging.js";
+import {deleteAll, Element, setCanvas, setCurrentStep, steps, storedSteps} from "./objectManaging.js";
+import {loadTools} from "./toolObjects.js";
 
 //important variables / default values
 let listOfTasks
@@ -16,14 +18,24 @@ let tasks = [];
 let querySnapshot = null;
 let q = null;
 
-auth.onAuthStateChanged( async user => {
-    if (user) {
-        currentUser = user;
-        q = firestore.query(tasksRef, firestore.where("userID", "==", auth.currentUser.uid), firestore.where("set", "==", currentSet), firestore.where("solved", "==", true));
-    } else {
-        currentUser = null;
-    }
-})
+let saved = true;
+
+function setUser(user){
+    currentUser = user;
+}
+
+let check = function () {
+    auth.onAuthStateChanged(async user => {
+        if (user) {
+            setUser(user);
+            q = firestore.query(tasksRef, firestore.where("userID", "==", auth.currentUser.uid), firestore.where("set", "==", currentSet), firestore.where("solved", "==", true));
+        } else {
+            currentUser = null;
+        }
+    })
+}
+
+setInterval(check, 200);
 
 //modal window -> list of tasks in given set
 const modal = document.getElementById("myModal");
@@ -33,6 +45,8 @@ const trashModal = document.getElementById("trashModal");
 
 //modal window -> displays hint for current task
 const helpModal = document.getElementById("helpModal");
+
+const optionsForm = document.getElementById("optionsForm");
 
 const helpContent = document.getElementById("helpContent");
 const resultModal = document.getElementById("resultModal");
@@ -44,11 +58,14 @@ document.querySelector("#modalTrash").onclick = function () { trashModal.style.d
 
 document.querySelector("#closeTrash").onclick = function () { closeTrashModal() }
 
+document.querySelector("#closeFormModal").onclick = function () { optionsForm.style.display = "none" }
+
 document.querySelector("#notDelete").onclick = function () { closeTrashModal() }
 
 document.querySelector("#delete").onclick = function(){
     closeTrashModal();
     deleteAll();
+    saveTask(false);
 }
 
 function closeModal(){
@@ -89,6 +106,7 @@ function closeResultModal() {
 document.addEventListener('click', function(event) {
     if(event.target.name === "choose"){
         set(parseInt(event.target.id));
+        setUser(auth.currentUser);
     }
     else if(event.target.name === "listButton"){
         let id = event.target.id.split(" ");
@@ -100,7 +118,7 @@ document.addEventListener('click', function(event) {
         document.getElementById("taskNum").style.color = "#252c36"
         document.getElementById("taskText").style.color = "#252c36"
     }
-    else if (event.target === trashModal || event.target === helpModal || event.target === resultModal) {
+    else if (event.target === trashModal || event.target === helpModal || event.target === resultModal || event.target === optionsForm) {
         if(event.target === resultModal){
             closeResultModal()
         }
@@ -145,8 +163,11 @@ function setTask(num){
     num--;
     document.getElementById("taskNum").innerHTML = '<i class="fa fa-paperclip"></i>' + listOfTasks[num].number + '. úloha';
     document.getElementById("taskText").innerHTML = listOfTasks[num].text;
-    deleteAll(); //reset new canvas
     setCanvas();
+    deleteAll();
+    loadTask();
+
+    loadTools(currentSet, currentTask);
 }
 
 function checkButtons(num){
@@ -211,27 +232,177 @@ function setListName(){
     document.getElementById("modalName").appendChild(u);
 }
 
-document.querySelector("#listOfTasks").onclick = async function () {
-    await loadListOfTasks()
-    modal.style.display = "block";
-    document.getElementById("taskNum").style.color = "#f3e4bf"
-    document.getElementById("taskText").style.color = "#f3e4bf"
-}
+document.querySelector("#listOfTasks").onclick = async function (event) {
+    if(currentUser != null && !saved){
+        event.preventDefault();
+        const result = window.confirm("Chceš odísť bez uloženia postupu rozpracovanej úlohy?");
 
-prevBtn.onclick = function (){
-    if(currentTask >= 2) {
-        currentTask--;
-        checkButtons(currentTask);
-        setTask(currentTask);
+        if (result) {
+            setSaved(true);
+            await loadListOfTasks()
+            modal.style.display = "block";
+            document.getElementById("taskNum").style.color = "#f3e4bf"
+            document.getElementById("taskText").style.color = "#f3e4bf"
+        }
+    }else {
+        await loadListOfTasks()
+        modal.style.display = "block";
+        document.getElementById("taskNum").style.color = "#f3e4bf"
+        document.getElementById("taskText").style.color = "#f3e4bf"
     }
 }
 
-nextBtn.onclick = function (){
-    if(currentTask < listOfTasks.length) {
-        currentTask++;
-        checkButtons(currentTask);
-        setTask(currentTask);
+prevBtn.onclick = function (e){
+    if(currentUser && !saved) {
+        e.preventDefault();
+        const result = window.confirm("Chceš odísť bez uloženia postupu rozpracovanej úlohy?");
+        if (result) {
+            setSaved(true);
+            if(currentTask >= 2) {
+                currentTask--;
+                checkButtons(currentTask);
+                setTask(currentTask);
+            }
+        }
+    }else{
+        if(currentTask >= 2) {
+            currentTask--;
+            checkButtons(currentTask);
+            setTask(currentTask);
+        }
     }
 }
 
-export {currentUser, currentSet, currentTask}
+nextBtn.onclick = function (e){
+    if(currentUser && !saved) {
+        e.preventDefault();
+        const result = window.confirm("Chceš odísť bez uloženia postupu rozpracovanej úlohy?");
+        if (result) {
+            setSaved(true);
+            if(currentTask < listOfTasks.length) {
+                currentTask++;
+                checkButtons(currentTask);
+                setTask(currentTask);
+            }
+        }
+    }else{
+        if(currentTask < listOfTasks.length) {
+            currentTask++;
+            checkButtons(currentTask);
+            setTask(currentTask);
+        }
+    }
+}
+
+function setSaved(value){
+    saved = value;
+}
+
+//saving task to database
+async function saveTask(solved) {
+    if(currentUser) {
+        let array = [];
+        steps.forEach((step) => {
+            step.args.type = step.type;
+            array.push(JSON.stringify(step.args));
+        });
+        let docID = currentUser.uid + currentSet.toString() + currentTask.toString();
+        await firestore.setDoc(firestore.doc(db, 'tasks', docID), {
+            set: currentSet,
+            task: currentTask,
+            userID: currentUser.uid,
+            solved: solved,
+            list: array
+        });
+        setSaved(true);
+    }
+}
+
+//converts data from database to array of steps
+function convert(array){
+    let result = [];
+    array.forEach((e) =>{
+        let object = JSON.parse(e);
+        let type = object.type;
+        delete object.type;
+        let element = new Element(type, object);
+        result.push(element);
+    })
+    return result;
+}
+
+//load task from database and displays steps taken during solving
+async function loadTask(){
+    if (currentUser) {
+        const tasksRef = firestore.collection(db, "tasks");
+        const q = firestore.query(tasksRef, firestore.where("userID", "==", currentUser.uid), firestore.where("set", "==", currentSet),
+                                            firestore.where("task", "==", currentTask));
+
+        const querySnapshot = await firestore.getDocs(q);
+        if(querySnapshot.empty){ return }
+        if(currentTask === 8 && currentSet === 1){
+            setPascal()
+        }
+        querySnapshot.forEach((doc) => {
+            let array = doc.get("list");
+            let converted = convert(array);
+
+            converted.forEach((con) => {
+                steps.push(con);
+                storedSteps.push(con);
+            })
+            setCurrentStep();
+            steps.forEach(step =>{
+                step.draw();
+            })
+        });
+        setSaved(true);
+    }
+    console.log(steps);
+}
+
+document.querySelector("#saveTask").onclick = function (){
+    if(currentUser == null){
+        window.alert("Najprv sa musíš prihlásiť !");
+    } else if(steps.length){
+        saveTask(false);
+        window.alert("Postup uložený!");
+    }
+}
+
+window.addEventListener('beforeunload', function (event) {
+    if(currentUser != null && !saved){
+        event.returnValue = "Chceš odísť bez uloženia postupu rozpracovanej úlohy?";
+    }
+});
+
+
+
+// logout
+document.querySelector("#logout").addEventListener('click', (e) => {
+    if(!saved) {
+        e.preventDefault();
+        const result = window.confirm("Chceš odísť bez uloženia postupu rozpracovanej úlohy?");
+        if (result) {
+            setSaved(true);
+            firebaseAuth.signOut(auth);
+        }
+    }else {
+        firebaseAuth.signOut(auth);
+    }
+});
+
+function setPascal(){
+    let btn = document.querySelector("#checkPascal");
+    btn.style.backgroundColor = "green";
+    btn.innerHTML = `
+            <i class="fa fa-check"></i>
+            `;
+    let inputs = document.querySelectorAll(".pascalInput");
+    inputs.forEach(input => {
+        input.placeholder = input.name;
+    })
+}
+
+
+export {currentUser, currentSet, currentTask, listOfTasks, loadTask, setUser, setSaved, saveTask}

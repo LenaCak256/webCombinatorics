@@ -1,6 +1,5 @@
-import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
-import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
-import {auth, db} from "./config.js"
+import {setSaved} from "./taskLoading.js";
+import {clearCanvasArea, tools, addDragAndDrop} from "./toolObjects.js";
 
 //stores steps taken while solving current task
 let steps = []; //steps
@@ -57,17 +56,28 @@ function deleteAll(){
 }
 
 function clearCanvas(){
+    clearCanvasArea();
     context.clearRect(0, 0, canvasWidth, canvasHeight); //clear canvas
 }
 
+function setCurrentStep(){currentStep = steps.length}
+
 let redoOk = false;
 document.querySelector("#undo").onclick = function (){
-    let message = "UNDO";
     if(currentStep > 0) {
+        if(steps[currentStep - 1].type === "tool"){
+            let tool = document.getElementById(steps[currentStep - 1].args.id);
+            parent.removeChild(tool);
+            let index = tools.indexOf(tool);
+            tools.splice(index, 1);
+        }
+        setSaved(false);
         steps.pop();
         currentStep--;
         redrawCanvas();
         redoOk = true;
+        console.log("UNDO steps ", steps);
+        console.log(tools);
     }
 }
 
@@ -75,9 +85,11 @@ document.querySelector("#redo").onclick = function (){
     if(redoOk) {
         let element = storedSteps[currentStep];
         steps.push(element);
+        setSaved(false);
         redrawCanvas();
         currentStep++;
         if(currentStep === storedSteps.length){redoOk = false;}
+        console.log(steps);
     }
 }
 
@@ -117,6 +129,16 @@ class Element{
                 context.stroke();
                 context.beginPath();
             }break;
+            case "tool":{
+                let tool = document.createElement(this.args.tag);
+                tool.innerHTML = this.args.inner;
+                tool.classList.add("object");
+                tool.style.left = this.args.x;
+                tool.style.top = this.args.y;
+                tools.push(tool);
+                addDragAndDrop(tool);
+                parent.insertBefore(tool, canvas);
+            }break;
         }
     }
 }
@@ -149,6 +171,7 @@ function handleEnter(e) {
     if (keyCode === 13) {
         let element = new Element("text", {text: this.value, x: 50, y: 30, width: this.value.length*12, height: 20,color: "black"});
         steps.push(element);
+        setSaved(false);
         currentStep++;
         storedSteps.push(element);
         element.draw();
@@ -230,6 +253,7 @@ canvas.addEventListener('mouseup', e => {
         if(!isDragging) {
             let element = new Element("line", {points: points, lineWidth, color: context.strokeStyle});
             steps.push(element);
+            setSaved(false);
             currentStep++;
             storedSteps.push(element);
             points = [];
@@ -309,4 +333,4 @@ document.addEventListener('click', function(event) {
     }
 });
 
-export {deleteAll, setCanvas, steps, Element}
+export {deleteAll, setCanvas, setCurrentStep, steps, storedSteps, currentStep, Element, offsetX, offsetY}

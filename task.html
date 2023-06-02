@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="theme/bootstrap.css" media="screen">
+  <link rel="stylesheet" href="theme/objectStyle.css" media="screen">
+
   <link rel="stylesheet" href="theme/usebootstrap.css">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
@@ -83,7 +85,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6" style="padding: 0 30px;">
+    <div class="col-sm-6 col-sm-offset-3" style="padding: 0 30px;">
       <div class=" introSet">
         <h3 class="setName"><i class="fa fa-paperclip"></i> 3. sada úloh</h3>
         <div class="row" style="padding: 20px; text-align: center">
@@ -93,19 +95,6 @@
             <button class="btn btn-warning" name="choose" id="3">Vyber</button>
           </div>
           <div class="col-sm-3"><img src="images/football.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6" style="padding: 0 30px;">
-      <div class=" introSet">
-        <h3 class="setName"><i class="fa fa-paperclip"></i> 4. sada úloh</h3>
-        <div class="row" style="padding: 20px; text-align: center">
-          <div class="col-sm-3"><img src="images/lock.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
-          <div class="col-sm-6">
-            <p class="setTheme">Výber úloh na olympiádu</p>
-            <button class="btn btn-warning" name="choose" id="4">Vyber</button>
-          </div>
-          <div class="col-sm-3"><img src="images/brick.png" style="width: 90px; margin: 0; text-align: center" alt="img"></div>
         </div>
       </div>
     </div>
@@ -138,21 +127,111 @@
   </div>
 </div>
 
+<div id="optionsForm" class="mymodal">
+  <div class="modalContent">
+    <span class="close" id="closeFormModal"><i class="fa fa-window-close"></i></span>
+    <h4 style="text-align: center; font-weight: bold"><u>Zvoľ kritériá na vymenovanie vetkých možností</u></h4>
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Opakovanie prvkov</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="opakovanie" id="opakovanie1" value=true checked="">
+                áno
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="opakovanie" id="opakovanie" value=false>
+                nie
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">Záleží na poradí prvkov</label>
+          <div class="col-lg-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="poradie" id="poradie1" value=true checked="">
+                áno
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="poradie" id="poradie2" value=false>
+                nie
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="number" class="col-lg-2 control-label">Koľko prvkové skupiny potrebuješ?</label>
+          <div class="col-lg-10">
+            <input type="number" id="number" value="2" min="2">
+          </div>
+        </div>
+        <div class="form-group has-warning">
+          <label for="inputWarning">Tu vpíš prvky, ktoré chceš použiť - napíš bez medzier !</label>
+          <input required type="text" class="form-control" id="inputWarning">
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10">
+            <button type="submit" class="btn btn-warning">Vytvor</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
 <div id="resultModal" class="mymodal">
   <div class="modalContent">
-    <span class="close" onclick="closeResultModal()"><i class="fa fa-window-close"></i></span>
+    <span class="close" id="closeResultModal"><i class="fa fa-window-close"></i></span>
     <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
       <i class="fa fa-calculator"></i> <u>Výsledok</u>
     </h4>
     <div id="resultContent" style="text-align: center">
       <p style="text-align: center">Zadaj svoj výsledok a stlač tlačidlo <u>Skontroluj</u></p>
       <input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
-      <button type="button" class="btn btn-warning" onclick="checkResult()">Skontroluj</button>
+      <button type="button" class="btn btn-warning" id="result">Skontroluj</button>
       <label class="messageLabel" id="correctLabel" style="font-size: 1.8em; background-color: #66a650; display: none">Správny výsledok</label>
       <label class="messageLabel" id="incorrectLabel" style="font-size: 1.8em; background-color: #b6372a; display: none">Nesprávny výsledok</label>
     </div>
   </div>
 </div>
+
+<div id="modal" class="skillModal">
+  <div class="skill-content">
+    <div class="col-lg-2">
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+    </div>
+    <div class="col-lg-8">
+      <div class="row">
+        <h3 style="font-family: 'Georgia', serif;">Nová skill získaná!</h3>
+      </div>
+      <div class="row">
+        <h2 style="font-family: 'Georgia', serif;" id="skillName"></h2>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+      <p><i class="fa fa-star skill-star"></i></p>
+    </div>
+  </div>
+</div>
+
 
 <div class="col-lg-12" id="taskPage" style="display: none">
   <div class="col-lg-2">
@@ -187,10 +266,17 @@
         <button type="button" name="tool" id="text" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche.">
           <i class="fa fa-comment"></i> Text
         </button>
-        <button type="button" name="tool" class="btn tool" id="load">Load</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
+        <div class="form-group">
+          <div class="input-group">
+            <input required type="text" id="changeInput" class="form-control" placeholder="Zadaj prvky">
+          <button class="btn tool" type="button" id="changePos" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj do políčka prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou premiestňovnia prvkov.">
+            <i class="fa fa-refresh"></i>  Výmena pozícií</button>
+          </div>
+        </div>
+        <button type="button" name="tool" id="allOptions" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zvoľ kritériá vo formulári a vypíš všetky hľadané možnosti">
+          <i class="fa fa-tasks"></i> Všetky možnosti
+        </button>
+        <button type="button" name="tool" id="choosePos" class="btn tool"><i class="fa fa-circle-o"></i> Výber pozícií</button>
       </div>
     </div>
     <div class="col-lg-8" id="taskSolving">
@@ -198,40 +284,229 @@
         <button type="button" class="btn btn-warning" style="margin: 5px; float:left" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Nápoveda" id="modalHelp">
           <i class="fa fa-lightbulb-o" style="color: #1a242f; font-size: 1.5em;"></i>
         </button>
+        <button type="button" disabled class="btn" style="margin: 5px; float:left; cursor: none; color: white; background-color: white">
+          Ulož postup
+        </button>
         <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Undo" id="undo">
           <i class="fa fa-undo" style="color: #1a242f; font-size: 1em;"></i>
         </button>
         <button class="btn btn-warning" style="margin: 5px" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Redo" id="redo">
           <i class="fa fa-repeat" style="color: #1a242f; font-size: 1em;"></i>
         </button>
-        <button class="btn btn-warning" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymazať všetko" id="modalTrash">
+        <button class="btn btn-danger" style="margin: 5px; float: right" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vymaž všetko z plochy" id="modalTrash">
           <i class="fa fa-trash" style="color: #1a242f; font-size: 1.5em;"></i>
+        </button>
+        <button class="btn btn-warning" style="margin: 5px; float: right; color: #1c2533; font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Ulož si postup rozpracovanej úlohy" id="saveTask">
+          Ulož postup
         </button>
         <div id="inputArea"></div>
       </div>
       <div id="canvasArea">
+        <div style="padding-top: 20px; padding-bottom: 40px; display: none; justify-content: center; font-size: 1.5em; color: black" id="displayPascal">
+          <table style="place-self: center">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>2</td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>3</td>
+              <td></td>
+              <td>3</td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>4</td>
+              <td></td>
+              <td>6</td>
+              <td></td>
+              <td>4</td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td>5</td>
+              <td></td>
+              <td>10</td>
+              <td></td>
+              <td>10</td>
+              <td></td>
+              <td>5</td>
+              <td></td>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <div id="addPascal" class="form">
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="6" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="15" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="20" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="15" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="6" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="7" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="21" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="35" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="35" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="21" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="7" type="text" required class="pascalInput"></td>
+              <td></td>
+              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td></td>
+            </tr>
+
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button id="checkPascal" type="button">
+                  <i class="fa fa-question"></i>
+                </button></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </div>
+
+          </table>
+        </div>
         <canvas id="canvas">
         </canvas>
       </div>
     </div>
     <div class="col-lg-2 tools">
       <div class="bs-component" style="width: 200px; float: left">
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool">Nástroj</button>
-        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="result">
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="checkResult">
           <i class="fa fa-question-circle"></i> Výsledok</button>
       </div>
     </div>
   </div>
 </div>
 
-<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/authTask.js"></script>
 <script type="module" src="js/taskLoading.js"></script>
 <script type="module" src="js/taskSolving.js"></script>
 <script type="module" src="js/objectManaging.js"></script>
+<script type="module" src="js/toolObjects.js"></script>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="bootstrap/bootstrap.min.js"></script>

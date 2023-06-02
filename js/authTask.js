@@ -1,6 +1,10 @@
 import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 import {auth, db} from "./config.js"
+import {deleteAll} from "./objectManaging.js";
+import {loadTask} from "./taskLoading.js";
+
+const provider = new firebaseAuth.GoogleAuthProvider();
 
 const loginButton = document.getElementById("login");
 const logoutButton = document.getElementById("logout");
@@ -30,23 +34,18 @@ window.onload = function () {
             //get and display data
             setupUI(user);
         } else {
+            deleteAll();
             setupUI();
         }
     })
 }
 
-// logout
-logoutButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    firebaseAuth.signOut(auth);
-});
-
-const provider = new firebaseAuth.GoogleAuthProvider();
 // login
 loginButton.addEventListener('click', (e) => {
     firebaseAuth.signInWithPopup(auth, provider)
         .then(async (result) => {
             const user = result.user;
+
             const users = firestore.collection(db, 'users');
             const q = firestore.query(users, firestore.where("__name__", "==", user.uid));
             const querySnapshot = await firestore.getDocs(q);
@@ -60,6 +59,8 @@ loginButton.addEventListener('click', (e) => {
                     });
                 });
             }
+
+            loadTask();
         })
 });
 

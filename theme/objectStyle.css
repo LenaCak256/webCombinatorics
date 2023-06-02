@@ -1,0 +1,36 @@
+.object{
+    position: absolute;
+    background-color: #99a4a4;
+    border: 1px solid #333636;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.objectCaption{
+    cursor: grab;
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+    width: inherit;
+}
+
+.active{
+    user-select: none;
+}
+
+.chooseLabel{
+    height: 60px;
+    width: 60px;
+    font-weight: bold;
+    font-size: 2em;
+    border: 1px solid white;
+    border-radius: 4px;
+    text-align: center;
+    background-color: white;
+    color: black;
+}
+
+.pascalInput{
+    width: 40px;
+    background-color: #f3a620;
+}

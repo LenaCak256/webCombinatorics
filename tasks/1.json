@@ -3,70 +3,56 @@
     "number": "1",
     "keyword": "karty",
     "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 kariet?",
-    "hint": "zamysli sa, či záleží na poradí | vyskúšaj si to na menšej množine prvkov",
+    "hint": "zamysli sa, či záleží na poradí | vyskúšaj si to na menšej množine kariet",
     "result": "32!"
   },
   {
     "number": "2",
-    "keyword": "konferencia",
-    "text": "Konferencie sa zúčastnilo 90 delegátov. Zvolili štvorčlenný výbor (predseda, podpredseda, konateľ a pokladník). Urči, koľko bolo možností pre výber členov výboru.",
-    "hint": "záleží na poradí vybraných členov",
-    "result": "V(90, 4)"
-  },
-  {
-    "number": "3",
     "keyword": "stretnutie priateľov",
     "text": "Zišlo sa 5 priateľov a navzájom si potriasli rukami. Urči počet potrasení.",
     "hint": "potrasenie Ivana s Petrom a potrasenie Petra s Ivanom je jedno a to isté",
     "result": "C(5, 2)"
   },
   {
-    "number": "4",
+    "number": "3",
     "keyword": "cestovné lístky",
     "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zisti, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
     "hint": "je dôležité si uvedomiť, že lístky s dvojicou staníc napr. (Bratislava - Trnava), (Trnava - Bratislava) sú dva rôzne cestovné lístky",
     "result": "V(3174,2)"
   },
   {
-    "number": "5",
+    "number": "4",
     "keyword": "tipovanie",
     "text": "V športke sa tipuje 6 zo 49 športov. Koľko je všetkých možných tipov?",
     "hint": "vyskúšaj si vypísať všetky možné tipy, ak sa tipujú 2 zo 4 športov",
     "result": "C(49, 6)"
   },
   {
-    "number": "6",
+    "number": "5",
     "keyword": "čísla",
     "text": "Koľko štvorciferných čísel, v ktorých sa žiadna číslica neopakuje, je možné zostaviť z číslic 1, 2, 3, 4, 5, 6, 7? ",
     "hint": "vyskúšaj si najprv zostaviť číslo s menším počtom cifier",
     "result": "V(7, 4)"
   },
   {
-    "number": "7",
+    "number": "6",
     "keyword": "kúpeľňa",
     "text": "Koľko slov je možné vytvoriť zo slova kúpeľňa zmenou poradia písmen? (Neberieme ohľad na to, či vzniknuté slová majú zmysel.)",
     "hint": "urči si počet možných písmen na každú pozíciu | písmená sa v slove neopakujú!",
     "result": "8!"
   },
   {
-    "number": "8",
-    "keyword": "cesta",
-    "text": "Na štvorčekovom papieri sú určené dva priesečníky čiar A a B. Urči, koľkými rôznymi cestami sa dá dostať z A do B, ak sa po štvorčekoch dá pohybovať len hore alebo doprava.",
-    "hint": "mapu si predstav ako súradnicovú sústavu | rozlišuj počet pohybov hore a počet pohybov doprava",
-    "result": "35!"
-  },
-  {
-    "number": "9",
+    "number": "7",
     "keyword": "kombinačné čísla",
     "text": "Vyjadri jedným kombinačným číslom výraz zadaný na ploche.",
     "hint": "spomeň si na vlastnosti kombinačnyćh čísel | využi Pascalovu formulu",
-    "result": "({11}{4})"
+    "result": "binom{11}{4}"
   },
   {
-    "number": "10",
+    "number": "8",
     "keyword": "Pascalov trojuholník",
     "text": "Doplň ďalšie tri riadky Pascalovho trojuholníka zadaného na ploche.",
     "hint": "spomeň si, aký je vzťah medzi jednotlivými riadkami | dôležité sú čísla umiestnené v predchádzajúcom riadku",
-    "result": "35!"
+    "result": ""
   }
 ]

@@ -29,7 +29,7 @@ function unsetData(){
 
 async function setData() {
     //solved tasks
-    for (let num = 1; num <= 4; num++) {
+    for (let num = 1; num <= 3; num++) {
         let setOfTasks = [];
         let response = await fetch('tasks/' + num + '.json')
         setOfTasks = await response.json()
