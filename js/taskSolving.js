@@ -41,6 +41,16 @@ document.querySelector("#result").onclick = function (){
     }*/
 }
 
+async function checkSkills(skill) {
+    const ref = firestore.doc(db, "users", currentUser.uid);
+    const docSnap = await firestore.getDoc(ref);
+    let skills = [];
+    if(! docSnap.empty) {
+        skills = docSnap.data().skills;
+    }
+    return !skills.includes(skill);
+}
+
 async function updateSkills(skill) {
     const ref = firestore.doc(db, "users", currentUser.uid);
     const docSnap = await firestore.getDoc(ref);
@@ -48,11 +58,10 @@ async function updateSkills(skill) {
     if(! docSnap.empty){
         let skills = docSnap.data().skills;
         skills.push(skill);
-        console.log(skills);
         await firestore.updateDoc(ref, {
             skills: skills
         });
     }
 }
 
-export{updateSkills, displaySkillModal}
+export{checkSkills, updateSkills, displaySkillModal}

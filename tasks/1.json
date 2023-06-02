@@ -51,7 +51,7 @@
   {
     "number": "8",
     "keyword": "Pascalov trojuholník",
-    "text": "Doplň ďalšie tri riadky Pascalovho trojuholníka zadaného na ploche.",
+    "text": "Doplň ďalšie dva riadky Pascalovho trojuholníka zadaného na ploche.",
     "hint": "spomeň si, aký je vzťah medzi jednotlivými riadkami | dôležité sú čísla umiestnené v predchádzajúcom riadku",
     "result": ""
   }

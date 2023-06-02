@@ -1,6 +1,6 @@
 import {Element, setCurrentStep, steps, storedSteps} from "./objectManaging.js";
-import {currentUser, saveTask, setSaved} from "./taskLoading.js";
-import {displaySkillModal, updateSkills} from "./taskSolving.js";
+import {currentSet, currentTask, currentUser, savePascalSteps, saveTask, setSaved} from "./taskLoading.js";
+import {displaySkillModal, updateSkills, checkSkills} from "./taskSolving.js";
 
 const canvasArea = document.querySelector("#canvasArea");
 const canvas = document.querySelector("#canvas");
@@ -43,11 +43,11 @@ function loadTools(set, task){
     clearCanvasArea();
 
     if(set === 1 && task === 1){
-        //pomocný tool ktorý sa objaví zakaždým v prvej úlohe
+        //help tool for task 1.1
         let tool = document.createElement("div");
         tool.classList.add("object");
         tool.innerHTML = `
-        <label class="objectCaption">Klikni na 2 obrázky a vymeň ich</label>
+        <div style="text-align: center"><label class="objectCaption">Klikni na 2 obrázky a vymeň ich</label></div>
         <div class="container" style="padding: 5px; width: max-content">
             <div class="col-sm-3" id="e1" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/cardA.svg" height="180px" width="90px"></div>
             <div class="col-sm-3" id="e2" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="../images/card10.svg" height="180px" width="90px"></div>
@@ -71,6 +71,7 @@ function loadTools(set, task){
         element4.addEventListener("click", swapContent);
     }
     if(set === 1 && task === 8){
+        //display picture and tools for Pascal triangle
         document.querySelector("#displayPascal").style.display = "flex";
         document.getElementById("checkPascal").style.backgroundColor = "#95a5a6";
     }else { document.querySelector("#displayPascal").style.display = "none";}
@@ -282,7 +283,7 @@ form.addEventListener("submit", function (event){
     tool.classList.add("object");
     assignRandomId(tool);
     tool.innerHTML = `
-          <label class="objectCaption">Všetky možnosti</label>
+          <div style="text-align: center"><label class="objectCaption">Všetky možnosti</label></div> 
           <div id="optionsContent" style="padding: 4px; overflow: auto; height: 200px; width: auto; background-color: white; color: black">
           </div>
     `;
@@ -309,19 +310,52 @@ document.querySelector("#changePos").onclick = function (){
         tool.classList.add("object");
         assignRandomId(tool);
         tool.innerHTML = `
-          <label class="objectCaption">Klikni na 2 prvky a vymeň ich</label>
-          <div id="chooseContent" style="padding: 10px; width: max-content; height: 80px; background-color: #254d17; color: black; display: flex; gap: 10px;">
+          <div style="text-align: center"> <label class="objectCaption">Klikni na 2 prvky a vymeň ich</label></div>
+          <div id="changeContent" style="padding: 10px; width: max-content; height: 80px; background-color: #254d17; color: black; display: flex; gap: 10px;">
           </div>
     `;
         addDragAndDrop(tool);
         canvasArea.insertBefore(tool, canvas);
-        let content = document.querySelector("#chooseContent");
+        let content = document.querySelector("#changeContent");
         for(let i=0; i< items.length; i++){
             let label = document.createElement("label");
             label.classList.add("chooseLabel");
             label.textContent = items[i];
             label.addEventListener("click", swapContent);
             content.appendChild(label);
+        }
+        addTool(tool);
+    }
+}
+
+document.querySelector("#choosePos").onclick = function (){
+    let num = document.getElementById("chooseInput").value;
+    document.getElementById("chooseInput").value = "";
+    if(num !== "" && num > 1){
+        let tool = document.createElement("div");
+        tool.classList.add("object");
+        assignRandomId(tool);
+        tool.innerHTML = `
+          <div style="text-align: center"><label class="objectCaption">Umiestňuj prvky podľa potreby</label></div>
+          <div id="chooseContent" style="padding: 10px; width: max-content; height: 80px; background-color: #254d17; color: black; display: flex; gap:3px;">
+          </div>
+    `;
+        addDragAndDrop(tool);
+        canvasArea.insertBefore(tool, canvas);
+        let content = document.querySelector("#chooseContent");
+        for(let i=0; i < num; i++){
+            let input = document.createElement("input");
+            input.classList.add("posInput");
+
+            let div = document.createElement("div");
+            div.classList.add("divideDiv");
+            div.textContent = " | ";
+
+            content.appendChild(input);
+            if(i < num-1){
+                content.appendChild(div);
+            }
+
         }
         addTool(tool);
     }
@@ -340,10 +374,16 @@ document.querySelector("#checkPascal").onclick = function (){
     if(result){
         btn.style.backgroundColor = "green";
         if(currentUser){
+            savePascalSteps();
             saveTask(true);
-            updateSkills("pascal");
-            document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Pascalov trojuholník";
-            displaySkillModal();
+            let check = checkSkills("pascal").then(p => {});
+            console.log("Check", check);
+            if(check) {
+                updateSkills("pascal").then(p => {
+                    document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Pascalov trojuholník";
+                    displaySkillModal();
+                });
+            }
         }
     }else{
         btn.style.backgroundColor = "red";

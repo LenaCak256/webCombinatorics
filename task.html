@@ -130,7 +130,7 @@
 <div id="optionsForm" class="mymodal">
   <div class="modalContent">
     <span class="close" id="closeFormModal"><i class="fa fa-window-close"></i></span>
-    <h4 style="text-align: center; font-weight: bold"><u>Zvoľ kritériá na vymenovanie vetkých možností</u></h4>
+    <h4 style="text-align: center; font-weight: bold"><u>Zvoľ kritériá na vymenovanie všetkých možností</u></h4>
     <form class="form-horizontal">
       <fieldset>
         <div class="form-group">
@@ -167,15 +167,15 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="number" class="col-lg-2 control-label">Koľko prvkové skupiny potrebuješ?</label>
-          <div class="col-lg-10">
+        <div class="form-group ">
+          <label class="col-lg-4" for="number" class="control-label">Koľko prvkové skupiny potrebuješ?</label>
+          <div class="col-lg-6">
             <input type="number" id="number" value="2" min="2">
           </div>
         </div>
         <div class="form-group has-warning">
-          <label for="inputWarning">Tu vpíš prvky, ktoré chceš použiť - napíš bez medzier !</label>
-          <input required type="text" class="form-control" id="inputWarning">
+          <label class="col-lg-4" for="inputWarning">Tu vpíš prvky, ktoré chceš použiť - napíš bez medzier !</label>
+          <input class="col-lg-6" required type="text" class="form-control" id="inputWarning">
         </div>
         <div class="form-group">
           <div class="col-lg-10">
@@ -266,17 +266,23 @@
         <button type="button" name="tool" id="text" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche.">
           <i class="fa fa-comment"></i> Text
         </button>
-        <div class="form-group">
-          <div class="input-group">
+        <button type="button" name="tool" id="allOptions" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zvoľ kritériá vo formulári a vypíš všetky hľadané možnosti">
+          <i class="fa fa-tasks"></i> Všetky možnosti
+        </button>
+        <div>
+          <div class="input-group" id="changeForm">
             <input required type="text" id="changeInput" class="form-control" placeholder="Zadaj prvky">
           <button class="btn tool" type="button" id="changePos" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj do políčka prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou premiestňovnia prvkov.">
             <i class="fa fa-refresh"></i>  Výmena pozícií</button>
           </div>
         </div>
-        <button type="button" name="tool" id="allOptions" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zvoľ kritériá vo formulári a vypíš všetky hľadané možnosti">
-          <i class="fa fa-tasks"></i> Všetky možnosti
-        </button>
-        <button type="button" name="tool" id="choosePos" class="btn tool"><i class="fa fa-circle-o"></i> Výber pozícií</button>
+        <div>
+          <div class="input-group">
+            <input required type="text" id="chooseInput" class="form-control" placeholder="Zadaj počet pozícií">
+            <button type="button" name="tool" id="choosePos" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj do políčka počet pozícií, na ktoré chceš umiestňovať prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou ukladanie prvkov na rôzne pozície.">
+              <i class="fa fa-circle-o"></i> Výber pozícií</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-lg-8" id="taskSolving">
@@ -427,40 +433,40 @@
             <tr>
               <td></td>
               <td></td>
-              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td><input id="11" name="1" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="6" type="text" required class="pascalInput"></td>
+              <td><input id="61" name="6" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="15" type="text" required class="pascalInput"></td>
+              <td><input id="151" name="15" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="20" type="text" required class="pascalInput"></td>
+              <td><input id="201" name="20" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="15" type="text" required class="pascalInput"></td>
+              <td><input id="152" name="15" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="6" type="text" required class="pascalInput"></td>
+              <td><input id="62" name="6" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td><input id="12" name="1" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
               <td></td>
             </tr>
 
             <tr>
               <td></td>
-              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td><input id="13" name="1" type="text" required autocomplete="off" class="pascalInput"></td>
               <td></td>
-              <td><input name="7" type="text" required class="pascalInput"></td>
+              <td><input id="71" name="7" type="text" required autocomplete="off" class="pascalInput"></td>
               <td></td>
-              <td><input name="21" type="text" required class="pascalInput"></td>
+              <td><input id="211" name="21" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="35" type="text" required class="pascalInput"></td>
+              <td><input id="351" name="35" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="35" type="text" required class="pascalInput"></td>
+              <td><input id="352" name="35" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="21" type="text" required class="pascalInput"></td>
+              <td><input id="212" name="21" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="7" type="text" required class="pascalInput"></td>
+              <td><input id="72" name="7" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
-              <td><input name="1" type="text" required class="pascalInput"></td>
+              <td><input id="14" name="1" type="text" autocomplete="off" required class="pascalInput"></td>
               <td></td>
             </tr>
 

@@ -340,9 +340,6 @@ async function loadTask(){
 
         const querySnapshot = await firestore.getDocs(q);
         if(querySnapshot.empty){ return }
-        if(currentTask === 8 && currentSet === 1){
-            setPascal()
-        }
         querySnapshot.forEach((doc) => {
             let array = doc.get("list");
             let converted = convert(array);
@@ -355,6 +352,13 @@ async function loadTask(){
             steps.forEach(step =>{
                 step.draw();
             })
+            let btn = document.querySelector("#checkPascal");
+            if(currentTask === 8 && currentSet === 1 && doc.get("solved")) {
+                btn.style.backgroundColor = "green";
+                btn.innerHTML = `
+            <i class="fa fa-check"></i>
+            `;
+            }
         });
         setSaved(true);
     }
@@ -364,7 +368,11 @@ async function loadTask(){
 document.querySelector("#saveTask").onclick = function (){
     if(currentUser == null){
         window.alert("Najprv sa musíš prihlásiť !");
-    } else if(steps.length){
+    } if(currentSet === 1 && currentTask === 8){
+        savePascalSteps();
+    }
+    if(steps.length){
+        console.log(steps);
         saveTask(false);
         window.alert("Postup uložený!");
     }
@@ -392,17 +400,35 @@ document.querySelector("#logout").addEventListener('click', (e) => {
     }
 });
 
-function setPascal(){
-    let btn = document.querySelector("#checkPascal");
-    btn.style.backgroundColor = "green";
-    btn.innerHTML = `
-            <i class="fa fa-check"></i>
-            `;
+function savePascalSteps(){
     let inputs = document.querySelectorAll(".pascalInput");
     inputs.forEach(input => {
-        input.placeholder = input.name;
+        if(input.value !== "") {
+            let element = new Element("input", {id: input.id, name: input.name, value: input.value});
+            steps.push(element);
+            setCurrentStep();
+            setSaved(false);
+        }
     })
 }
 
+/*function setPascal(solved){
+    let btn = document.querySelector("#checkPascal");
+    if(solved === "true") {
+        btn.style.backgroundColor = "green";
+        btn.innerHTML = `
+            <i class="fa fa-check"></i>
+            `;
+    }
+    console.log(steps);
+    steps.forEach(step => {
+        document.getElementsByName(step.args.name).placeholder = step.args.value;
+    })
+    /*let inputs = document.querySelectorAll(".pascalInput");
+    inputs.forEach(input => {
+        input.placeholder = input.name;
+    })*/
+//}
 
-export {currentUser, currentSet, currentTask, listOfTasks, loadTask, setUser, setSaved, saveTask}
+
+export {currentUser, currentSet, currentTask, listOfTasks, loadTask, setUser, setSaved, saveTask, savePascalSteps}

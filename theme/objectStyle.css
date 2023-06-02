@@ -12,6 +12,7 @@
     text-decoration: underline;
     font-weight: bold;
     width: inherit;
+    text-align: center;
 }
 
 .active{
@@ -33,4 +34,20 @@
 .pascalInput{
     width: 40px;
     background-color: #f3a620;
+}
+
+.posInput {
+    width: 40px;
+    background-color: #f3cc8e;
+    color: #1e2a36;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.divideDiv{
+    height: 10px;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+    background-color: #254d17;
 }

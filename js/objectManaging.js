@@ -67,7 +67,15 @@ document.querySelector("#undo").onclick = function (){
     if(currentStep > 0) {
         if(steps[currentStep - 1].type === "tool"){
             let tool = document.getElementById(steps[currentStep - 1].args.id);
-            parent.removeChild(tool);
+            let childNodes = parent.childNodes;
+            for (let i = 0; i < childNodes.length; i++) {
+                let childElement = childNodes[i];
+                if(childElement.id === tool.id){
+                    parent.removeChild(childElement);
+                    break;
+                }
+            }
+
             let index = tools.indexOf(tool);
             tools.splice(index, 1);
         }
@@ -139,6 +147,10 @@ class Element{
                 addDragAndDrop(tool);
                 parent.insertBefore(tool, canvas);
             }break;
+            case "input": {
+                document.getElementById(this.args.id).placeholder = this.args.value;
+            }
+                break;
         }
     }
 }
