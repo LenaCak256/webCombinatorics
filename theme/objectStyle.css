@@ -51,3 +51,15 @@
     color: white;
     background-color: #254d17;
 }
+
+#displayBinom{
+    display: none;
+    color: black;
+    padding: 10px;
+    font-size: 3em;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+}

@@ -311,7 +311,6 @@ td{
   background-color: #b6aeae;
 }
 
-
 #ups{
   padding-top: 200px;
   text-align: center;
@@ -398,6 +397,28 @@ td{
   font-size: 1.5em;
 }
 
+.result{
+  width: 100%;
+  height: 400px;
+  background-color: #f3e4bf;
+  border: 4px solid #6c6868;
+  border-radius: 8px;
+}
+.resutlCaption{
+  padding-top: 10px;;
+  margin-top: 50px;
+  height: 50px;
+  background-color: #254d17;
+  text-align: center;
+  border: 2px solid #6c6868;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.3em;
+}
+
+.pr{
+  color: black;
+}
 
 /**********************************************************/
 body {

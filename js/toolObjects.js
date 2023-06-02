@@ -70,11 +70,21 @@ function loadTools(set, task){
         element3.addEventListener("click", swapContent);
         element4.addEventListener("click", swapContent);
     }
-    if(set === 1 && task === 8){
+    if(set === 1 && task === 7){
+        //display picture and tool for binominal coefficient
+        document.querySelector("#displayPascal").style.display = "none";
+        document.getElementById("displayBinom").style.display = "inline";
+        document.getElementById("checkBinom").style.backgroundColor = "#95a5a6";
+        document.getElementById("checkBinom").innerHTML = "<i class='fa fa-question'></i>"
+    } else if(set === 1 && task === 8){
         //display picture and tools for Pascal triangle
         document.querySelector("#displayPascal").style.display = "flex";
+        document.querySelector("#displayBinom").style.display = "none";
         document.getElementById("checkPascal").style.backgroundColor = "#95a5a6";
-    }else { document.querySelector("#displayPascal").style.display = "none";}
+    } else if (task < 7 && set === 1){
+        document.querySelector("#displayPascal").style.display = "none";
+        document.querySelector("#displayBinom").style.display = "none";
+    }
 }
 
 let selectedElements = [];
@@ -116,8 +126,6 @@ function addTool(tool){
         tools.push(tool);
         addDragAndDrop(tool);
     }
-    console.log("ADDTOOL",steps);
-    console.log("TOOLS", tools);
 }
 
 function clearCanvasArea(){
@@ -157,7 +165,7 @@ function permutationsR(value){
     let result = [];
 
     function permute(currentStr, remainingChars) {
-        if (currentStr.length === str.length) {
+        if (currentStr.length === value.length) {
             result.push(currentStr);
         } else {
             for (let i = 0; i < value.length; i++) {
@@ -252,8 +260,6 @@ form.addEventListener("submit", function (event){
     let items = document.getElementById("inputWarning").value;
     let repeat = document.querySelector('input[name="opakovanie"]:checked').value;
     let order = document.querySelector('input[name="poradie"]:checked').value;
-    console.log(items, items.length);
-    console.log(numOfItems);
 
     //generate options with functions
     let options = [];
@@ -271,7 +277,7 @@ form.addEventListener("submit", function (event){
             options = variations(items, numOfItems);
         }
     }
-    if(repeat === "ture" && order === "true"){
+    if(repeat === "true" && order === "true"){
         if(numOfItems === items.length){
             options = permutationsR(items);
         }else{
@@ -377,10 +383,38 @@ document.querySelector("#checkPascal").onclick = function (){
             savePascalSteps();
             saveTask(true);
             let check = checkSkills("pascal").then(p => {});
-            console.log("Check", check);
             if(check) {
                 updateSkills("pascal").then(p => {
                     document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Pascalov trojuholník";
+                    displaySkillModal();
+                });
+            }
+        }
+    }else{
+        btn.style.backgroundColor = "red";
+    }
+}
+
+document.querySelector("#checkBinom").onclick = function (){
+    let binomN = parseInt(document.querySelector("#binomN").value);
+    let binomK = parseInt(document.querySelector("#binomK").value);
+
+    let btn = document.querySelector("#checkBinom");
+    if(binomN === 11 && binomK === 4){
+        btn.style.backgroundColor = "green";
+        if(currentUser){
+            let e1 = new Element("input", {id: "binomN", value: "11"});
+            let e2 = new Element("input", {id: "binomK", value: "4"});
+            steps.push(e1);
+            steps.push(e2);
+            setCurrentStep();
+            setSaved(false);
+            saveTask(true);
+            let check = checkSkills("binom").then(p => {});
+            console.log(check);
+            if(check) {
+                updateSkills("binom").then(p => {
+                    document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Kombinačné čísla";
                     displaySkillModal();
                 });
             }

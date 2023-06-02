@@ -78,6 +78,10 @@ function closeTrashModal(){
     trashModal.style.display = "none";
 }
 
+document.querySelector("#checkResult").onclick = function (){
+    resultModal.style.display = "flex";
+}
+
 //displays help modal and loads hint for current task
 document.querySelector("#modalHelp").onclick = function () {
     helpModal.style.display = "block";
@@ -359,6 +363,13 @@ async function loadTask(){
             <i class="fa fa-check"></i>
             `;
             }
+            let btn1 = document.querySelector("#checkBinom");
+            if(currentTask === 7 && currentSet === 1 && doc.get("solved")) {
+                btn1.style.backgroundColor = "green";
+                btn1.innerHTML = `
+            <i class="fa fa-check"></i>
+            `;
+            }
         });
         setSaved(true);
     }
@@ -411,24 +422,5 @@ function savePascalSteps(){
         }
     })
 }
-
-/*function setPascal(solved){
-    let btn = document.querySelector("#checkPascal");
-    if(solved === "true") {
-        btn.style.backgroundColor = "green";
-        btn.innerHTML = `
-            <i class="fa fa-check"></i>
-            `;
-    }
-    console.log(steps);
-    steps.forEach(step => {
-        document.getElementsByName(step.args.name).placeholder = step.args.value;
-    })
-    /*let inputs = document.querySelectorAll(".pascalInput");
-    inputs.forEach(input => {
-        input.placeholder = input.name;
-    })*/
-//}
-
 
 export {currentUser, currentSet, currentTask, listOfTasks, loadTask, setUser, setSaved, saveTask, savePascalSteps}

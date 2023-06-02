@@ -18,7 +18,7 @@
     "keyword": "cestovné lístky",
     "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zisti, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
     "hint": "je dôležité si uvedomiť, že lístky s dvojicou staníc napr. (Bratislava - Trnava), (Trnava - Bratislava) sú dva rôzne cestovné lístky",
-    "result": "V(3174,2)"
+    "result": "V(3174, 2)"
   },
   {
     "number": "4",

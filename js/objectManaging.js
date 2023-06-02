@@ -84,8 +84,6 @@ document.querySelector("#undo").onclick = function (){
         currentStep--;
         redrawCanvas();
         redoOk = true;
-        console.log("UNDO steps ", steps);
-        console.log(tools);
     }
 }
 
@@ -97,7 +95,6 @@ document.querySelector("#redo").onclick = function (){
         redrawCanvas();
         currentStep++;
         if(currentStep === storedSteps.length){redoOk = false;}
-        console.log(steps);
     }
 }
 
