@@ -49,10 +49,10 @@ function loadTools(set, task){
         tool.innerHTML = `
         <div style="text-align: center"><label class="objectCaption">Klikni na 2 obrázky a vymeň ich</label></div>
         <div class="container" style="padding: 5px; width: max-content">
-            <div class="col-sm-3" id="e1" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./cardA.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e2" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card10.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e3" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card6.svg" height="180px" width="90px"></div>
-            <div class="col-sm-3" id="e4" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./cardJ.svg" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e1" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card1.png" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e2" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card3.png" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e3" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card2.png" height="180px" width="90px"></div>
+            <div class="col-sm-3" id="e4" style="padding: 3px; margin: 3px; background-color: white; width: 100px"><img src="./card4.png" height="180px" width="90px"></div>
         </div>
     `;
         addDragAndDrop(tool);
@@ -411,7 +411,6 @@ document.querySelector("#checkBinom").onclick = function (){
             setSaved(false);
             saveTask(true);
             let check = checkSkills("binom").then(p => {});
-            console.log(check);
             if(check) {
                 updateSkills("binom").then(p => {
                     document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Kombinačné čísla";

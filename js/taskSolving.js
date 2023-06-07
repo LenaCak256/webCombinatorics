@@ -40,12 +40,16 @@ document.querySelector("#result").onclick = function (){
         let key = currentSet.toString() + currentTask.toString();
         let values = skills.get(key);
         if(values.length !== 0) {
-            updateSkills(values[0]);
-            closeResultModal();
-            let html = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> ";
-            html = html + values[1];
-            document.querySelector("#skillName").innerHTML = html;
-            displaySkillModal();
+            let check = checkSkills(values[0]).then();
+            if(check){
+                updateSkills(values[0]).then(p => {
+                    closeResultModal();
+                    let html = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> ";
+                    html = html + values[1];
+                    document.querySelector("#skillName").innerHTML = html;
+                    displaySkillModal();
+                });
+            }
         }
     }else{
         document.querySelector("#incorrectLabel").style.display = "block";
