@@ -175,7 +175,7 @@
         </div>
         <div class="form-group has-warning">
           <label class="col-lg-4" for="inputWarning">Tu vpíš prvky, ktoré chceš použiť - napíš bez medzier !</label>
-          <input class="col-lg-6" required type="text" class="form-control" id="inputWarning">
+          <input class="col-lg-6" autocomplete="off" required type="text" class="form-control" id="inputWarning">
         </div>
         <div class="form-group">
           <div class="col-lg-10">
@@ -184,22 +184,6 @@
         </div>
       </fieldset>
     </form>
-  </div>
-</div>
-
-<div id="resultModal" class="mymodal">
-  <div class="modalContent">
-    <span class="close" id="closeResultModal"><i class="fa fa-window-close"></i></span>
-    <h4 style="margin-bottom: 20px; font-weight: bold; text-align: center">
-      <i class="fa fa-calculator"></i> <u>Výsledok</u>
-    </h4>
-    <div id="resultContent" style="text-align: center">
-      <p style="text-align: center">Zadaj svoj výsledok a stlač tlačidlo <u>Skontroluj</u></p>
-      <input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
-      <button type="button" class="btn btn-warning" id="result">Skontroluj</button>
-      <label class="messageLabel" id="correctLabel" style="font-size: 1.8em; background-color: #66a650; display: none">Správny výsledok</label>
-      <label class="messageLabel" id="incorrectLabel" style="font-size: 1.8em; background-color: #b6372a; display: none">Nesprávny výsledok</label>
-    </div>
   </div>
 </div>
 
@@ -256,30 +240,30 @@
   <div class="col-lg-12">
     <div class="col-lg-2 tools" id="leftCol">
       <div class="bs-component" style="width: 200px; float: right">
-        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Po kliknutí môžeš kresliť na plochu. Nižšie si vieš nastaviť farbu a hrúbku pera. " id="pen">
+        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="Po kliknutí môžeš kresliť na plochu. Nižšie si vieš nastaviť farbu a hrúbku pera. " id="pen">
           <i class="fa fa-pencil"></i> Pero
         </button>
         <div id="penSettings">
           <label for="stroke" style="margin-right: 6px">farba pera</label><input id="stroke" name='stroke' type="color">
           <label for="lineWidth" style="margin-right: 6px">hrúbka pera</label><input id="lineWidth" name='lineWidth' type="number" value="2" min="1" max="100" style="width: 40px">
         </div>
-        <button type="button" name="tool" id="text" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche.">
+        <button type="button" name="tool" id="text" class="btn tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pridaj na plochu textové pole na tvoje poznámky, napíš a stlač ENTER, následne textom môžeš pohybovať po ploche.">
           <i class="fa fa-comment"></i> Text
         </button>
-        <button type="button" name="tool" id="allOptions" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zvoľ kritériá vo formulári a vypíš všetky hľadané možnosti">
+        <button type="button" name="tool" id="allOptions" class="btn tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zvoľ kritériá vo formulári a vypíš všetky hľadané možnosti">
           <i class="fa fa-tasks"></i> Všetky možnosti
         </button>
         <div>
           <div class="input-group" id="changeForm">
             <input required type="text" id="changeInput" class="form-control" placeholder="Zadaj prvky">
-          <button class="btn tool" type="button" id="changePos" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj do políčka prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou premiestňovnia prvkov.">
+          <button class="btn tool" type="button" id="changePos" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zadaj do políčka prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou premiestňovnia prvkov.">
             <i class="fa fa-refresh"></i>  Výmena pozícií</button>
           </div>
         </div>
         <div>
           <div class="input-group">
             <input required type="text" id="chooseInput" class="form-control" placeholder="Zadaj počet pozícií">
-            <button type="button" name="tool" id="choosePos" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj do políčka počet pozícií, na ktoré chceš umiestňovať prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou ukladanie prvkov na rôzne pozície.">
+            <button type="button" name="tool" id="choosePos" class="btn tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="Zadaj do políčka počet pozícií, na ktoré chceš umiestňovať prvky a stlač tlačidlo. Zobrazí sa ti nástroj s možnosťou ukladanie prvkov na rôzne pozície.">
               <i class="fa fa-circle-o"></i> Výber pozícií</button>
           </div>
         </div>
@@ -309,7 +293,7 @@
       </div>
       <div id="canvasArea">
         <div id="displayBinom" style="width: max-content; height: max-content">
-          <div style="margin: 0; padding-left:100px; padding-top: 40px; height: max-content" class="row">
+          <div style="margin: 0; padding-left:100px; height: max-content" class="row">
             <div class="col-lg-6" style="text-align: right; padding-top: 60px; width: max-content">
               \[\binom{10}{6} + \binom{10}{4} = \]
             </div>
@@ -517,10 +501,65 @@
         </canvas>
       </div>
     </div>
-    <div class="col-lg-2 tools">
-      <div class="bs-component" style="width: 200px; float: left">
-        <button type="button" name="tool" class="btn tool" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="checkResult">
-          <i class="fa fa-question-circle"></i> Výsledok</button>
+    <div class="col-lg-2">
+      <div class="resutlCaption">
+        <i class="fa fa-calculator"></i> Riešenie <i class="fa fa-pencil-square-o"></i>
+      </div>
+      <div class="result">
+        <div id="displayResult"></div>
+        <div class="bs-component" style="width: 100%">
+          <div class="btn-group" style="margin-top: 8px; margin-bottom: 4px">
+            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="plus">+</button>
+            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="mínus">-</button>
+            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="krát">*</button>
+          </div>
+          <div class="form-group" style="margin: 4px">
+            <div class="input-group">
+              <input type="text" class="form-control" id="inputResult">
+              <span class="input-group-btn">
+                  <button class="btn resultBtn" id="addResult" type="button" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vyber možnosť, ktorú chceš pridať do výsledku, vpíš hodnotu a stlač Pridaj">Pridaj</button>
+              </span>
+            </div>
+          <div class="form-group" style="color: #1a242f">
+            <div class="col-lg-6">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="resultOption" id="numberValue" value="number" checked="">
+                  číslo
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="resultOption" id="binom" value="binom">
+                  kombinačné číslo
+                </label>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="resultOption" id="factorial" value="factorial">
+                  faktoriál
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="resultOption" id="fraction" value="fraction">
+                    zlomok
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="button" name="tool" class="btn resultBtn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="result">
+            <i class="fa fa-question-circle"></i> Skontroluj
+          </button>
+            <div><br>
+              <label class="messageLabel" id="unknownLabel" style="font-size: 1.3em; color: #363535; background-color: #b6aeae; display: inline"><i class="fa fa-question"></i></label>
+              <label class="messageLabel" id="correctLabel" style="font-size: 1.3em; background-color: #66a650; display: none">Správny výsledok</label>
+              <label class="messageLabel" id="incorrectLabel" style="font-size: 1.3em; background-color: #b6372a; display: none">Nesprávny výsledok</label>
+            </div>
+        </div>
       </div>
     </div>
   </div>

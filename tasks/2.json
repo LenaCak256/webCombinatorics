@@ -38,8 +38,8 @@
     "number": "6",
     "keyword": "lokomotíva",
     "text": "Koľko rôznych slov, v ktorých nie sú žiadne dve písmená o vedľa seba, je možné získať zámenou poradia písmen v slove lokomotíva ?",
-    "hint": "",
-    "result": ""
+    "hint": "najprv vytvor usporiadania bez písmenka o",
+    "result": "7! * binom{8}{3}"
   },
   {
     "number": "7",

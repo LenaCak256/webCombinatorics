@@ -1,4 +1,4 @@
-import {setSaved} from "./taskLoading.js";
+import {currentSet, setSaved} from "./taskLoading.js";
 import {clearCanvasArea, tools, addDragAndDrop} from "./toolObjects.js";
 
 //stores steps taken while solving current task
@@ -94,6 +94,7 @@ document.querySelector("#redo").onclick = function (){
         setSaved(false);
         redrawCanvas();
         currentStep++;
+        console.log(currentStep, storedSteps.length);
         if(currentStep === storedSteps.length){redoOk = false;}
     }
 }
@@ -136,6 +137,7 @@ class Element{
             }break;
             case "tool":{
                 let tool = document.createElement(this.args.tag);
+                tool.id = this.args.id;
                 tool.innerHTML = this.args.inner;
                 tool.classList.add("object");
                 tool.style.left = this.args.x;
@@ -342,4 +344,4 @@ document.addEventListener('click', function(event) {
     }
 });
 
-export {deleteAll, setCanvas, setCurrentStep, steps, storedSteps, currentStep, Element, offsetX, offsetY}
+export {setCanvas, penOn, penOff, deleteAll, setCurrentStep, steps, storedSteps, currentStep, Element, offsetX, offsetY}

@@ -1,4 +1,4 @@
-import {Element, setCurrentStep, steps, storedSteps} from "./objectManaging.js";
+import {penOff, Element, setCurrentStep, steps, storedSteps, penOn, setCanvas} from "./objectManaging.js";
 import {currentSet, currentTask, currentUser, savePascalSteps, saveTask, setSaved} from "./taskLoading.js";
 import {displaySkillModal, updateSkills, checkSkills} from "./taskSolving.js";
 
@@ -23,6 +23,12 @@ export function addDragAndDrop(tool){
     header.addEventListener("mousedown", ()=>{
         header.classList.add("active");
         header.addEventListener("mousemove", onDrag);
+        if(penOn){
+            penOff();
+            let penBtn = document.querySelector("#pen");
+            penBtn.style.backgroundColor = "#f3e4bf";
+            penBtn.style.fontWeight = "normal";
+        }
     });
 
     document.addEventListener("mouseup", ()=>{
@@ -76,14 +82,19 @@ function loadTools(set, task){
         document.getElementById("displayBinom").style.display = "inline";
         document.getElementById("checkBinom").style.backgroundColor = "#95a5a6";
         document.getElementById("checkBinom").innerHTML = "<i class='fa fa-question'></i>"
+        document.querySelector("#canvas").style.display = "none";
     } else if(set === 1 && task === 8){
         //display picture and tools for Pascal triangle
         document.querySelector("#displayPascal").style.display = "flex";
         document.querySelector("#displayBinom").style.display = "none";
         document.getElementById("checkPascal").style.backgroundColor = "#95a5a6";
+        document.querySelector("#canvas").style.display = "none";
+
     } else if (task < 7 && set === 1){
         document.querySelector("#displayPascal").style.display = "none";
         document.querySelector("#displayBinom").style.display = "none";
+        document.querySelector("#canvas").style.display = "inline";
+        setCanvas();
     }
 }
 

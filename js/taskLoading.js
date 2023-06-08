@@ -49,7 +49,6 @@ const helpModal = document.getElementById("helpModal");
 const optionsForm = document.getElementById("optionsForm");
 
 const helpContent = document.getElementById("helpContent");
-const resultModal = document.getElementById("resultModal");
 //*********************************************************************
 
 document.querySelector("#closeModal").onclick = function () { closeModal() }
@@ -78,10 +77,6 @@ function closeTrashModal(){
     trashModal.style.display = "none";
 }
 
-document.querySelector("#checkResult").onclick = function (){
-    resultModal.style.display = "flex";
-}
-
 //displays help modal and loads hint for current task
 document.querySelector("#modalHelp").onclick = function () {
     helpModal.style.display = "block";
@@ -101,12 +96,6 @@ document.querySelector("#closeHelp").onclick = function () {
     }
 }
 
-function closeResultModal() {
-    resultModal.style.display = "none";
-    document.getElementById("correctLabel").style.display = "none";
-    document.getElementById("incorrectLabel").style.display = "none";
-}
-
 document.addEventListener('click', function(event) {
     if(event.target.name === "choose"){
         set(parseInt(event.target.id));
@@ -122,10 +111,7 @@ document.addEventListener('click', function(event) {
         document.getElementById("taskNum").style.color = "#252c36"
         document.getElementById("taskText").style.color = "#252c36"
     }
-    else if (event.target === trashModal || event.target === helpModal || event.target === resultModal || event.target === optionsForm) {
-        if(event.target === resultModal){
-            closeResultModal()
-        }
+    else if (event.target === trashModal || event.target === helpModal || event.target === optionsForm) {
         event.target.style.display = "none";
         while(helpContent.hasChildNodes()){
             helpContent.removeChild(helpContent.firstChild);
@@ -370,6 +356,16 @@ async function loadTask(){
             <i class="fa fa-check"></i>
             `;
             }
+
+            if(doc.get("solved")){
+                document.querySelector("#correctLabel").style.display = "inline";
+                document.querySelector("#unknownLabel").style.display = "none";
+                document.querySelector("#incorrectLabel").style.display = "none";
+            }else {
+                ocument.querySelector("#correctLabel").style.display = "none";
+                document.querySelector("#unknownLabel").style.display = "inline";
+                document.querySelector("#incorrectLabel").style.display = "none";
+            }
         });
         setSaved(true);
     }
@@ -379,13 +375,15 @@ async function loadTask(){
 document.querySelector("#saveTask").onclick = function (){
     if(currentUser == null){
         window.alert("Najprv sa musíš prihlásiť !");
-    } if(currentSet === 1 && currentTask === 8){
-        savePascalSteps();
-    }
-    if(steps.length){
-        console.log(steps);
-        saveTask(false);
-        window.alert("Postup uložený!");
+    } else{
+        if(currentSet === 1 && currentTask === 8){
+            savePascalSteps();
+        }
+        if(steps.length){
+            console.log(steps);
+            saveTask(false);
+            window.alert("Postup uložený!");
+        }
     }
 }
 
