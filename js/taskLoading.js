@@ -3,7 +3,7 @@ import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebas
 import {auth, db} from "./config.js"
 import {deleteAll, Element, setCanvas, setCurrentStep, steps, storedSteps} from "./objectManaging.js";
 import {loadTools} from "./toolObjects.js";
-import {displayResult, result} from "./taskSolving.js";
+import {Binom, displayResult, Frac, result} from "./taskSolving.js";
 
 //important variables / default values
 let listOfTasks
@@ -298,6 +298,11 @@ async function saveTask(solved) {
             array.push(JSON.stringify(step.args));
         });
         let docID = currentUser.uid + currentSet.toString() + currentTask.toString();
+        result.forEach(item =>{
+            if(item instanceof Binom || item instanceof Frac){
+                result[result.indexOf(item)] = item.toJson();
+            }
+        })
         let stringResult = JSON.stringify(result);
         await firestore.setDoc(firestore.doc(db, 'tasks', docID), {
             set: currentSet,
@@ -375,7 +380,19 @@ async function loadTask(){
 
             let res = JSON.parse(doc.get("result"));
             for(let i=0; i<res.length; i++){
-                result.push(res[i]);
+                let item = res[i];
+
+                if(item.type){
+                    console.log("OK");
+                    if(item.type === 'binom'){
+                        result.push(new Binom(item.n, item.k));
+                    }
+                    if(item.type === "frac"){
+                        result.push(new Frac(item.n, item.k));
+                    }
+                }else{
+                    result.push(item);
+                }
             }
             displayResult();
         });

@@ -1,9 +1,6 @@
 import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import {db} from "./config.js";
 import {currentSet, currentTask, currentUser, listOfTasks, saveTask} from "./taskLoading.js";
-
-const { Fraction } = math;
-
 const skills = new Map();
 skills.set("11", ["factorial", "Faktoriál"]);
 skills.set("14", ["combinations", "Kombinácie"]);
@@ -38,6 +35,10 @@ class Binom{
     getTex(){
         return "\\binom{" + this.n + "}{" + this.k + "}";
     }
+
+    toJson(){
+        return {type: 'binom', n: this.n, k: this.k };
+    }
 }
 
 class Frac{
@@ -53,6 +54,10 @@ class Frac{
     getTex(){
         return "\\frac{" + this.n + "}{" + this.k + "}";
     }
+
+    toString(){
+        return {type: 'frac', n: this.n, k: this.k};
+    }
 }
 
 let result = []
@@ -63,6 +68,7 @@ function displayResult(){
 
     if(result.length) {
         result.forEach(item => {
+            console.log(item);
             if(item instanceof Binom){
                 string += item.getTex();
             }else if (item instanceof Frac){
@@ -288,4 +294,4 @@ document.querySelector("#deleteResult").onclick = function() {
     displayResult();
 }
 
-export{checkSkills, updateSkills, displaySkillModal, displayResult, result}
+export{checkSkills, updateSkills, displaySkillModal, displayResult, result, Binom, Frac}
