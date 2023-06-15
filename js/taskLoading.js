@@ -383,7 +383,6 @@ async function loadTask(){
                 let item = res[i];
 
                 if(item.type){
-                    console.log("OK");
                     if(item.type === 'binom'){
                         result.push(new Binom(item.n, item.k));
                     }

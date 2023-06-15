@@ -48,7 +48,10 @@ class Frac{
     }
 
     getValue(){
-        return math.fraction(this.n, this.k);
+        let numerator = math.evaluate(this.n);
+        let denominator = math.evaluate(this.k);
+
+        return math.fraction(numerator, denominator);
     }
 
     getTex(){
@@ -68,7 +71,6 @@ function displayResult(){
 
     if(result.length) {
         result.forEach(item => {
-            console.log(item);
             if(item instanceof Binom){
                 string += item.getTex();
             }else if (item instanceof Frac){
@@ -93,55 +95,43 @@ function countResult(array){
     let output = "";
 
     if(array.length === 1){
-        return math.evaluate(array[0]);
+        let element = array[0];
+        if(element instanceof Binom || element instanceof Frac){
+            return math.evaluate(element.getValue().toString());
+        }else{
+            return math.evaluate(element);
+        }
     }
+
     if(array.length){
-        let prev = array[0];
+        let prev;
         let current;
-        for(let i=1; i<array.length; i++){
+
+        for(let i=0; i<array.length; i++){
             current = array[i];
 
-            if(prev instanceof Binom){
-                prev = prev.getValue();
-            }
-            if(prev instanceof Frac){
-                prev = prev.getValue();
-            }
-            if(prev === "!"){
-                prev = "";
-            }
             switch (current){
                 case "!": {
                     output += math.factorial(parseInt(prev)).toString();
                     break;
                 }
                 case "+":{
-                    output += prev.toString();
                     output += "+";
                     break;
                 }
                 case "-":{
-                    output += prev.toString();
                     output += "-";
                     break;
                 }
                 case "*":{
-                    output += prev.toString();
                     output += "*";
                     break;
                 }
-                case "^":{
-                    output += prev.toString();
-                    output += "^";
-                    break;
-                }
                 default:{
-                    if(current instanceof Binom){
-                        current = current.getValue();
+                    if(current instanceof Binom || current instanceof Frac){
+                        current = current.getValue().toString();
                     }
-                    if(current instanceof Frac){
-                        current = current.getValue();
-                    }else{
+                    if(array[i+1] !== "!") {
                         output += current;
                     }
                     break;
@@ -150,7 +140,7 @@ function countResult(array){
             prev = current;
         }
     }
-    return math.evaluate(output);
+    return Math.round(math.evaluate(output));
 }
 
 const radioButtons = document.querySelectorAll('input[name="resultOption"]');
@@ -162,18 +152,21 @@ radioButtons.forEach(function(radioButton) {
                     document.querySelector("#inputResult").style.display = "inline";
                     document.querySelector("#binomialInput").style.display = "none";
                     document.querySelector("#fractionInput").style.display = "none";
+                    document.querySelector("#fracWarning").style.display = "none";
                     break;
                 }
                 case "fraction":{
                     document.querySelector("#inputResult").style.display = "none";
                     document.querySelector("#binomialInput").style.display = "none";
                     document.querySelector("#fractionInput").style.display = "inline";
+                    document.querySelector("#fracWarning").style.display = "flex";
                     break;
                 }
                 case "binom":{
                     document.querySelector("#inputResult").style.display = "none";
                     document.querySelector("#binomialInput").style.display = "inline";
                     document.querySelector("#fractionInput").style.display = "none";
+                    document.querySelector("#fracWarning").style.display = "none";
                     break;
                 }
             }
@@ -216,9 +209,13 @@ document.querySelector("#result").onclick = function (){
         correctResult = countResult([correctResult]);
     }
     let value = countResult(result);
+
+    console.log(correctResult);
+    console.log(value);
+
     document.querySelector("#unknownLabel").style.display = "none";
     document.querySelector("#incorrectLabel").style.display = "none";
-    console.log(correctResult === value);
+    document.querySelector("#correctLabel").style.display = "none";
     if(value === correctResult && correctResult !== ""){
         document.querySelector("#correctLabel").style.display = "inline";
         saveTask(true);
