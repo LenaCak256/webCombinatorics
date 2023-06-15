@@ -1,6 +1,7 @@
 import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 import {db} from "./config.js";
 import {currentSet, currentTask, currentUser, listOfTasks, saveTask} from "./taskLoading.js";
+
 const skills = new Map();
 skills.set("11", ["factorial", "Faktoriál"]);
 skills.set("14", ["combinations", "Kombinácie"]);
@@ -63,6 +64,25 @@ class Frac{
     }
 }
 
+class Pow{
+    constructor(base, power) {
+        this.base = base;
+        this.power = power;
+    }
+
+    getValue(){
+        return math.pow(this.base, this.power);
+    }
+
+    getTex(){
+        return this.base + "^{" + this.power + "}";
+    }
+
+    toString(){
+        return {type: 'pow', n: this.base, k: this.power};
+    }
+}
+
 let result = []
 
 function displayResult(){
@@ -71,9 +91,7 @@ function displayResult(){
 
     if(result.length) {
         result.forEach(item => {
-            if(item instanceof Binom){
-                string += item.getTex();
-            }else if (item instanceof Frac){
+            if(item instanceof Binom || item instanceof Frac || item instanceof Pow){
                 string += item.getTex();
             }
             else{
@@ -96,7 +114,7 @@ function countResult(array){
 
     if(array.length === 1){
         let element = array[0];
-        if(element instanceof Binom || element instanceof Frac){
+        if(element instanceof Binom || element instanceof Frac || element instanceof Pow){
             return math.evaluate(element.getValue().toString());
         }else{
             return math.evaluate(element);
@@ -128,7 +146,7 @@ function countResult(array){
                     break;
                 }
                 default:{
-                    if(current instanceof Binom || current instanceof Frac){
+                    if(current instanceof Binom || current instanceof Frac || current instanceof Pow){
                         current = current.getValue().toString();
                     }
                     if(array[i+1] !== "!") {
@@ -194,6 +212,11 @@ document.querySelector("#addResult").onclick = function (){
         case "number": {
             item = document.querySelector("#inputResult").value;
             document.querySelector("#inputResult").value = "";
+
+            if(pow){
+                let base = result.pop();
+                item = new Pow(base, item);
+            }
             break;
         }
     }
@@ -276,10 +299,10 @@ document.querySelector("#times").onclick = function() {
     displayResult();
 }
 
-/*document.querySelector("#pow").onclick = function() {
-    result.push("^");
-    displayResult();
-}*/
+let pow = false;
+document.querySelector("#pow").onclick = function() {
+    pow = true;
+}
 
 document.querySelector("#factorialBtn").onclick = function() {
     result.push("!");

@@ -15,17 +15,17 @@
   },
   {
     "number": "3",
-    "keyword": "",
-    "text": "",
-    "hint": "",
-    "result": ""
+    "keyword": "guličky",
+    "text": "Z vrecka, v ktorom sú 3 žlté, 1 modrá, 10 červených a 10 zelených guličiek, naberieme hrsť desiatich guličiek. Koľko rôznych hrstí môžeme dostať ?",
+    "hint": "v hrsti môže byť viacero guličiek rovnakej farby",
+    "result": "72"
   },
   {
     "number": "4",
-    "keyword": "",
-    "text": "",
-    "hint": "",
-    "result": ""
+    "keyword": "mocniny",
+    "text": "Koľko z čísel 1,2, .. ., 100 000 je mocninou iného prirodzeného čísla?",
+    "hint": "vzhľadom k tomu, že 100 000 < 2^17, budeme sa sústrediť na mocniny < 17 | ak je prirodzené číslo mocninou iného prirodzeného čísla, je tiež prvočíselnou mocninou nejakého prirodzeného čísla",
+    "result": "366"
   },
   {
     "number": "5",
