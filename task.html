@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="theme/usebootstrap.css">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.1/math.js"></script>
   <script src="bootstrap/html5shiv.js"></script>
   <script src="bootstrap/respond.min.js"></script>
 
@@ -502,22 +502,33 @@
       </div>
     </div>
     <div class="col-lg-2">
-      <div class="resutlCaption">
+      <div class="resultCaption">
         <i class="fa fa-calculator"></i> Riešenie <i class="fa fa-pencil-square-o"></i>
       </div>
       <div class="result">
         <div id="displayResult"></div>
         <div class="bs-component" style="width: 100%">
           <div class="btn-group" style="margin-top: 8px; margin-bottom: 4px">
-            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="plus">+</button>
-            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="mínus">-</button>
-            <button type="button" class="btn op" data-toggle="tooltip" data-placement="bottom" data-original-title="krát">*</button>
+            <button type="button" class="btn op" id="plus" ><i class="fa fa-plus"></i></button>
+            <button type="button" class="btn op" id="minus" ><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn op" id="times" ><i class="fa fa-times"></i></button>
+
+            <button type="button" class="btn op" style="font-size: 1.7em; padding: 5px 10px 0; font-weight: bold" id="factorialBtn" data-toggle="tooltip" data-placement="top" data-original-title="faktoriál">!</button>
+            <button type="button" class="btn op" id="deleteResult" data-toggle="tooltip" data-placement="bottom" data-original-title="vymaž krok"><i class="fa fa-arrow-left"></i></button>
           </div>
           <div class="form-group" style="margin: 4px">
             <div class="input-group">
-              <input type="text" class="form-control" id="inputResult">
+              <input type="text" class="form-control" id="inputResult" style="display: inline">
+              <div class="input-wrapper" id="binomialInput" style="display: none">
+                <input type="text" class="binomInput form-control" id="N" placeholder="n">
+                <input type="text" class="binomInput form-control" id="K" placeholder="k">
+              </div>
+              <div class="input-wrapper" id="fractionInput" style="display: none">
+                <input type="text" class="binomInput form-control" id="frac1" placeholder="čitateľ">
+                <input type="text" class="binomInput form-control" id="frac2" placeholder="menovateľ">
+              </div>
               <span class="input-group-btn">
-                  <button class="btn resultBtn" id="addResult" type="button" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Vyber možnosť, ktorú chceš pridať do výsledku, vpíš hodnotu a stlač Pridaj">Pridaj</button>
+                  <button class="btn resultBtn" id="addResult" type="button">Pridaj</button>
               </span>
             </div>
           <div class="form-group" style="color: #1a242f">
@@ -526,27 +537,24 @@
                 <label>
                   <input type="radio" name="resultOption" id="numberValue" value="number" checked="">
                   číslo
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="resultOption" id="binom" value="binom">
-                  kombinačné číslo
-                </label>
+                  </label>
               </div>
             </div>
 
             <div class="col-lg-6">
               <div class="radio">
                 <label>
-                  <input type="radio" name="resultOption" id="factorial" value="factorial">
-                  faktoriál
+                  <input type="radio" name="resultOption" id="fraction" value="fraction">
+                  zlomok
                 </label>
               </div>
+            </div>
+
+            <div class="col-lg-12">
               <div class="radio">
                 <label>
-                  <input type="radio" name="resultOption" id="fraction" value="fraction">
-                    zlomok
+                  <input type="radio" name="resultOption" id="binom" value="binom">
+                  kombinačné číslo
                 </label>
               </div>
             </div>
@@ -555,7 +563,7 @@
             <i class="fa fa-question-circle"></i> Skontroluj
           </button>
             <div><br>
-              <label class="messageLabel" id="unknownLabel" style="font-size: 1.3em; color: #363535; background-color: #b6aeae; display: inline"><i class="fa fa-question"></i></label>
+              <label class="messageLabel" id="unknownLabel" style="font-size: 1.3em; color: #363535; background-color: #b6aeae; display: inline"><i class="fa fa-window-minimize"></i></label>
               <label class="messageLabel" id="correctLabel" style="font-size: 1.3em; background-color: #66a650; display: none">Správny výsledok</label>
               <label class="messageLabel" id="incorrectLabel" style="font-size: 1.3em; background-color: #b6372a; display: none">Nesprávny výsledok</label>
             </div>

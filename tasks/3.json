@@ -3,27 +3,27 @@
     "number": "1",
     "keyword": "telovýchovný spolok",
     "text": "Telovýchovný spolok má štyri oddiely: atletický (A), futbalový (F), volejbalový (V) a šachový (S). Každý člen športuje v niektorom oddieli, niektorí aj vo viacerých naraz. Koľko členov má telovýchovný spolok?",
-    "hint": "",
-    "result": ""
+    "hint": "v tabuľke sú uvedené počty členov vykonávajúcich daný šport, 2 alebo 3 písmená označujú počet členov, ktorí vykonávajú viac športov naraz (napríklad AF označuje atletiku a futbal) | daj pozor na viacnásobné pripočítanie rovnakých členov",
+    "result": "85"
   },
   {
     "number": "2",
     "keyword": "telovýchovný spolok - pokračovanie",
     "text": "Koľko športovcov z predchádzajúcej úlohy vykonáva aspoň 2 športy ?",
-    "hint": "",
-    "result": ""
+    "hint": "musíš odrátať všetky nevyhovujúce možnosti",
+    "result": "28"
   },
   {
     "number": "3",
-    "keyword": "kino",
-    "text": "Koľkými spôsobmi sa vie v kine usadiť n manželských párov do posledného radu, kde je 2n miest tak, aby žiadny manželský pár nesedel vedľa seba?",
+    "keyword": "",
+    "text": "",
     "hint": "",
     "result": ""
   },
   {
     "number": "4",
-    "keyword": "farebné guličky",
-    "text": "Z vrecka, v ktorom sú 3 žlté, 1 modrá, 10 červených a 10 zelených guličiek, naberieme hrsť desiatich guličiek. Koľko rôznych hrstí môžeme dostať?",
+    "keyword": "",
+    "text": "",
     "hint": "",
     "result": ""
   },
@@ -31,7 +31,7 @@
     "number": "5",
     "keyword": "tlmočníci",
     "text": "Koľko tlmočníkov je zamestnaných v stredisku, ak vieme, že 36 z nich vie anglicky, 32 nemecky, 31 rusky, 30 francúzsky, 28 poľsky a 26 po španielsky, pričom 53 z nich pozná viac ako jeden z uvedených jazykov. 24 tlmočníci poznajú aspoň tri jazyky, 9 aspoň štyri, 3 aspoň päť a 1 všetkých šesť.",
-    "hint": "",
-    "result": ""
+    "hint": "po spočítaní tlmočníkov všetkých jazykov sú niektorí tlmočíci zarátaní viackrát",
+    "result": "93"
   }
 ]

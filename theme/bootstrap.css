@@ -402,7 +402,7 @@ td{
   border-radius: 8px;
   text-align: center;
 }
-.resutlCaption{
+.resultCaption{
   padding-top: 10px;
   height: 50px;
   background-color: #20331a;
@@ -419,10 +419,12 @@ td{
 }
 
 #displayResult{
+  font-size: 1.3em;
+  padding: 3px;
   background-color: white;
   color: black;
   width: 100%;
-  height: 30%;
+  height: 25%;
   overflow: auto;
 }
 
@@ -431,6 +433,7 @@ td{
   background-color: #f3a620;
   font-size: 1.3em;
   font-weight: bold;
+  width: max-content;
 }
 
 .op:hover{
@@ -439,6 +442,25 @@ td{
 
 .pr{
   color: black;
+}
+
+.sportTool{
+  width: max-content;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.binomInput{
+  width: 10%;
+  color: black;
+}
+
+.input-wrapper {
+  display: flex;
+}
+
+.input-wrapper input {
+  margin-right: 3px;
 }
 
 /**********************************************************/

@@ -11,5 +11,6 @@
     <orderEntry type="library" name="mathjax" level="application" />
     <orderEntry type="library" name="platform" level="application" />
     <orderEntry type="library" name="jquery-3.7.0" level="application" />
+    <orderEntry type="library" name="mathjs" level="application" />
   </component>
 </module>

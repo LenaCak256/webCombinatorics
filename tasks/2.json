@@ -2,57 +2,57 @@
   {
     "number": "1",
     "keyword": "výletníci",
-    "text": "35 výletníkov sa pred cestou rozdelilo na štyri skupiny: 17 sa ich vracalo vlakom, 8 autobusom, 6 lodí a 4 pešo. Koľkými spôsobmi sa mohli rozdeliť?",
-    "hint": "",
-    "result": ""
+    "text": "35 výletníkov sa pred cestou rozdelilo na štyri skupiny: 17 sa ich vracalo vlakom, 8 autobusom, 6 loďou a 4 pešo. Koľkými spôsobmi sa mohli rozdeliť?",
+    "hint": "predstav si rozdelenie ako jedno usporiadanie výletníkov, v ktorom jednotlivé dopravné prostriedky predstavujú rozdielne prvky | napríklad V je výletník cestujúci vlakom, P je výletník idúci pešo atď",
+    "result": "4,1696525898027e+16"
   },
   {
     "number": "2",
     "keyword": "abeceda",
     "text": "Latinská abeceda sa skladá z 26 písmen. Koľko 6-písmenových slov z nej možno utvoriť?",
-    "hint": "",
-    "result": ""
+    "hint": "zamysli sa, či sa prvky môžu v slovách opakovať",
+    "result": "308915776"
   },
   {
     "number": "3",
     "keyword": "menu",
     "text": "Na jedálnom lístku sú 4 aperitívy, 6 predjedál, 3 polievky, 23 hlavných jedál, 4 studené nápoje, 5 múčnikov, 2 teplé nápoje a 12 vín. Koľkými spôsobmi je možné zostaviť menu skladajúce sa zo všetkých ôsmich súčastí?",
-    "hint": "",
-    "result": ""
+    "hint": "v menu sa všetky chody môžu kombinovať každý s každým bez výnimky",
+    "result": "794880"
   },
   {
     "number": "4",
     "keyword": "zápasy",
     "text": "V stávke sa tipujú výsledky 12 zápasov - či vyhrajú domáci, hostia alebo zápasy skončia nerozhodne. Koľko je všetkých možných tipov ?",
-    "hint": "",
-    "result": ""
+    "hint": "pri každom z 12-tich zápasov može nastať každá z troch možností výsledku",
+    "result": "531441"
   },
   {
     "number": "5",
     "keyword": "zoradenie vagónov",
     "text": "Na zoraďovacej stanici stojí 5 lôžkových, 7 jedálnych a 20 obyčajných osobných vagónov. Bude z nich zostavená súprava s piatimi vagónmi. Koľko rôznych súprav je možno zoradiť?",
-    "hint": "",
-    "result": ""
+    "hint": "záleží na poradí vagónov | v súprave sa môže vyskytnúť viacero vagónov jedného druhu",
+    "result": "243"
   },
   {
     "number": "6",
     "keyword": "lokomotíva",
     "text": "Koľko rôznych slov, v ktorých nie sú žiadne dve písmená o vedľa seba, je možné získať zámenou poradia písmen v slove lokomotíva ?",
-    "hint": "najprv vytvor usporiadania bez písmenka o",
-    "result": "7! * binom{8}{3}"
+    "hint": "najprv vytvor usporiadania bez písmenka o | následne zisti počet možných umiestnení písmenka o",
+    "result": "282240"
   },
   {
     "number": "7",
     "keyword": "výber kariet",
     "text": "Koľkými spôsobmi sa dá z kartovej hry (po ôsmich kartách štyroch farieb) vybrať 6 kariet tak, aby medzi nimi boli karty všetkých štyroch farieb?",
-    "hint": "",
-    "result": ""
+    "hint": "možnosti vieme rozdeliť na 2 disjunktné množiny | v prvej budú všetky šestice kariet, v ktorých je po dvoch kartách dvoch farieb a po jednej karte zvyšných dvoch farieb | v druhej šestici budú po tri karty jednej farby a po jednej karte ostatných troch farieb",
+    "result": "415744"
   },
   {
     "number": "8",
     "keyword": "volejbalové družstvá",
     "text": "Koľkými spôsobmi je možné rozdeliť 8 chlapcov a 4 dievčatá na dve šesťčlenné volejbalové družstvá tak, aby v každom družstve bolo aspoň jedno dievča?",
-    "hint": "",
-    "result": ""
+    "hint": "v každom družstve musí byť aspoň jedno dievča, teda 1 a viac, no najviac 3 dievčatá, pretože inak by nezvýšilo dievča do druhého družstva",
+    "result": "434"
   }
 ]

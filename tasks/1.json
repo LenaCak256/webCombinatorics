@@ -4,49 +4,49 @@
     "keyword": "karty",
     "text": "Koľkými spôsobmi vieme rozmiešať balíček 32 rôznych kariet?",
     "hint": "zamysli sa, či záleží na poradí | vyskúšaj si to na menšej množine kariet",
-    "result": "32!"
+    "result": "32 !"
   },
   {
     "number": "2",
     "keyword": "stretnutie priateľov",
     "text": "Zišlo sa 5 priateľov a navzájom si potriasli rukami. Urči počet potrasení.",
     "hint": "potrasenie Ivana s Petrom a potrasenie Petra s Ivanom je jedno a to isté",
-    "result": "C(5, 2)"
+    "result": "10"
   },
   {
     "number": "3",
     "keyword": "cestovné lístky",
     "text": "Súvislá železničná sieť zahŕňa 3714 staníc. Zisti, koľko rôznych druhov cestovných lístkov by musela nechať natlačiť železničná správa, keby na každom lístku boli uvedené dve stanice: najprv východisková a potom cieľová.",
     "hint": "je dôležité si uvedomiť, že lístky s dvojicou staníc napr. (Bratislava - Trnava), (Trnava - Bratislava) sú dva rôzne cestovné lístky",
-    "result": "V(3174, 2)"
+    "result": "10071102"
   },
   {
     "number": "4",
     "keyword": "tipovanie",
     "text": "V športke sa tipuje 6 zo 49 športov. Koľko je všetkých možných tipov?",
     "hint": "vyskúšaj si vypísať všetky možné tipy, ak sa tipujú 2 zo 4 športov",
-    "result": "C(49, 6)"
+    "result": "13983816"
   },
   {
     "number": "5",
     "keyword": "čísla",
     "text": "Koľko štvorciferných čísel, v ktorých sa žiadna číslica neopakuje, je možné zostaviť z číslic 1, 2, 3, 4, 5, 6, 7? ",
     "hint": "vyskúšaj si najprv zostaviť číslo s menším počtom cifier",
-    "result": "V(7, 4)"
+    "result": "840"
   },
   {
     "number": "6",
     "keyword": "kúpeľňa",
     "text": "Koľko slov je možné vytvoriť zo slova kúpeľňa zmenou poradia písmen? (Neberieme ohľad na to, či vzniknuté slová majú zmysel.)",
     "hint": "urči si počet možných písmen na každú pozíciu | písmená sa v slove neopakujú!",
-    "result": "8!"
+    "result": "8 !"
   },
   {
     "number": "7",
     "keyword": "kombinačné čísla",
     "text": "Vyjadri jedným kombinačným číslom výraz zadaný na ploche.",
     "hint": "spomeň si na vlastnosti kombinačnyćh čísel | využi Pascalovu formulu",
-    "result": "binom{11}{4}"
+    "result": "330"
   },
   {
     "number": "8",

@@ -3,6 +3,7 @@ import * as firebaseAuth from "https://www.gstatic.com/firebasejs/9.22.1/firebas
 import {auth, db} from "./config.js"
 import {deleteAll, Element, setCanvas, setCurrentStep, steps, storedSteps} from "./objectManaging.js";
 import {loadTools} from "./toolObjects.js";
+import {displayResult, result} from "./taskSolving.js";
 
 //important variables / default values
 let listOfTasks
@@ -297,12 +298,14 @@ async function saveTask(solved) {
             array.push(JSON.stringify(step.args));
         });
         let docID = currentUser.uid + currentSet.toString() + currentTask.toString();
+        let stringResult = JSON.stringify(result);
         await firestore.setDoc(firestore.doc(db, 'tasks', docID), {
             set: currentSet,
             task: currentTask,
             userID: currentUser.uid,
             solved: solved,
-            list: array
+            list: array,
+            result: stringResult
         });
         setSaved(true);
     }
@@ -323,7 +326,14 @@ function convert(array){
 
 //load task from database and displays steps taken during solving
 async function loadTask(){
+    while (result.length){ result.pop()}
+    displayResult();
+
     if (currentUser) {
+        document.querySelector("#correctLabel").style.display = "none";
+        document.querySelector("#unknownLabel").style.display = "inline";
+        document.querySelector("#incorrectLabel").style.display = "none";
+
         const tasksRef = firestore.collection(db, "tasks");
         const q = firestore.query(tasksRef, firestore.where("userID", "==", currentUser.uid), firestore.where("set", "==", currentSet),
                                             firestore.where("task", "==", currentTask));
@@ -357,19 +367,20 @@ async function loadTask(){
             `;
             }
 
-            if(doc.get("solved")){
+            if(doc.get("solved")) {
                 document.querySelector("#correctLabel").style.display = "inline";
                 document.querySelector("#unknownLabel").style.display = "none";
                 document.querySelector("#incorrectLabel").style.display = "none";
-            }else {
-                ocument.querySelector("#correctLabel").style.display = "none";
-                document.querySelector("#unknownLabel").style.display = "inline";
-                document.querySelector("#incorrectLabel").style.display = "none";
             }
+
+            let res = JSON.parse(doc.get("result"));
+            for(let i=0; i<res.length; i++){
+                result.push(res[i]);
+            }
+            displayResult();
         });
         setSaved(true);
     }
-    console.log(steps);
 }
 
 document.querySelector("#saveTask").onclick = function (){
@@ -379,8 +390,7 @@ document.querySelector("#saveTask").onclick = function (){
         if(currentSet === 1 && currentTask === 8){
             savePascalSteps();
         }
-        if(steps.length){
-            console.log(steps);
+        if(steps.length || result.length){
             saveTask(false);
             window.alert("Postup uložený!");
         }

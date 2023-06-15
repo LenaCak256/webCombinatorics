@@ -47,7 +47,31 @@ export function addDragAndDrop(tool){
 function loadTools(set, task){
     clearHelpTools();
     clearCanvasArea();
-
+    if((set === 3 && task === 1) || (set === 3 && task === 2)){
+        //help tool for task 3.1
+        let tool = document.createElement("div");
+        tool.classList.add("object");
+        tool.innerHTML = `
+        <div style="text-align: center"><label class="objectCaption">Rozdelenie členov</label></div>
+        <div class="container" style="padding: 5px; width: max-content; background-color: white">
+            <div class="col-lg-4" style="text-align: center; color: black">
+                <p class="sportTool">A ... 26</p> <p class="sportTool">F ... 17</p> <p class="sportTool">V ... 58</p>
+                <p class="sportTool">S ... 19</p> <p class="sportTool">AF ... 7</p>
+            </div>
+            <div class="col-lg-4" style="text-align: center; color: black">
+                <p class="sportTool">AV ... 18</p> <p class="sportTool">AS ... 3</p> <p class="sportTool">FV ... 9</p>
+                <p class="sportTool">FS ... 0</p> <p class="sportTool">VS ... 5</p>
+            </div>
+            <div class="col-lg-4" style="text-align: center; color: black">
+                <p class="sportTool">AFV ... 5</p> <p class="sportTool">AFS ... 0</p> <p class="sportTool">AVS ... 2</p>
+                <p class="sportTool">FVS ... 0</p> <p class="sportTool">AFVS ... 0</p>
+            </div>
+        </div>
+    `;
+        addDragAndDrop(tool);
+        helpTools.push(tool);
+        canvasArea.insertBefore(tool, canvas);
+    }
     if(set === 1 && task === 1){
         //help tool for task 1.1
         let tool = document.createElement("div");
@@ -393,13 +417,14 @@ document.querySelector("#checkPascal").onclick = function (){
         if(currentUser){
             savePascalSteps();
             saveTask(true);
-            let check = checkSkills("pascal").then(p => {});
-            if(check) {
-                updateSkills("pascal").then(p => {
-                    document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Pascalov trojuholník";
-                    displaySkillModal();
-                });
-            }
+            checkSkills("pascal").then(check => {
+                if(check) {
+                    updateSkills("pascal").then(p => {
+                        document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Pascalov trojuholník";
+                        displaySkillModal();
+                    });
+                }
+            });
         }
     }else{
         btn.style.backgroundColor = "red";
@@ -421,13 +446,14 @@ document.querySelector("#checkBinom").onclick = function (){
             setCurrentStep();
             setSaved(false);
             saveTask(true);
-            let check = checkSkills("binom").then(p => {});
-            if(check) {
-                updateSkills("binom").then(p => {
-                    document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Kombinačné čísla";
-                    displaySkillModal();
-                });
-            }
+            checkSkills("binom").then(check => {
+                if(check) {
+                    updateSkills("binom").then(p => {
+                        document.querySelector("#skillName").innerHTML = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> Kombinačné čísla";
+                        displaySkillModal();
+                    });
+                }
+            });
         }
     }else{
         btn.style.backgroundColor = "red";

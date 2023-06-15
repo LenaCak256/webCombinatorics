@@ -2,11 +2,17 @@ import * as firestore from "https://www.gstatic.com/firebasejs/9.22.1/firebase-f
 import {db} from "./config.js";
 import {currentSet, currentTask, currentUser, listOfTasks, saveTask} from "./taskLoading.js";
 
+const { Fraction } = math;
+
 const skills = new Map();
 skills.set("11", ["factorial", "Faktoriál"]);
 skills.set("14", ["combinations", "Kombinácie"]);
 skills.set("15", ["variations", "Variácie"]);
 skills.set("16", ["permutations", "Permutácie"]);
+skills.set("21", ["permutationsR", "Permutácie s opakovaním"]);
+skills.set("28", ["combinationsR", "Kombinácie s opakovaním"]);
+skills.set("22", ["variationsR", "Variáce s opakovaním"]);
+skills.set("31", ["IE", "Princíp inklúzie a exklúzie"]);
 
 function displaySkillModal() {
     const modal = document.getElementById('modal');
@@ -19,37 +25,210 @@ function displaySkillModal() {
     }, 2000);
 }
 
+class Binom{
+    constructor(n, k) {
+        this.n = n;
+        this.k = k;
+    }
+
+    getValue(){
+        return math.combinations(this.n, this.k);
+    }
+
+    getTex(){
+        return "\\binom{" + this.n + "}{" + this.k + "}";
+    }
+}
+
+class Frac{
+    constructor(n, k) {
+        this.n = n;
+        this.k = k;
+    }
+
+    getValue(){
+        return math.fraction(this.n, this.k);
+    }
+
+    getTex(){
+        return "\\frac{" + this.n + "}{" + this.k + "}";
+    }
+}
+
 let result = []
+
+function displayResult(){
+    let string = "";
+    let display = document.querySelector("#displayResult");
+
+    if(result.length) {
+        result.forEach(item => {
+            if(item instanceof Binom){
+                string += item.getTex();
+            }else if (item instanceof Frac){
+                string += item.getTex();
+            }
+            else{
+                string += item;
+            }
+        })
+    }
+    if(string === ""){
+        display.innerHTML = '';
+    }else {
+        display.innerHTML = '<p> $' + string + '$</p>';
+        MathJax.typesetPromise([display]).then(() => {
+            //console.log('MathJax typesetting complete');
+        });
+    }
+}
+
+function countResult(array){
+    let output = "";
+
+    if(array.length === 1){
+        return math.evaluate(array[0]);
+    }
+    if(array.length){
+        let prev = array[0];
+        let current;
+        for(let i=1; i<array.length; i++){
+            current = array[i];
+
+            if(prev instanceof Binom){
+                prev = prev.getValue();
+            }
+            if(prev instanceof Frac){
+                prev = prev.getValue();
+            }
+            if(prev === "!"){
+                prev = "";
+            }
+            switch (current){
+                case "!": {
+                    output += math.factorial(parseInt(prev)).toString();
+                    break;
+                }
+                case "+":{
+                    output += prev.toString();
+                    output += "+";
+                    break;
+                }
+                case "-":{
+                    output += prev.toString();
+                    output += "-";
+                    break;
+                }
+                case "*":{
+                    output += prev.toString();
+                    output += "*";
+                    break;
+                }
+                case "^":{
+                    output += prev.toString();
+                    output += "^";
+                    break;
+                }
+                default:{
+                    if(current instanceof Binom){
+                        current = current.getValue();
+                    }
+                    if(current instanceof Frac){
+                        current = current.getValue();
+                    }else{
+                        output += current;
+                    }
+                    break;
+                }
+            }
+            prev = current;
+        }
+    }
+    return math.evaluate(output);
+}
+
+const radioButtons = document.querySelectorAll('input[name="resultOption"]');
+radioButtons.forEach(function(radioButton) {
+    radioButton.addEventListener('change', function() {
+        if (radioButton.checked) {
+            switch(radioButton.value){
+                case "number":{
+                    document.querySelector("#inputResult").style.display = "inline";
+                    document.querySelector("#binomialInput").style.display = "none";
+                    document.querySelector("#fractionInput").style.display = "none";
+                    break;
+                }
+                case "fraction":{
+                    document.querySelector("#inputResult").style.display = "none";
+                    document.querySelector("#binomialInput").style.display = "none";
+                    document.querySelector("#fractionInput").style.display = "inline";
+                    break;
+                }
+                case "binom":{
+                    document.querySelector("#inputResult").style.display = "none";
+                    document.querySelector("#binomialInput").style.display = "inline";
+                    document.querySelector("#fractionInput").style.display = "none";
+                    break;
+                }
+            }
+        }
+    });
+});
+
 document.querySelector("#addResult").onclick = function (){
     let option = document.querySelector('input[name="resultOption"]:checked').value;
-    let input = document.querySelector("#inputResult").value;
-    let display = document.querySelector("#displayResult");
-    if(option === "factorial"){
-        input += "!";
+    let item;
+
+    switch(option){
+        case "binom": {
+            let n = document.querySelector("#N").value;
+            let k = document.querySelector("#K").value;
+            item = new Binom(n, k);
+            break;
+        }
+        case "fraction": {
+            let top = document.querySelector("#frac1").value;
+            let bottom = document.querySelector("#frac2").value;
+            item = new Frac(top, bottom);
+            break;
+        }
+        case "number": {
+            item = document.querySelector("#inputResult").value;
+            document.querySelector("#inputResult").value = "";
+            break;
+        }
     }
-    result.push(input);
-    display.innerHTML = `</p>` + input + `</p>`;
+    result.push(item);
+    displayResult();
 }
 
 document.querySelector("#result").onclick = function (){
     let correctResult = listOfTasks[currentTask - 1].result;
-    let value = result[0];
+    if(correctResult.includes(" ")){
+        correctResult = countResult(correctResult.split(" "));
+    }else{
+        correctResult = countResult([correctResult]);
+    }
+    let value = countResult(result);
     document.querySelector("#unknownLabel").style.display = "none";
-    if(value === correctResult){
+    document.querySelector("#incorrectLabel").style.display = "none";
+    console.log(correctResult === value);
+    if(value === correctResult && correctResult !== ""){
         document.querySelector("#correctLabel").style.display = "inline";
         saveTask(true);
         let key = currentSet.toString() + currentTask.toString();
         let values = skills.get(key);
-        if(values.length !== 0) {
-            let check = checkSkills(values[0]).then();
-            if(check){
-                updateSkills(values[0]).then(p => {
-                    let html = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> ";
-                    html = html + values[1];
-                    document.querySelector("#skillName").innerHTML = html;
-                    displaySkillModal();
-                });
-            }
+        if(values) {
+            checkSkills(values[0]).then(check =>{
+                if(check){
+                    updateSkills(values[0]).then(p => {
+                        let html = "<i class='fa fa-trophy' style='font-size: 1.5em'></i> ";
+                        html = html + values[1];
+                        document.querySelector("#skillName").innerHTML = html;
+                        displaySkillModal();
+                    });
+                }
+            })
         }
     }else{
         document.querySelector("#incorrectLabel").style.display = "inline";
@@ -79,4 +258,34 @@ async function updateSkills(skill) {
     }
 }
 
-export{checkSkills, updateSkills, displaySkillModal}
+document.querySelector("#plus").onclick = function() {
+    result.push("+");
+    displayResult();
+}
+
+document.querySelector("#minus").onclick = function() {
+    result.push("-");
+    displayResult();
+}
+
+document.querySelector("#times").onclick = function() {
+    result.push("*");
+    displayResult();
+}
+
+/*document.querySelector("#pow").onclick = function() {
+    result.push("^");
+    displayResult();
+}*/
+
+document.querySelector("#factorialBtn").onclick = function() {
+    result.push("!");
+    displayResult();
+}
+
+document.querySelector("#deleteResult").onclick = function() {
+    result.pop();
+    displayResult();
+}
+
+export{checkSkills, updateSkills, displaySkillModal, displayResult, result}
