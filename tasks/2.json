@@ -37,7 +37,7 @@
   {
     "number": "6",
     "keyword": "lokomotíva",
-    "text": "Koľko rôznych slov, v ktorých nie sú žiadne dve písmená o vedľa seba, je možné získať zámenou poradia písmen v slove lokomotíva ?",
+    "text": "Koľko rôznych slov, v ktorých nie sú žiadne dve písmená O vedľa seba, je možné získať zámenou poradia písmen v slove lokomotíva ?",
     "hint": "najprv vytvor usporiadania bez písmenka o | následne zisti počet možných umiestnení písmenka o",
     "result": "282240"
   },

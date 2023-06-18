@@ -34,7 +34,7 @@
     <li id="name" class="introName"><a href="index.html">Kombinatorika</a></li>
     <li><a href="theory.html"><i class="fa fa-book"></i> Teória</a></li>
     <li><a href="task.html"><i class="fa fa-calculator"></i> Úlohy</a></li>
-    <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj progres</a></li>
+    <li><a href="mySkills.html"><i class="fa fa-trophy" style="color: #f3a620"></i> Môj postup</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right"  style="margin-right: 20px">
     <li><label class="label" id="user" style="float: right"><p><i class="fa fa-user" style="font-size: 15px"></i> prihlásený</p><p id="userName"></p></label></li>
@@ -199,7 +199,7 @@
     </div>
     <div class="col-lg-8">
       <div class="row">
-        <h3 style="font-family: 'Georgia', serif;">Nová skill získaná!</h3>
+        <h3 style="font-family: 'Georgia', serif;">Nová schopnosť !</h3>
       </div>
       <div class="row">
         <h2 style="font-family: 'Georgia', serif;" id="skillName"></h2>
@@ -295,7 +295,7 @@
         <div id="displayBinom" style="width: max-content; height: max-content">
           <div style="margin: 0; padding-left:100px; height: max-content" class="row">
             <div class="col-lg-6" style="text-align: right; padding-top: 60px; width: max-content">
-              \[\binom{10}{6} + \binom{10}{4} = \]
+              \[\binom{10}{6} + \binom{10}{3} = \]
             </div>
             <div class="col-lg-6 form-group" style="padding-top: 40px; text-align: left">
               <div class="row">
@@ -512,9 +512,8 @@
             <button type="button" class="btn op" id="plus" ><i class="fa fa-plus"></i></button>
             <button type="button" class="btn op" id="minus" ><i class="fa fa-minus"></i></button>
             <button type="button" class="btn op" id="times" ><i class="fa fa-times"></i></button>
-            <button type="button" class="btn op" style="font-size: 1.7em; padding: 5px 10px 0; font-weight: bold" id="pow" data-toggle="tooltip" data-placement="top" data-original-title="mocnina sa zobrazí v políčku až keď pridáš aj jej hodnotu">^</button>
-
-            <button type="button" class="btn op" style="font-size: 1.7em; padding: 5px 10px 0; font-weight: bold" id="factorialBtn" data-toggle="tooltip" data-placement="top" data-original-title="faktoriál">!</button>
+            <button type="button" class="btn op" style="font-weight: bold" id="pow" data-toggle="tooltip" data-placement="top" data-original-title="mocnina sa zobrazí v políčku až keď pridáš aj jej hodnotu">^</button>
+            <button type="button" class="btn op" style="font-weight: bold" id="factorialBtn" data-toggle="tooltip" data-placement="top" data-original-title="faktoriál"><i class="fa fa-exclamation"></i></button>
             <button type="button" class="btn op" id="deleteResult" data-toggle="tooltip" data-placement="top" data-original-title="vymaž krok"><i class="fa fa-arrow-left"></i></button>
           </div>
           <p id="fracWarning" style="padding: 3px; color: black; display: none">výrazy do zlomku musíš vpísať pomocu klávesnice</p>
@@ -561,7 +560,7 @@
               </div>
             </div>
           </div>
-          <button type="button" name="tool" class="btn resultBtn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="result">
+          <button type="button" class="btn resultBtn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zadaj svoj výsledok a skontroluj či je správny" id="result">
             <i class="fa fa-question-circle"></i> Skontroluj
           </button>
             <div><br>

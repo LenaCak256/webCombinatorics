@@ -123,9 +123,11 @@ document.addEventListener('click', function(event) {
 //redirection from options to task with respective task set
 async function set(num) {
     document.getElementById("options").style.display = "none";
-    document.getElementById("taskPage").style.display = "inline"
+    document.getElementById("taskPage").style.display = "inline";
+    tasks = [];
     currentSet = num
     if(currentUser){
+        q = firestore.query(tasksRef, firestore.where("userID", "==", auth.currentUser.uid), firestore.where("set", "==", currentSet), firestore.where("solved", "==", true));
         querySnapshot = await firestore.getDocs(q);
         if (!querySnapshot.empty) {
             querySnapshot.forEach((doc) => {
@@ -133,7 +135,7 @@ async function set(num) {
                 tasks.push(taskNum);
             });
         }
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 8; i++) {
             if (!tasks.includes(i)) {
                 currentTask = i;
                 break;
@@ -331,7 +333,7 @@ function convert(array){
 
 //load task from database and displays steps taken during solving
 async function loadTask(){
-    while (result.length){ result.pop()}
+    while (result.length){result.pop()}
     displayResult();
 
     if (currentUser) {

@@ -59,7 +59,7 @@ class Frac{
         return "\\frac{" + this.n + "}{" + this.k + "}";
     }
 
-    toString(){
+    toJson(){
         return {type: 'frac', n: this.n, k: this.k};
     }
 }
@@ -78,7 +78,7 @@ class Pow{
         return this.base + "^{" + this.power + "}";
     }
 
-    toString(){
+    toJson(){
         return {type: 'pow', n: this.base, k: this.power};
     }
 }
